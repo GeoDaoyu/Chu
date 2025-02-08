@@ -20,14 +20,17 @@ export default defineConfig({
       component: './Home',
     },
     {
+      path: '/login',
+      component: './Login',
+    },
+    {
+      path: '/sso',
+      component: './SSO',
+    },
+    {
       name: '权限演示',
       path: '/access',
       component: './Access',
-    },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
     },
   ],
   npmClient: 'pnpm',

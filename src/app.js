@@ -4,7 +4,7 @@
 // 更多信息见文档：https://umijs.org/docs/api/runtime-config#getinitialstate
 export async function getInitialState() {
   console.log('全局初始化配置 - 完成');
-  return { name: '@umijs/max' };
+  return { name: '游客', user: { name: '游客' }, role: 'guest' };
 }
 
 export const layout = () => {

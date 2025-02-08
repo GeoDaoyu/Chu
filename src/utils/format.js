@@ -1,4 +1,4 @@
 // 示例方法，没有实际意义
-export function trim(str: string) {
+export function trim(str) {
   return str.trim();
 }
