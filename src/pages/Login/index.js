@@ -1,3 +1,4 @@
+import { setAuthority } from '@/utils/authority';
 import { history, useModel } from '@umijs/max';
 import { Button } from 'antd';
 import { getRole, login } from './service.js';
@@ -13,6 +14,11 @@ export default () => {
     const role = await getRole();
     console.log('获取权限信息 - 完成');
     setInitialState({
+      name: user.data.name,
+      user: user.data,
+      role: role.data,
+    });
+    setAuthority({
       name: user.data.name,
       user: user.data,
       role: role.data,

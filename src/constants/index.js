@@ -1,1 +1,5 @@
-export const DEFAULT_NAME = '游客';
+export const DEFAULT_INITIALSTATE = {
+  name: '游客',
+  user: { name: '游客' },
+  role: 'guest',
+};
