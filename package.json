@@ -13,6 +13,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
+    "@arcgis/core": "^4.31.6",
     "@umijs/max": "^4.4.4",
     "antd": "^5.4.0",
     "ramda": "^0.30.1"

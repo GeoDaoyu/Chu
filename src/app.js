@@ -11,12 +11,3 @@ export async function getInitialState() {
 
   return isNotEmpty(authority) ? authority : DEFAULT_INITIALSTATE;
 }
-
-export const layout = () => {
-  return {
-    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
-    menu: {
-      locale: false,
-    },
-  };
-};

@@ -4,12 +4,10 @@ import { Button } from 'antd';
 import { getRole, login } from './service.js';
 
 export default () => {
-  const { setName } = useModel('global');
   const { setInitialState } = useModel('@@initialState');
 
   const onClick = async () => {
     const user = await login();
-    setName(user.data.name);
     console.log('获取用户信息 - 完成');
     const role = await getRole();
     console.log('获取权限信息 - 完成');
