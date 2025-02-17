@@ -1,0 +1,29 @@
+import GeoJSONLayer from '@arcgis/core/layers/GeoJSONLayer';
+import { useModel } from '@umijs/max';
+import { useCallback } from 'react';
+import { id, renderer, template, url } from './config.js';
+
+export default () => {
+  const { view } = useModel('global');
+  const add = useCallback(() => {
+    const geojsonLayer = new GeoJSONLayer({
+      id,
+      url: url,
+      copyright: 'USGS Earthquakes',
+      popupTemplate: template,
+      renderer: renderer,
+      orderBy: {
+        field: 'mag',
+      },
+    });
+    view.map.add(geojsonLayer);
+  }, [view]);
+  const remove = useCallback(() => {
+    const layer = view.map.findLayerById(id);
+    view.map.remove(layer);
+  }, [view]);
+  return {
+    add,
+    remove,
+  };
+};

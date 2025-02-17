@@ -1,3 +1,4 @@
+import AddGeoJSONLayer from '@/components/AddGeoJSONLayer';
 import { deleteAuthority } from '@/utils/authority';
 import { history, useModel } from '@umijs/max';
 import { Button, Space } from 'antd';
@@ -20,6 +21,7 @@ const HomePage = () => {
         <Button onClick={login}>去登录</Button>
         <Button onClick={logout}>登出</Button>
       </Space>
+      <AddGeoJSONLayer />
     </div>
   );
 };
