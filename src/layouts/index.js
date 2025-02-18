@@ -1,4 +1,5 @@
 import Map from '@/components/Map';
+import User from '@/components/User';
 import { useModel } from '@umijs/max';
 import { Layout } from 'antd';
 import { Outlet } from 'umi';
@@ -11,7 +12,9 @@ export default function BasicLayout() {
 
   return (
     <Layout>
-      <Header className={styles.header}>Header</Header>
+      <Header className={styles.header}>
+        <User />
+      </Header>
       <Content>
         <div className={styles.container}>
           <Map />
