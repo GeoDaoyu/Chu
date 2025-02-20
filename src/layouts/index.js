@@ -1,5 +1,5 @@
-import Map from '@/components/Map';
 import User from '@/components/User';
+import Map from '@/widgets/Map';
 import { useModel } from '@umijs/max';
 import { Layout } from 'antd';
 import { Outlet } from 'umi';

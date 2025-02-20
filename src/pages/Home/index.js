@@ -1,5 +1,5 @@
-import AddGeoJSONLayer from '@/components/AddGeoJSONLayer';
 import SideCollapse from '@/components/SideCollapse';
+import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
 import styles from './index.less';
 
 const items = [
