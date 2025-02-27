@@ -10,4 +10,5 @@ export default defineConfig({
   routes,
   npmClient: 'pnpm',
   headScripts: [{ src: './config/index.js' }],
+  styles: ['./assets/esri/themes/light/main.css'],
 });

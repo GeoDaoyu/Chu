@@ -3,9 +3,10 @@
   "author": "zhanggy <zhanggy@geoscene.cn>",
   "scripts": {
     "build": "max build",
+    "copy": "cpx ./node_modules/@arcgis/core/assets/**/*.* ./public/assets/",
     "dev": "max dev",
     "format": "prettier --cache --write .",
-    "postinstall": "max setup",
+    "postinstall": "max setup && npm run copy",
     "prepare": "husky",
     "setup": "max setup",
     "start": "npm run dev"
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "cpx2": "^8.0.0",
     "husky": "^9",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
