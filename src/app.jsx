@@ -1,5 +1,6 @@
 import { DEFAULT_INITIALSTATE } from '@/constants';
 import { getAuthority } from '@/utils/authority';
+import { ConfigProvider } from 'antd';
 import { isNotEmpty } from 'ramda';
 // 运行时配置
 
@@ -10,4 +11,18 @@ export async function getInitialState() {
   const authority = getAuthority();
 
   return isNotEmpty(authority) ? authority : DEFAULT_INITIALSTATE;
+}
+
+export function rootContainer(container) {
+  return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#00b96b',
+        },
+      }}
+    >
+      {container}
+    </ConfigProvider>
+  );
 }
