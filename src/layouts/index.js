@@ -1,6 +1,6 @@
 import User from '@/components/User';
+import useViewStore from '@/stores/useViewStore';
 import Map from '@/widgets/Map';
-import { useModel } from '@umijs/max';
 import { Layout } from 'antd';
 import { Outlet } from 'umi';
 import styles from './index.less';
@@ -8,7 +8,7 @@ import styles from './index.less';
 const { Header, Content } = Layout;
 
 export default function BasicLayout() {
-  const { view } = useModel('global');
+  const view = useViewStore((state) => state.view);
 
   return (
     <Layout>

@@ -1,7 +1,7 @@
+import useViewStore from '@/stores/useViewStore';
 import esriConfig from '@arcgis/core/config.js';
 import Map from '@arcgis/core/Map';
 import SceneView from '@arcgis/core/views/SceneView';
-import { useModel } from '@umijs/max';
 import { useEffect, useRef } from 'react';
 import styles from './index.less';
 
@@ -9,7 +9,7 @@ esriConfig.assetsPath = './assets';
 
 export default () => {
   const ref = useRef();
-  const { setView } = useModel('global');
+  const initializeView = useViewStore((state) => state.initialize);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -27,7 +27,7 @@ export default () => {
       },
     });
     view.when(() => {
-      setView(view);
+      initializeView(view);
     });
   }, [ref]);
 

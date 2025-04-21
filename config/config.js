@@ -11,7 +11,7 @@ export default defineConfig({
   request: {},
   routes,
   npmClient: 'pnpm',
-  headScript: [
+  headScripts: [
     {
       src: UMI_ENV ? `./config/index.${UMI_ENV}.js` : './config/index.js',
     },
