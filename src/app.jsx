@@ -12,7 +12,10 @@ export async function getInitialState() {
 
   return isNotEmpty(authority) ? authority : DEFAULT_INITIALSTATE;
 }
-
+export const request = {
+  requestInterceptors: [],
+  responseInterceptors: [],
+};
 export function rootContainer(container) {
   return (
     <ConfigProvider
