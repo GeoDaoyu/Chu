@@ -1,10 +1,11 @@
 import User from '@/components/User';
 import useViewStore from '@/stores/useViewStore';
 import Map from '@/widgets/Map';
-import { Layout } from 'antd';
+import { Button, Flex, Layout, Space, Typography } from 'antd';
 import { Outlet } from 'umi';
 import styles from './index.less';
 
+const { Title } = Typography;
 const { Header, Content } = Layout;
 
 export default function BasicLayout() {
@@ -13,6 +14,15 @@ export default function BasicLayout() {
   return (
     <Layout>
       <Header className={styles.header}>
+        <Space size="large">
+          <Title>系统名称</Title>
+          <Flex gap="small">
+            <Button type="primary">外链一</Button>
+            <Button type="primary">外链二</Button>
+            <Button type="primary">外链三</Button>
+            <Button type="primary">外链四</Button>
+          </Flex>
+        </Space>
         <User />
       </Header>
       <Content>
