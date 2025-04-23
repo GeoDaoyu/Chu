@@ -1,3 +1,4 @@
+import RouteMenu from '@/components/RouteMenu';
 import User from '@/components/User';
 import useViewStore from '@/stores/useViewStore';
 import Map from '@/widgets/Map';
@@ -28,7 +29,8 @@ export default function BasicLayout() {
       <Content>
         <div className={styles.container}>
           <Map />
-          {view && <Outlet view={view} />}
+          {view && <Outlet />}
+          <RouteMenu />
         </div>
       </Content>
     </Layout>
