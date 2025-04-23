@@ -1,27 +1,28 @@
+import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
 export default [
   {
     title: '面板一',
-    component: null,
+    component: undefined,
     position: 'left',
   },
   {
     title: '面板二',
-    component: null,
+    component: undefined,
     position: 'left',
   },
   {
     title: '面板三',
-    component: null,
+    component: undefined,
     position: 'left',
   },
   {
     title: '面板四',
-    component: null,
+    component: undefined,
     position: 'right',
   },
   {
     title: '面板五',
-    component: null,
+    component: <AddGeoJSONLayer />,
     position: 'right',
   },
 ];
