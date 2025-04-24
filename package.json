@@ -1,32 +1,23 @@
 {
-  "private": true,
-  "author": "zhanggy <zhanggy@geoscene.cn>",
+  "name": "chu",
+  "version": "1.0.0",
+  "description": "A modern WebGIS framework built on UmiJS with Monorepo architecture.",
   "scripts": {
-    "build": "max build",
-    "build:prod": "cross-env UMI_ENV=prod max build",
-    "copy": "cpx ./node_modules/@arcgis/core/assets/**/*.* ./public/assets/",
-    "dev": "max dev",
-    "format": "prettier --cache --write .",
-    "postinstall": "max setup && npm run copy",
-    "prepare": "husky",
-    "setup": "max setup",
-    "start": "npm run dev"
+    "start:cim": "pnpm --filter ./apps/cim-map start",
+    "build:ui": "pnpm --filter ./packages/ui build",
+    "prepare": "husky"
   },
+  "keywords": ["umi", "antd", "arcgis"],
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "license": "ISC",
+  "packageManager": "pnpm@10.5.2",
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
-    "@ant-design/pro-components": "^2.4.4",
-    "@arcgis/core": "^4.31.6",
-    "@umijs/max": "^4.4.4",
-    "antd": "^5.4.0",
-    "ramda": "^0.30.1",
-    "zustand": "^5.0.3"
+    "antd": "^5.24.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
-    "cpx2": "^8.0.0",
-    "cross-env": "^7.0.3",
-    "husky": "^9",
+    "husky": "^9.1.7",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",

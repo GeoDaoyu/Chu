@@ -1,3 +1,4 @@
-# README
+# Chu
 
-`@umijs/max` 模板项目，更多功能参考 [Umi Max 简介](https://umijs.org/docs/max/introduce)
+A modern WebGIS framework built on UmiJS with Monorepo architecture.
+ 
