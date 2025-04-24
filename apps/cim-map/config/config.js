@@ -10,6 +10,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   routes,
+  mfsu: false,
   npmClient: 'pnpm',
   headScripts: [
     {

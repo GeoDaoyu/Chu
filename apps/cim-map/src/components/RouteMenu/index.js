@@ -6,7 +6,6 @@ import styles from './index.less';
 const RouteMenu = () => {
   const location = useLocation();
   const current = location.pathname;
-  console.log(current);
   const onClick = (e) => {
     history.push(e.key);
   };

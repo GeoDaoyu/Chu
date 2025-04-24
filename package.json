@@ -2,26 +2,36 @@
   "name": "chu",
   "version": "1.0.0",
   "description": "A modern WebGIS framework built on UmiJS with Monorepo architecture.",
-  "scripts": {
-    "start:cim": "pnpm --filter ./apps/cim-map start",
-    "build:ui": "pnpm --filter ./packages/ui build",
-    "prepare": "husky"
-  },
-  "keywords": ["umi", "antd", "arcgis"],
-  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "keywords": [
+    "umi",
+    "antd",
+    "arcgis"
+  ],
   "license": "ISC",
-  "packageManager": "pnpm@10.5.2",
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "scripts": {
+    "build:ui": "pnpm --filter ./packages/ui build",
+    "prepare": "husky",
+    "start:cim": "pnpm --filter ./apps/cim-map start"
+  },
   "dependencies": {
-    "antd": "^5.24.7"
+    "@ant-design/icons": "^5.0.1",
+    "@ant-design/pro-components": "^2.4.4",
+    "antd": "^5.24.7",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "eslint": "^8.23.0",
     "husky": "^9.1.7",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",
     "prettier-plugin-packagejson": "^2.4.3",
+    "stylelint": "^14.9.1",
     "typescript": "^5.0.3"
-  }
+  },
+  "packageManager": "pnpm@10.5.2"
 }
