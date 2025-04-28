@@ -1,5 +1,6 @@
 import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
-export default [
+import { Sketch } from '@chu/widgets';
+export default (props) => [
   {
     title: '面板一',
     component: undefined,
@@ -17,12 +18,12 @@ export default [
   },
   {
     title: '面板四',
-    component: undefined,
+    component: <Sketch {...props} />,
     position: 'right',
   },
   {
     title: '面板五',
-    component: <AddGeoJSONLayer />,
+    component: <AddGeoJSONLayer {...props} />,
     position: 'right',
   },
 ];

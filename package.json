@@ -17,6 +17,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
+    "@arcgis/core": "^4.32.10",
     "antd": "^5.24.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

@@ -1,3 +1,4 @@
+import useViewStore from '@/stores/useViewStore.js';
 import { Panel } from '@chu/ui';
 import { Flex } from 'antd';
 import { filter, propEq } from 'ramda';
@@ -5,9 +6,10 @@ import config from './config';
 import styles from './index.less';
 
 const HomePage = () => {
-  const leftItem = filter(propEq('left', 'position'))(config);
-  const rightItem = filter(propEq('right', 'position'))(config);
-
+  const view = useViewStore((state) => state.view);
+  const configWithView = config({ view });
+  const leftItem = filter(propEq('left', 'position'))(configWithView);
+  const rightItem = filter(propEq('right', 'position'))(configWithView);
   return (
     <div className={styles.container}>
       <div className={styles.left}>
