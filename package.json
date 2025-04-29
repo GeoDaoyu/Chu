@@ -11,8 +11,16 @@
   "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
   "scripts": {
     "build:ui": "pnpm --filter ./packages/ui build",
+    "lint": "npm run lint:es && npm run lint:css",
+    "lint:css": "umi lint \"{apps,packages}/**/*.{css,less}\" --stylelint-only",
+    "lint:es": "umi lint \"{apps,packages}/**/*.{js,jsx,ts,tsx}\" --eslint-only",
     "prepare": "husky",
     "start:cim": "pnpm --filter ./apps/cim-map start"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -23,8 +31,11 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "@umijs/lint": "^4.0.0",
     "eslint": "^8.23.0",
     "husky": "^9.1.7",
     "lint-staged": "^13.2.0",

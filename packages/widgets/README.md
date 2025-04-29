@@ -1,7 +1,6 @@
-# @mr/ui
+# @mr/widgets
 
-[![NPM version](https://img.shields.io/npm/v/@mr/ui.svg?style=flat)](https://npmjs.org/package/@mr/ui)
-[![NPM downloads](http://img.shields.io/npm/dm/@mr/ui.svg?style=flat)](https://npmjs.org/package/@mr/ui)
+[![NPM version](https://img.shields.io/npm/v/@mr/ui.svg?style=flat)](https://npmjs.org/package/@mr/ui) [![NPM downloads](http://img.shields.io/npm/dm/@mr/ui.svg?style=flat)](https://npmjs.org/package/@mr/ui)
 
 A react library developed with dumi
 
