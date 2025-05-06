@@ -11,6 +11,7 @@ export default [
   {
     path: '/login',
     component: './Login',
+    layout: false,
   },
   {
     path: '/sso',
