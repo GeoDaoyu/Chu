@@ -1,29 +1,26 @@
-import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
 import Sketch from '@arcgis/core/widgets/Sketch';
 import React, { useEffect, useRef } from 'react';
+import useLayer from './useLayer';
 
 export default function ({ view }) {
   const ref = useRef();
+  const widgetRef = useRef();
+  const layerRef = useLayer({ view });
 
   useEffect(() => {
-    const sketchLayer = new GraphicsLayer({
-      elevationInfo: {
-        mode: 'absolute-height',
-      },
-      title: 'Sketched geometries',
-      listMode: 'hide',
-    });
-
-    view.map.add(sketchLayer);
-    new Sketch({
-      view: view,
-      layer: sketchLayer,
-      container: ref.current,
-    });
+    if (ref.current && layerRef.current) {
+      widgetRef.current = new Sketch({
+        view: view,
+        layer: layerRef.current,
+        container: ref.current,
+      });
+    }
     return () => {
-      view.map.remove(sketchLayer);
+      if (widgetRef.current) {
+        widgetRef.current.destroy();
+      }
     };
-  }, []);
+  }, [view]);
 
   return <div ref={ref}></div>;
 }
