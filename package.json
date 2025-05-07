@@ -12,6 +12,7 @@
   "type": "module",
   "scripts": {
     "build:ui": "pnpm --filter ./packages/ui build",
+    "fix": "eslint --fix",
     "lint": "eslint",
     "prepare": "husky",
     "start:cim": "pnpm --filter ./apps/cim-map start"

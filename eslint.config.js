@@ -10,4 +10,10 @@ export default defineConfig([
   includeIgnoreFile(gitignorePath),
   ...xoSpaceBrowser,
   ...xoReactSpace,
+  {
+    rules: {
+      '@stylistic/object-curly-spacing': ['error', 'always'], // 强制 对象字面量（{}）内部必须包含空格
+      '@stylistic/jsx-quotes': ['error', 'prefer-double'], // 强制 JSX 属性使用双引号
+    },
+  },
 ]);
