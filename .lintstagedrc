@@ -3,15 +3,11 @@
     "prettier --cache --write"
   ],
   "*.{js,jsx}": [
-    "umi lint --fix --eslint-only",
-    "prettier --cache --write"
-  ],
-  "*.{css,less}": [
-    "umi lint --fix --stylelint-only",
+    "eslint --fix",
     "prettier --cache --write"
   ],
   "*.ts?(x)": [
-    "umi lint --fix --eslint-only",
+    "eslint --fix",
     "prettier --cache --parser=typescript --write"
   ]
 }
