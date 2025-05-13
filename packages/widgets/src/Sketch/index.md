@@ -1,9 +1,9 @@
-# Panel
+# Sketch
 
-标绘微件
+Usage:
 
 ```jsx
 import { Sketch } from '@chu/ui';
 
-export default () => <Sketch />;
+export default () => <Sketch view={view} />;
 ```

@@ -1,5 +1,4 @@
-import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
-import Sketch from '@arcgis/core/widgets/Sketch';
+import Weather from '@arcgis/core/widgets/Weather';
 import React, { useEffect, useRef } from 'react';
 
 export default function ({ view }) {
@@ -8,14 +7,8 @@ export default function ({ view }) {
 
   useEffect(() => {
     if (ref.current) {
-      const layer = new GraphicsLayer({
-        listMode: 'hide',
-      });
-
-      view.map.add(layer);
-      widgetRef.current = new Sketch({
+      widgetRef.current = new Weather({
         view,
-        layer,
         container: ref.current,
       });
     }
@@ -24,8 +17,6 @@ export default function ({ view }) {
       if (widgetRef.current) {
         widgetRef.current.destroy();
       }
-
-      view.map.remove(layer);
     };
   }, [view]);
 
