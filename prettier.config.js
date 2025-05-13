@@ -5,6 +5,7 @@ export default {
   proseWrap: 'never',
   singleQuote: true,
   trailingComma: 'all',
+  organizeImportsSkipDestructiveCodeActions: true,
   overrides: [
     {
       files: '*.md',
