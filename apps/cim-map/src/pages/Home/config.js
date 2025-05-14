@@ -1,5 +1,5 @@
 import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
-import { Measurement, Sketch } from '@chu/widgets';
+import { Measurement, Sketch, ZoomKeeper } from '@chu/widgets';
 export default (props) => [
   {
     title: '面板一',
@@ -8,7 +8,7 @@ export default (props) => [
   },
   {
     title: '面板二',
-    component: undefined,
+    component: <ZoomKeeper {...props} />,
     position: 'left',
   },
   {
