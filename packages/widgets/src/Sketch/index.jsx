@@ -7,18 +7,16 @@ export default function ({ view }) {
   const widgetRef = useRef();
 
   useEffect(() => {
-    if (ref.current) {
-      const layer = new GraphicsLayer({
-        listMode: 'hide',
-      });
+    const layer = new GraphicsLayer({
+      listMode: 'hide',
+    });
 
-      view.map.add(layer);
-      widgetRef.current = new Sketch({
-        view,
-        layer,
-        container: ref.current,
-      });
-    }
+    view.map.add(layer);
+    widgetRef.current = new Sketch({
+      view,
+      layer,
+      container: ref.current,
+    });
 
     return () => {
       if (widgetRef.current) {
