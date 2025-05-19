@@ -20,6 +20,9 @@ importers:
       antd:
         specifier: ^5.24.7
         version: 5.24.8(date-fns@2.30.0)(luxon@3.5.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      ramda:
+        specifier: ^0.30.1
+        version: 0.30.1
       react:
         specifier: ^18.0.0
         version: 18.3.1
@@ -131,6 +134,9 @@ importers:
       react-dom:
         specifier: '>=16.9.0'
         version: 18.3.1(react@18.3.1)
+      zustand:
+        specifier: ^4.5.7
+        version: 4.5.7(@types/react@19.1.4)(react@18.3.1)
     devDependencies:
       '@commitlint/cli':
         specifier: ^17.1.2
@@ -143,7 +149,7 @@ importers:
         version: 4.4.9(eslint@9.26.0(jiti@1.21.7))(stylelint@14.16.1)(typescript@5.8.3)
       dumi:
         specifier: ^2.4.13
-        version: 2.4.20(@babel/core@7.23.6)(@swc/helpers@0.5.1)(@types/node@22.15.17)(@types/react@18.3.20)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
+        version: 2.4.20(@babel/core@7.23.6)(@swc/helpers@0.5.1)(@types/node@22.15.17)(@types/react@19.1.4)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
       father:
         specifier: ^4.1.0
         version: 4.5.2(@babel/core@7.23.6)(@types/node@22.15.17)(styled-components@6.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(type-fest@4.40.0)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
@@ -8352,6 +8358,21 @@ packages:
   zod@3.24.3:
     resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
 
+  zustand@4.5.7:
+    resolution: {integrity: sha512-CHOUy7mu3lbD6o6LJLfllpjkzhHXSBlX8B9+qPddUsIfeF5S/UZ5q0kmCsnRqT1UHFQZchNFDDzMbQsuesHWlw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0.6'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+
   zustand@5.0.3:
     resolution: {integrity: sha512-14fwWQtU3pH4dE0dOpdMiWjddcH+QzKIgk1cl8epwSE7yag43k/AD/m4L6+K7DytAOr9gGBe3/EXj9g7cdostg==}
     engines: {node: '>=12.20.0'}
@@ -9804,12 +9825,32 @@ snapshots:
       - react
       - react-dom
 
+  '@floating-ui/react-dom-interactions@0.3.1(@types/react@19.1.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@floating-ui/react-dom': 0.6.3(@types/react@19.1.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      aria-hidden: 1.2.4
+      point-in-polygon: 1.1.0
+      use-isomorphic-layout-effect: 1.2.0(@types/react@19.1.4)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - react-dom
+
   '@floating-ui/react-dom@0.6.3(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@floating-ui/dom': 0.4.5
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       use-isomorphic-layout-effect: 1.2.0(@types/react@18.3.20)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@floating-ui/react-dom@0.6.3(@types/react@19.1.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@floating-ui/dom': 0.4.5
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      use-isomorphic-layout-effect: 1.2.0(@types/react@19.1.4)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
 
@@ -10642,7 +10683,7 @@ snapshots:
 
   '@types/history@5.0.0':
     dependencies:
-      history: 4.10.1
+      history: 5.3.0
 
   '@types/hoist-non-react-statics@3.3.6':
     dependencies:
@@ -10719,20 +10760,20 @@ snapshots:
   '@types/react-router-dom@4.3.5':
     dependencies:
       '@types/history': 5.0.0
-      '@types/react': 19.1.4
+      '@types/react': 18.3.20
       '@types/react-router': 5.1.20
 
   '@types/react-router-redux@5.0.27':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.1.4
+      '@types/react': 18.3.20
       '@types/react-router': 5.1.20
-      redux: 3.7.2
+      redux: 4.2.1
 
   '@types/react-router@5.1.20':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.1.4
+      '@types/react': 18.3.20
 
   '@types/react@18.3.20':
     dependencies:
@@ -10742,6 +10783,7 @@ snapshots:
   '@types/react@19.1.4':
     dependencies:
       csstype: 3.1.3
+    optional: true
 
   '@types/resolve@1.20.6': {}
 
@@ -11567,7 +11609,7 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  '@umijs/preset-umi@4.4.9(@types/node@22.15.17)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.87.0)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))':
+  '@umijs/preset-umi@4.4.9(@types/node@22.15.17)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.39.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))':
     dependencies:
       '@iconify/utils': 2.1.1
       '@svgr/core': 6.5.1
@@ -11628,7 +11670,7 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  '@umijs/preset-umi@4.4.9(@types/node@22.15.17)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(terser@5.39.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))':
+  '@umijs/preset-umi@4.4.9(@types/node@22.15.17)(@types/react@19.1.4)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.87.0)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))':
     dependencies:
       '@iconify/utils': 2.1.1
       '@svgr/core': 6.5.1
@@ -11652,7 +11694,7 @@ snapshots:
       '@umijs/zod2ts': 4.4.9
       babel-plugin-dynamic-import-node: 2.3.3
       babel-plugin-react-compiler: 0.0.0-experimental-c23de8d-20240515
-      click-to-react-component: 1.1.0(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      click-to-react-component: 1.1.0(@types/react@19.1.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       core-js: 3.34.0
       current-script-polyfill: 1.0.0
       enhanced-resolve: 5.9.3
@@ -12744,6 +12786,16 @@ snapshots:
       - '@types/react'
       - react-dom
 
+  click-to-react-component@1.1.0(@types/react@19.1.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@floating-ui/react-dom-interactions': 0.3.1(@types/react@19.1.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      htm: 3.1.1
+      react: 18.3.1
+      react-merge-refs: 1.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+
   cliui@8.0.1:
     dependencies:
       string-width: 4.2.3
@@ -13340,7 +13392,7 @@ snapshots:
 
   dumi-assets-types@2.4.14: {}
 
-  dumi@2.4.20(@babel/core@7.23.6)(@swc/helpers@0.5.1)(@types/node@22.15.17)(@types/react@18.3.20)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1))):
+  dumi@2.4.20(@babel/core@7.23.6)(@swc/helpers@0.5.1)(@types/node@22.15.17)(@types/react@19.1.4)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1))):
     dependencies:
       '@ant-design/icons-svg': 4.4.2
       '@makotot/ghostui': 2.0.0(react@18.3.1)
@@ -13405,7 +13457,7 @@ snapshots:
       sass: 1.87.0
       sitemap: 7.1.2
       sucrase: 3.35.0
-      umi: 4.4.9(@babel/core@7.23.6)(@types/node@22.15.17)(@types/react@18.3.20)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(sass@1.87.0)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
+      umi: 4.4.9(@babel/core@7.23.6)(@types/node@22.15.17)(@types/react@19.1.4)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(sass@1.87.0)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
       unified: 10.1.2
       unist-util-visit: 4.1.2
       unist-util-visit-parents: 5.1.3
@@ -19202,14 +19254,14 @@ snapshots:
 
   typescript@5.8.3: {}
 
-  umi@4.4.9(@babel/core@7.23.6)(@types/node@22.15.17)(@types/react@18.3.20)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(sass@1.87.0)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1))):
+  umi@4.4.9(@babel/core@7.23.6)(@types/node@22.15.17)(@types/react@19.1.4)(eslint@9.26.0(jiti@1.21.7))(lightningcss@1.22.1)(prettier@3.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(sass@1.87.0)(stylelint@14.16.1)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1))):
     dependencies:
       '@babel/runtime': 7.23.6
       '@umijs/bundler-utils': 4.4.9
       '@umijs/bundler-webpack': 4.4.9(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
       '@umijs/core': 4.4.9
       '@umijs/lint': 4.4.9(eslint@9.26.0(jiti@1.21.7))(stylelint@14.16.1)(typescript@5.8.3)
-      '@umijs/preset-umi': 4.4.9(@types/node@22.15.17)(@types/react@18.3.20)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.87.0)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
+      '@umijs/preset-umi': 4.4.9(@types/node@22.15.17)(@types/react@19.1.4)(lightningcss@1.22.1)(rollup@3.29.5)(sass@1.87.0)(terser@5.39.0)(type-fest@4.40.0)(typescript@5.8.3)(webpack@5.99.6(@swc/core@1.9.2(@swc/helpers@0.5.1)))
       '@umijs/renderer-react': 4.4.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@umijs/server': 4.4.9
       '@umijs/test': 4.4.9(@babel/core@7.23.6)
@@ -19450,6 +19502,12 @@ snapshots:
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.20
+
+  use-isomorphic-layout-effect@1.2.0(@types/react@19.1.4)(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+    optionalDependencies:
+      '@types/react': 19.1.4
 
   use-sync-external-store@1.2.0(react@18.3.1):
     dependencies:
@@ -19749,6 +19807,13 @@ snapshots:
       zod: 3.24.3
 
   zod@3.24.3: {}
+
+  zustand@4.5.7(@types/react@19.1.4)(react@18.3.1):
+    dependencies:
+      use-sync-external-store: 1.5.0(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 19.1.4
+      react: 18.3.1
 
   zustand@5.0.3(@types/react@18.3.20)(react@18.3.1)(use-sync-external-store@1.5.0(react@18.3.1)):
     optionalDependencies:

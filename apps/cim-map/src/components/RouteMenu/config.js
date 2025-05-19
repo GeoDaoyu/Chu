@@ -11,8 +11,8 @@ export default [
     icon: <MailOutlined />,
   },
   {
-    label: '路由一',
-    key: '/route1',
+    label: '资源目录',
+    key: '/resource',
     icon: <AppstoreOutlined />,
   },
   {

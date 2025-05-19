@@ -34,5 +34,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "authors": []
+  "authors": [],
+  "dependencies": {
+    "zustand": "^4.5.7"
+  }
 }

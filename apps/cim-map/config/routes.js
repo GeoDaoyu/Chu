@@ -9,6 +9,11 @@ export default [
     component: '@/pages/Home',
   },
   {
+    name: '资源目录',
+    path: '/resource',
+    component: '@/pages/Resource',
+  },
+  {
     path: '/login',
     component: './Login',
     layout: false,
