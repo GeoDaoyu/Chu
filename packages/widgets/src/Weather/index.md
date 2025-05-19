@@ -3,7 +3,7 @@
 Usage:
 
 ```jsx
-import { Weather } from '@chu/ui';
+import { Weather } from '@chu/widgets';
 
 export default () => <Weather view={view} />;
 ```

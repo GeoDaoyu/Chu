@@ -28,7 +28,10 @@ export const addLayer = async (view, treeData, key) => {
   }
   const { url, ...rest } = node;
   if (!url) return;
-  const layer = await Layer.fromArcGISServerUrl({ url, properties: rest });
+  const layer = await Layer.fromArcGISServerUrl({
+    url,
+    properties: { id: key, ...rest },
+  });
   view.map.add(layer);
 };
 export const removeLayer = (view, id) => {

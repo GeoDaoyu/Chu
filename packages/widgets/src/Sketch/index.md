@@ -3,7 +3,7 @@
 Usage:
 
 ```jsx
-import { Sketch } from '@chu/ui';
+import { Sketch } from '@chu/widgets';
 
 export default () => <Sketch view={view} />;
 ```
