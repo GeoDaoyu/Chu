@@ -1,5 +1,5 @@
+import { useLayerTreeStore } from '@chu/store';
 import { Tree } from 'antd';
-import useLayerTreeStore from './useLayerTreeStore';
 
 const LayerTree = ({ view, treeData }) => {
   const { checkedKeys, setCheckedKeys } = useLayerTreeStore();

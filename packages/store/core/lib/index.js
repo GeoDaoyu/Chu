@@ -1,0 +1,37 @@
+import Layer from '@arcgis/core/layers/Layer';
+
+// TODO: 迁移到packages/lib下
+export const hasLayer = (view, id) => {
+  const layer = view.map.findLayerById(id);
+  return !!layer;
+};
+const findNode = (treeData, key) => {
+  if (treeData.key === key) {
+    return treeData;
+  }
+
+  if (treeData.children) {
+    for (const child of treeData.children) {
+      const found = findNode(child, key);
+      if (found) return found;
+    }
+  }
+
+  return null;
+};
+// TODO: 从store中获取view和treeData
+// TODO: 提取获取图层info的函数
+export const addLayer = async (view, treeData, key) => {
+  const node = findNode({ children: treeData }, key);
+  if (!node) {
+    return;
+  }
+  const { url, ...rest } = node;
+  if (!url) return;
+  const layer = await Layer.fromArcGISServerUrl({ url, properties: rest });
+  view.map.add(layer);
+};
+export const removeLayer = (view, id) => {
+  const layer = view.map.findLayerById(id);
+  view.map.remove(layer);
+};

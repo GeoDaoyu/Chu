@@ -1,4 +1,4 @@
-import useViewStore from '@/stores/useViewStore.js';
+import { useViewStore } from '@chu/store';
 import { Panel } from '@chu/ui';
 import { LayerTree } from '@chu/widgets';
 import { Flex } from 'antd';

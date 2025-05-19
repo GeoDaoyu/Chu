@@ -20,6 +20,9 @@
     "prepublishOnly": "father doctor && npm run build",
     "start": "npm run dev"
   },
+  "dependencies": {
+    "@chu/store": "workspace:*"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
@@ -34,8 +37,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "authors": [],
-  "dependencies": {
-    "zustand": "^4.5.7"
-  }
+  "authors": []
 }

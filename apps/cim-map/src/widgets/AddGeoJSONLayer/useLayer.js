@@ -1,5 +1,5 @@
-import useViewStore from '@/stores/useViewStore.js';
 import GeoJSONLayer from '@arcgis/core/layers/GeoJSONLayer';
+import { useViewStore } from '@chu/store';
 import { useCallback } from 'react';
 import { id, renderer, template, url } from './config.js';
 

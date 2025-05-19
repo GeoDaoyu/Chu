@@ -1,4 +1,4 @@
-import useViewStore from '@/stores/useViewStore.js';
+import { useViewStore } from '@chu/store';
 import { Panel } from '@chu/ui';
 import { Flex } from 'antd';
 import { filter, propEq } from 'ramda';

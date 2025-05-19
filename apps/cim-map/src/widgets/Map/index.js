@@ -1,7 +1,7 @@
-import useViewStore from '@/stores/useViewStore';
 import esriConfig from '@arcgis/core/config.js';
 import Map from '@arcgis/core/Map';
 import SceneView from '@arcgis/core/views/SceneView';
+import { useViewStore } from '@chu/store';
 import { useEffect, useRef } from 'react';
 import styles from './index.less';
 

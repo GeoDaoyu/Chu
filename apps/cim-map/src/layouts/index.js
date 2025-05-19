@@ -1,7 +1,7 @@
 import RouteMenu from '@/components/RouteMenu';
 import User from '@/components/User';
-import useViewStore from '@/stores/useViewStore';
 import Map from '@/widgets/Map';
+import { useViewStore } from '@chu/store';
 import { Button, Flex, Layout, Space, Typography } from 'antd';
 import { Outlet } from 'umi';
 import styles from './index.less';

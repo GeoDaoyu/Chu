@@ -1,5 +1,5 @@
 import { difference } from 'ramda';
-import { addLayer, hasLayer, removeLayer } from '../lib';
+import { addLayer, hasLayer, removeLayer } from './lib';
 
 const layerControl = (config) => (set, get, api) => {
   const initialState = config(set, get, api);

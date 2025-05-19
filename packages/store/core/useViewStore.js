@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
-export default create((set) => ({
+const useViewStore = create((set) => ({
   view: null,
   initialize: (newView) => set({ view: newView }),
 }));
+export default useViewStore;
