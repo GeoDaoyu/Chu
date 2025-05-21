@@ -1,4 +1,5 @@
 import Layer from '@arcgis/core/layers/Layer';
+import createLayer from './createLayer';
 
 // TODO: 迁移到packages/lib下
 export const hasLayer = (view, id) => {
@@ -26,12 +27,15 @@ export const addLayer = async (view, treeData, key) => {
   if (!node) {
     return;
   }
-  const { url, ...rest } = node;
-  if (!url) return;
-  const layer = await Layer.fromArcGISServerUrl({
-    url,
-    properties: { id: key, ...rest },
-  });
+  const { url, type, ...rest } = node;
+  const layer = type
+    ? createLayer({ id: key, ...node })
+    : url
+      ? await Layer.fromArcGISServerUrl({
+          url,
+          properties: { id: key, ...rest },
+        })
+      : new Layer({ id: key });
   view.map.add(layer);
 };
 export const removeLayer = (view, id) => {
