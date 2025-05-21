@@ -110,6 +110,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
 
+  packages/lib: {}
+
   packages/store:
     dependencies:
       zustand:
@@ -134,6 +136,9 @@ importers:
 
   packages/widgets:
     dependencies:
+      '@chu/lib':
+        specifier: workspace:*
+        version: link:../lib
       '@chu/store':
         specifier: workspace:*
         version: link:../store

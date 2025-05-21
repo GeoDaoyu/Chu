@@ -1,7 +1,7 @@
 import { difference } from 'ramda';
-import { addLayer, hasLayer, removeLayer } from './lib';
+import { addLayer, hasLayer, removeLayer } from '../core';
 
-const layerControl = (config) => (set, get, api) => {
+const layerControlMiddleware = (config) => (set, get, api) => {
   const initialState = config(set, get, api);
   return {
     ...initialState,
@@ -23,4 +23,4 @@ const layerControl = (config) => (set, get, api) => {
   };
 };
 
-export default layerControl;
+export default layerControlMiddleware;

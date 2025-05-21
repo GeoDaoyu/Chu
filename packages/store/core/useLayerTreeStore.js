@@ -1,12 +1,15 @@
 import { create } from 'zustand';
-import layerControl from './layerControlMiddleware';
 
-// TODO: 迁移到packages/store
-const useLayerTreeStore = create(
-  layerControl((set) => ({
+export const createLayerTreeStore = (middleware) => {
+  const store = (set) => ({
     checkedKeys: [],
     setCheckedKeys: (newCheckedKeys) => set({ checkedKeys: newCheckedKeys }),
-  })),
-);
+  });
 
+  const storeCreator = middleware ? middleware(store) : store;
+
+  return create(storeCreator);
+};
+
+const useLayerTreeStore = createLayerTreeStore();
 export default useLayerTreeStore;

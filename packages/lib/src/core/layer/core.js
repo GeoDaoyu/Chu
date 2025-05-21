@@ -1,7 +1,6 @@
 import Layer from '@arcgis/core/layers/Layer';
 import createLayer from './createLayer';
 
-// TODO: 迁移到packages/lib下
 export const hasLayer = (view, id) => {
   const layer = view.map.findLayerById(id);
   return !!layer;
