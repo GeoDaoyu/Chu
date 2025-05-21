@@ -1,6 +1,6 @@
 import { useViewStore } from '@chu/store';
 import { Panel } from '@chu/ui';
-import { LayerList, LayerTree } from '@chu/widgets';
+import { LayerList, LayerTree, Legend } from '@chu/widgets';
 import { Flex } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './index.less';
@@ -25,6 +25,9 @@ const ResourcePage = () => {
         <Flex gap="large" vertical={true}>
           <Panel title="图层列表">
             <LayerList view={view} />
+          </Panel>
+          <Panel title="图例">
+            <Legend view={view} />
           </Panel>
         </Flex>
       </div>
