@@ -14,6 +14,16 @@ export default [
     component: '@/pages/Resource',
   },
   {
+    name: '空间分析',
+    path: '/analysis',
+    component: '@/pages/Analysis',
+  },
+  {
+    name: '仿真特效',
+    path: '/effect',
+    component: '@/pages/Effect',
+  },
+  {
     path: '/login',
     component: './Login',
     layout: false,

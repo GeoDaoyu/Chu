@@ -4,6 +4,8 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
+// TODO: 从umi route config中获取
+// 图标怎么办？
 export default [
   {
     label: '首页',
@@ -16,13 +18,13 @@ export default [
     icon: <AppstoreOutlined />,
   },
   {
-    label: '路由二',
-    key: '/route2',
+    label: '空间分析',
+    key: '/analysis',
     icon: <AppstoreOutlined />,
   },
   {
-    label: '路由三',
-    key: '/route3',
+    label: '仿真特效',
+    key: '/effect',
     icon: <SettingOutlined />,
   },
 ];
