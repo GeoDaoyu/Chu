@@ -2,10 +2,12 @@ import FunctionList from '@/components/FunctionList';
 import { useViewStore } from '@chu/store';
 import { Panel } from '@chu/ui';
 import { Flex } from 'antd';
+import dataSource from './config';
 import styles from './index.less';
 
 const ResourcePage = () => {
   const view = useViewStore((state) => state.view);
+  const dataSourceWithView = dataSource({ view });
 
   return (
     <div className={styles.container}>
@@ -15,7 +17,7 @@ const ResourcePage = () => {
       <div className={styles.right}>
         <Flex gap="large" vertical={true}>
           <Panel title="空间分析">
-            <FunctionList view={view} />
+            <FunctionList dataSource={dataSourceWithView} />
           </Panel>
         </Flex>
       </div>
