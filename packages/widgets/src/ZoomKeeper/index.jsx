@@ -1,8 +1,10 @@
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { watch } from '@arcgis/core/core/reactiveUtils.js';
 import ZoomVM from '@arcgis/core/widgets/Zoom/ZoomViewModel.js';
-import { Button, Flex, Space } from 'antd';
+import { Button, Flex, Space, Typography } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
+
+const { Text } = Typography;
 
 export default function ({ view }) {
   const { zoom: currentZoom } = view;
@@ -27,7 +29,8 @@ export default function ({ view }) {
 
   return (
     <Flex justify="space-between" align="center">
-      层级: {zoom}
+      <Text>      层级: {zoom}
+</Text>
       <Space>
         <Button type="primary" icon={<PlusOutlined />} onClick={zoomIn} />
         <Button type="primary" icon={<MinusOutlined />} onClick={zoomOut} />

@@ -1,6 +1,7 @@
 import {
   AppstoreOutlined,
   MailOutlined,
+  ScissorOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
 
@@ -20,7 +21,7 @@ export default [
   {
     label: '空间分析',
     key: '/analysis',
-    icon: <AppstoreOutlined />,
+    icon: <ScissorOutlined />,
   },
   {
     label: '仿真特效',

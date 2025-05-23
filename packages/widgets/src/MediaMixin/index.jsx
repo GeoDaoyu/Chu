@@ -1,0 +1,31 @@
+import MediaLayer from '@arcgis/core/layers/MediaLayer';
+import { Button, Flex } from 'antd';
+import React, { useEffect, useRef } from 'react';
+
+export default function ({ view, mediaLayerConfig }) {
+  const layer = useRef(null);
+  useEffect(() => {
+    layer.current = new MediaLayer(mediaLayerConfig);
+    view.map.add(layer.current);
+    return () => {
+      view.map.remove(layer.current);
+    };
+  }, []);
+  const show = () => {
+    layer.current.visible = true;
+  };
+  const hide = () => {
+    layer.current.visible = false;
+  };
+
+  return (
+    <Flex vertical gap="middle">
+      <Button type="primary" block onClick={show}>
+        显示视频
+      </Button>
+      <Button type="primary" block onClick={hide}>
+        隐藏视频
+      </Button>
+    </Flex>
+  );
+}
