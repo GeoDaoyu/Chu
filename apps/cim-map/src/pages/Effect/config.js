@@ -1,8 +1,15 @@
-import { PlayCircleOutlined } from '@ant-design/icons';
+import {
+  DashboardOutlined,
+  DatabaseOutlined,
+  ExperimentOutlined,
+  FieldTimeOutlined,
+  ForkOutlined,
+  PlayCircleOutlined,
+} from '@ant-design/icons';
 import Extent from '@arcgis/core/geometry/Extent';
 import ExtentAndRotationGeoreference from '@arcgis/core/layers/support/ExtentAndRotationGeoreference';
 import VideoElement from '@arcgis/core/layers/support/VideoElement';
-import { MediaMixin } from '@chu/widgets';
+import { MediaMixin, Weather } from '@chu/widgets';
 
 const element = new VideoElement({
   video:
@@ -31,6 +38,36 @@ const dataSource = (props) => [
     title: '视频融合',
     avatar: <PlayCircleOutlined />,
     component: <MediaMixin mediaLayerConfig={mediaLayerConfig} {...props} />,
+  },
+  {
+    key: '2',
+    title: '天气',
+    avatar: <DashboardOutlined />,
+    component: <Weather {...props} />,
+  },
+  {
+    key: '3',
+    title: '交通流量',
+    avatar: <DatabaseOutlined />,
+    component: undefined,
+  },
+  {
+    key: '4',
+    title: '积水仿真',
+    avatar: <ExperimentOutlined />,
+    component: undefined,
+  },
+  {
+    key: '5',
+    title: '风场',
+    avatar: <FieldTimeOutlined />,
+    component: undefined,
+  },
+  {
+    key: '6',
+    title: '洋流',
+    avatar: <ForkOutlined />,
+    component: undefined,
   },
 ];
 export default dataSource;

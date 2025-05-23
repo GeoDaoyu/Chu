@@ -15,6 +15,7 @@ export default function ({ view }) {
 
     return () => {
       if (widgetRef.current) {
+        // TODO: 还原天气设置
         widgetRef.current.destroy();
       }
     };
