@@ -1,6 +1,5 @@
-import FunctionList from '@/components/FunctionList';
 import { useViewStore } from '@chu/store';
-import { Panel } from '@chu/ui';
+import { FunctionList, Panel } from '@chu/ui';
 import { Flex } from 'antd';
 import dataSource from './config';
 import styles from './index.less';
