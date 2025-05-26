@@ -1,6 +1,8 @@
 # Chu
 
-[中文文档](README-zh.md)
+English | [简体中文](./README.zh-CN.md)
+
+
 
 A modern WebGIS framework built on UmiJS with Monorepo architecture.
 
