@@ -19,7 +19,6 @@ const findNode = (treeData, key) => {
 
   return null;
 };
-// TODO: 从store中获取view和treeData
 // TODO: 提取获取图层info的函数
 export const addLayer = async (view, treeData, key) => {
   const node = findNode({ children: treeData }, key);

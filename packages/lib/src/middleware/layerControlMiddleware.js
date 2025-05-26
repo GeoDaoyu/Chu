@@ -5,7 +5,9 @@ const layerControlMiddleware = (config) => (set, get, api) => {
   const initialState = config(set, get, api);
   return {
     ...initialState,
-    setCheckedKeys: (newValue, treeData, view) => {
+    // TODO: 解除view的传参
+    setCheckedKeys: (newValue, view) => {
+      const treeData = get().treeData;
       const oldValue = get().checkedKeys;
       const addKeys = difference(newValue, oldValue);
       const removeKeys = difference(oldValue, newValue);

@@ -1,15 +1,20 @@
 import { layerControlMiddleware } from '@chu/lib';
 import { createLayerTreeStore } from '@chu/store';
 import { Tree } from 'antd';
+import { useEffect } from 'react';
 
 const useLayerTreeStore = createLayerTreeStore(layerControlMiddleware);
 
 const LayerTree = ({ view, treeData }) => {
-  const { checkedKeys, setCheckedKeys } = useLayerTreeStore();
+  const { checkedKeys, setCheckedKeys, setTreeData } = useLayerTreeStore();
 
   const onCheck = (checkedKeysValue) => {
-    setCheckedKeys(checkedKeysValue, treeData, view);
+    setCheckedKeys(checkedKeysValue, view);
   };
+
+  useEffect(() => {
+    setTreeData(treeData);
+  }, [treeData]);
 
   return (
     <Tree
