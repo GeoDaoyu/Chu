@@ -1,0 +1,24 @@
+{
+  "name": "@chu/cli",
+  "version": "0.0.1",
+  "description": "cli",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "cli": "bin/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "@inquirer/prompts": "^7.5.3",
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "inquirer": "^12.6.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
