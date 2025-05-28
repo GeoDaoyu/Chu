@@ -1,6 +1,6 @@
 import MediaLayer from '@arcgis/core/layers/MediaLayer';
 import { Button, Flex } from 'antd';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ({ view, mediaLayerConfig }) {
   const layer = useRef(null);

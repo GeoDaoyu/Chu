@@ -1,7 +1,7 @@
 import Daylight from '@arcgis/core/widgets/Daylight';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function ({ view }) {
+const Widget = ({ view }) => {
   const ref = useRef();
   const widgetRef = useRef();
 
@@ -22,4 +22,6 @@ export default function ({ view }) {
   }, [view]);
 
   return <div ref={ref}></div>;
-}
+};
+
+export default Widget;

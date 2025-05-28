@@ -2,11 +2,11 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { watch } from '@arcgis/core/core/reactiveUtils.js';
 import ZoomVM from '@arcgis/core/widgets/Zoom/ZoomViewModel.js';
 import { Button, Flex, Space, Typography } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const { Text } = Typography;
 
-export default function ({ view }) {
+const ZoomKeeper = ({ view }) => {
   const { zoom: currentZoom } = view;
   const [zoom, setZoom] = useState(Math.round(currentZoom));
   const vmRef = useRef(new ZoomVM({ view }));
@@ -39,4 +39,5 @@ export default function ({ view }) {
       </Space>
     </Flex>
   );
-}
+};
+export default ZoomKeeper;
