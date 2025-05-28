@@ -20,4 +20,5 @@ const RouteMenu = () => {
     </div>
   );
 };
+
 export default RouteMenu;

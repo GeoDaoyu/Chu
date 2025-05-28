@@ -12,7 +12,9 @@ export default () => {
   const initializeView = useViewStore(state => state.initialize);
 
   useEffect(() => {
-    if (!ref.current) { return; }
+    if (!ref.current) {
+      return;
+    }
     const map = new Map({
       basemap: 'topo-vector',
     });

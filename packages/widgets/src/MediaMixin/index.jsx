@@ -2,7 +2,7 @@ import MediaLayer from '@arcgis/core/layers/MediaLayer';
 import { Button, Flex } from 'antd';
 import { useEffect, useRef } from 'react';
 
-export default function ({ view, mediaLayerConfig }) {
+const MediaMixin = ({ view, mediaLayerConfig }) => {
   const layer = useRef(null);
   useEffect(() => {
     layer.current = new MediaLayer(mediaLayerConfig);
@@ -10,7 +10,7 @@ export default function ({ view, mediaLayerConfig }) {
     return () => {
       view.map.remove(layer.current);
     };
-  }, []);
+  }, [view, mediaLayerConfig]);
   const show = () => {
     layer.current.visible = true;
   };
@@ -28,4 +28,6 @@ export default function ({ view, mediaLayerConfig }) {
       </Button>
     </Flex>
   );
-}
+};
+
+export default MediaMixin;
