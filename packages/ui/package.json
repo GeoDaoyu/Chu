@@ -20,13 +20,13 @@
     "prepublishOnly": "father doctor && npm run build",
     "start": "npm run dev"
   },
-  "devDependencies": {
-    "dumi": "^2.4.13",
-    "father": "^4.1.0"
-  },
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
+  },
+  "devDependencies": {
+    "dumi": "^2.4.13",
+    "father": "^4.1.0"
   },
   "publishConfig": {
     "access": "public"

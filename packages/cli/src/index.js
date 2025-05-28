@@ -1,8 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { input, select } from '@inquirer/prompts';
 import chalk from 'chalk';
 import { program } from 'commander';
-import fs from 'fs';
-import path from 'path';
 
 program.name('chu-cli').description('cli for Chu').version('1.0.0');
 
@@ -63,7 +63,8 @@ program
           `\nNext steps:\n  cd ${projectName}\n  pnpm install\n  pnpm start`,
         ),
       );
-    } catch (error) {
+    }
+    catch (error) {
       console.error(chalk.red('Failed:'), error);
       process.exit(1);
     }

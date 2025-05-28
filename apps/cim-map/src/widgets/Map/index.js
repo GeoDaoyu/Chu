@@ -9,17 +9,17 @@ esriConfig.assetsPath = './assets';
 
 export default () => {
   const ref = useRef();
-  const initializeView = useViewStore((state) => state.initialize);
+  const initializeView = useViewStore(state => state.initialize);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) { return; }
     const map = new Map({
       basemap: 'topo-vector',
     });
 
     const view = new SceneView({
       container: ref.current,
-      map: map,
+      map,
       zoom: 9,
       center: [120, 30],
       ui: {

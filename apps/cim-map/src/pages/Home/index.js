@@ -6,7 +6,7 @@ import config from './config';
 import styles from './index.less';
 
 const HomePage = () => {
-  const view = useViewStore((state) => state.view);
+  const view = useViewStore(state => state.view);
   const configWithView = config({ view });
   const leftItem = filter(propEq('left', 'position'))(configWithView);
   const rightItem = filter(propEq('right', 'position'))(configWithView);

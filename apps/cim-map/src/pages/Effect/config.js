@@ -32,7 +32,7 @@ const mediaLayerConfig = {
   title: '2017 Hurricanes and Aerosols Simulation',
 };
 
-const dataSource = (props) => [
+const dataSource = props => [
   {
     key: '1',
     title: '视频融合',

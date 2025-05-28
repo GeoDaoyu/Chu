@@ -1,7 +1,7 @@
 import { difference } from 'ramda';
 import { addLayer, hasLayer, removeLayer } from '../core';
 
-const layerControlMiddleware = (config) => (set, get, api) => {
+const layerControlMiddleware = config => (set, get, api) => {
   const initialState = config(set, get, api);
   return {
     ...initialState,
@@ -18,7 +18,7 @@ const layerControlMiddleware = (config) => (set, get, api) => {
         }
       });
 
-      removeKeys.forEach((key) => removeLayer(view, key));
+      removeKeys.forEach(key => removeLayer(view, key));
 
       set({ checkedKeys: newValue });
     },

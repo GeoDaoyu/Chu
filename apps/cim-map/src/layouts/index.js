@@ -1,16 +1,16 @@
-import RouteMenu from '@/components/RouteMenu';
-import User from '@/components/User';
-import Map from '@/widgets/Map';
 import { useViewStore } from '@chu/store';
 import { Button, Flex, Layout, Space, Typography } from 'antd';
 import { Outlet } from 'umi';
+import RouteMenu from '@/components/RouteMenu';
+import User from '@/components/User';
+import Map from '@/widgets/Map';
 import styles from './index.less';
 
 const { Title } = Typography;
 const { Header, Content } = Layout;
 
 export default function BasicLayout() {
-  const view = useViewStore((state) => state.view);
+  const view = useViewStore(state => state.view);
 
   return (
     <Layout>

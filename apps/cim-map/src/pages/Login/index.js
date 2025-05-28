@@ -1,6 +1,6 @@
-import { setAuthority } from '@/utils/authority';
 import { history, useModel } from '@umijs/max';
 import { Button } from 'antd';
+import { setAuthority } from '@/utils/authority';
 import { getRole, login } from './service.js';
 
 export default () => {

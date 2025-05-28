@@ -6,5 +6,6 @@ export default antfu({
   stylistic: {
     semi: true,
   },
+  lessOpinionated: true,
   ignores: ['apps/*/public/assets'],
 });

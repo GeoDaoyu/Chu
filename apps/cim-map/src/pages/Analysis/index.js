@@ -5,7 +5,7 @@ import dataSource from './config';
 import styles from './index.less';
 
 const ResourcePage = () => {
-  const view = useViewStore((state) => state.view);
+  const view = useViewStore(state => state.view);
   const dataSourceWithView = dataSource({ view });
 
   return (

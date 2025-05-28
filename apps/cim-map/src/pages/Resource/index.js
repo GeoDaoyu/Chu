@@ -7,7 +7,7 @@ import styles from './index.less';
 import { getLayerTree } from './service.js';
 
 const ResourcePage = () => {
-  const view = useViewStore((state) => state.view);
+  const view = useViewStore(state => state.view);
   const [treeData, setTreeData] = useState([]);
   useEffect(() => {
     getLayerTree().then(({ data }) => setTreeData(data));

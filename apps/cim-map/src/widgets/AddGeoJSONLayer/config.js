@@ -1,7 +1,7 @@
 export const id = 'geojson';
 
-export const url =
-  'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
+export const url
+  = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
 
 export const template = {
   title: 'Earthquake Info',

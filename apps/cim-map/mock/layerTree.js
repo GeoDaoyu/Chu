@@ -26,7 +26,7 @@ export default {
   'GET /api/v1/layerTree': (_, res) => {
     res.json({
       success: true,
-      data: data,
+      data,
       errorCode: 0,
     });
   },

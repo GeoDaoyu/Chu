@@ -1,6 +1,6 @@
-import { deleteAuthority } from '@/utils/authority';
 import { history, useModel } from '@umijs/max';
 import { Button, Space } from 'antd';
+import { deleteAuthority } from '@/utils/authority';
 import styles from './index.less';
 
 export default () => {

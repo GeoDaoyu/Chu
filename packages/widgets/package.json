@@ -20,6 +20,10 @@
     "prepublishOnly": "father doctor && npm run build",
     "start": "npm run dev"
   },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
   "dependencies": {
     "@chu/lib": "workspace:*",
     "@chu/store": "workspace:*"
@@ -30,10 +34,6 @@
     "@umijs/lint": "^4.0.0",
     "dumi": "^2.4.13",
     "father": "^4.1.0"
-  },
-  "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
   },
   "publishConfig": {
     "access": "public"

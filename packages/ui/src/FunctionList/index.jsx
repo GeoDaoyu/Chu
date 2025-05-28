@@ -8,11 +8,13 @@ export default ({ dataSource }) => {
 
   return (
     <div className={styles.container}>
-      {activeItem ? (
-        <Zone goBack={() => setActiveItem(null)}>{activeItem}</Zone>
-      ) : (
-        <List dataSource={dataSource} goTo={setActiveItem} />
-      )}
+      {activeItem
+        ? (
+            <Zone goBack={() => setActiveItem(null)}>{activeItem}</Zone>
+          )
+        : (
+            <List dataSource={dataSource} goTo={setActiveItem} />
+          )}
     </div>
   );
 };

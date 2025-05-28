@@ -29,8 +29,10 @@ export default function ({ view }) {
 
   return (
     <Flex justify="space-between" align="center">
-      <Text>      层级: {zoom}
-</Text>
+      <Text>
+        层级:
+        {zoom}
+      </Text>
       <Space>
         <Button type="primary" icon={<PlusOutlined />} onClick={zoomIn} />
         <Button type="primary" icon={<MinusOutlined />} onClick={zoomOut} />
