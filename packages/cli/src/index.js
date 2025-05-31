@@ -1,8 +1,9 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import process from 'node:process';
 import { input, select } from '@inquirer/prompts';
 import chalk from 'chalk';
 import { program } from 'commander';
+import create from './create.js';
 
 program.name('chu-cli').description('cli for Chu').version('1.0.0');
 
@@ -47,13 +48,7 @@ program
         choices: TEMPLATES,
       });
 
-      const projectPath = path.join(process.cwd(), projectName);
-      fs.mkdirSync(projectPath);
-
-      fs.writeFileSync(
-        path.join(projectPath, 'README.md'),
-        `# ${projectName}\n\nThis is a project created using the ${template} template.`,
-      );
+      await create(projectName, template);
 
       console.log(
         chalk.green(`\n✔ Project ${projectName} created successfully!`),
