@@ -10,7 +10,7 @@ program.name('chu-cli').description('cli for Chu').version('1.0.0');
 const TEMPLATES = [
   {
     name: 'cim-map',
-    description: '',
+    description: 'City Information Modeling, CIM, 城市信息模型',
     value: 'cim-map',
   },
   {
