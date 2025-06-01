@@ -7,6 +7,27 @@ import chalk from 'chalk';
 const REPO_URL = 'https://github.com/geodaoyu/Chu.git';
 const DEFAULT_BRANCH = 'main';
 
+const cleanAppsDir = (projectPath, template) => {
+  const appsDir = path.join(projectPath, 'apps');
+  if (!fs.existsSync(appsDir)) {
+    return;
+  }
+
+  try {
+    const items = fs.readdirSync(appsDir);
+
+    items.forEach((item) => {
+      const itemPath = path.join(appsDir, item);
+      if (fs.statSync(itemPath).isDirectory() && item !== template) {
+        fs.rmSync(itemPath, { recursive: true, force: true });
+      }
+    });
+  }
+  catch (error) {
+    console.error(chalk.gray(`clean error: ${error.message}`));
+  }
+};
+
 const create = async (projectName, template) => {
   const targetDir = path.resolve(process.cwd(), projectName);
 
@@ -31,9 +52,7 @@ const create = async (projectName, template) => {
   const gitDir = path.join(targetDir, '.git');
   fs.rmSync(gitDir, { recursive: true, force: true });
 
-  console.log(`\n🔧 应用 ${chalk.cyan(template)} 模板配置...`);
-  // 这里可以添加模板特定的配置逻辑
-  // 例如：fs.copyFileSync(path.join(targetDir, `templates/${template}`), ...)
+  cleanAppsDir(targetDir, template);
 
   return targetDir;
 };
