@@ -1,6 +1,6 @@
 {
-  "name": "chu-cli",
-  "version": "0.0.1",
+  "name": "@geodaoyu/chu-cli",
+  "version": "0.0.2",
   "description": "cli",
   "keywords": [
     "chu",

@@ -4,7 +4,7 @@
 
 🌍现代WebGIS框架
 
-![last commit](https://badgen.net/github/last-commit/GeoDaoyu/Chu)[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+![last commit](https://badgen.net/github/last-commit/GeoDaoyu/Chu)[![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](./CONTRIBUTING.md)
 
 <p align="center">
   <a href="./docs/tutorial/quickstart.md">教程</a> •
