@@ -1,23 +1,33 @@
 {
-  "name": "@chu/cli",
-  "type": "module",
+  "name": "chu-cli",
   "version": "0.0.1",
   "description": "cli",
+  "keywords": [
+    "chu",
+    "cli"
+  ],
   "license": "MIT",
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "type": "module",
   "main": "src/index.js",
   "bin": {
-    "cli": "bin/index.js"
+    "chu-cli": "./dist/index.js"
   },
   "files": [
+    "bin",
     "dist"
   ],
-  "engines": {
-    "node": ">=16.0.0"
+  "scripts": {
+    "build": "tsup",
+    "prepublishOnly": "npm run build"
   },
-  "scripts": {},
   "devDependencies": {
     "@inquirer/prompts": "^7.5.3",
     "chalk": "^5.4.1",
-    "commander": "^14.0.0"
+    "commander": "^14.0.0",
+    "tsup": "^8.5.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
