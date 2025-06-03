@@ -1,2 +1,3 @@
-window.appcfg = {};
-console.log('加载全局配置文件 - 完成');
+window.appcfg = {
+  title: 'CIM 基础一张图',
+};

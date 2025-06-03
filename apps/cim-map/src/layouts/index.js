@@ -8,6 +8,7 @@ import styles from './index.less';
 
 const { Title } = Typography;
 const { Header, Content } = Layout;
+const defaultTitle = 'Chu';
 
 export default function BasicLayout() {
   const view = useViewStore(state => state.view);
@@ -16,7 +17,7 @@ export default function BasicLayout() {
     <Layout>
       <Header className={styles.header}>
         <Space size="large">
-          <Title>系统名称</Title>
+          <Title>{window.appcfg.title || defaultTitle}</Title>
           <Flex gap="small">
             <Button type="primary">外链一</Button>
             <Button type="primary">外链二</Button>
