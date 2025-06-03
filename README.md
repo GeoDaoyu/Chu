@@ -42,10 +42,10 @@ Chu，中文发音为「啾」，是一个现代的WebGIS框架。总体使用Mo
 
 ## 📦 如何使用
 
-### 安装
+### 使用脚手架创建项目
 
 ```bash
-git clone --depth=1 https://github.com/GeoDaoyu/Chu.git
+pnpm dlx @geodaoyu/chu-cli@latest create
 ```
 
 ### 启动

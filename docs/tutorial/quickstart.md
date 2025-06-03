@@ -1,6 +1,3 @@
-<p style="background-color: #f2dede; padding: 10px; border-left: 6px solid #a94442; color: #a94442;">
-文档完善中，暂不可用！！！
-</p>
 
 ## 环境准备
 
@@ -28,68 +25,39 @@ $ node -v
 v20.18.0
 ```
 
-然后需要包管理工具。node 默认包含 npm，强烈建议选择[pnpm](https://pnpm.io/installation)。
+然后需要包管理工具。因为使用了pnpm workspace，所以必须使用[pnpm](https://pnpm.io/installation)。
 
 ## 创建项目
 
 通过脚手架工具创建项目
 
 ```bash
-$ pnpm dlx create-umi@latest
+$ pnpm dlx @geodaoyu/chu-cli@latest create
 
-✔ Install the following package: create-umi? (Y/n) · true
+✔ Enter project name: chengdu-map
 
-✔ Pick Npm Client › pnpm
-
-✔ Pick Npm Registry › taobao
-
+✔ Select project template: cim-map
 
 ```
 
 ## 启动项目
 
+安装依赖`pnpm install`
+
 执行 `pnpm start:cim` 命令
 
-行 `pnpm dev` 命令，
-
 ```bash
-$ pnpm dev
-
-        ╔═════════════════════════════════════════════════════╗
-
-        ║ App listening at:                                   ║
-
-        ║  >   Local: https://127.0.0.1:8000                  ║
-
-ready - ║  > Network: https://192.168.1.1:8000                ║
-
-        ║                                                     ║
-
-        ║ Now you can open browser with the above addresses👆 ║
-
-        ╚═════════════════════════════════════════════════════╝
-
-event - compiled successfully in 1121 ms (388 modules)
-
-event - MFSU compiled successfully in 1308 ms (875 modules)
+$ pnpm start:cim
 ```
 
-在浏览器里打开 http://localhost:8000/，能看到以下界面，
-
-```bash
-占位图片
-```
+在浏览器里打开 http://localhost:8000/，能看到地图页面。
 
 ## 部署发布
 
-执行 `pnpm build` 命令，
+执行 `pnpm run build` 命令，
 
 ```bash
 > umi build
-
-event - compiled successfully in 1179 ms (567 modules)
-
-event - build index.html
 ```
 
 产物默认会生成到 `./dist` 目录下，
