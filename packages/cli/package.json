@@ -1,6 +1,6 @@
 {
   "name": "@geodaoyu/chu-cli",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "cli",
   "keywords": [
     "chu",
@@ -11,7 +11,7 @@
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "chu-cli": "./dist/index.js"
+    "chu-cli": "./dist/index.cjs"
   },
   "files": [
     "bin",
