@@ -5,5 +5,6 @@ Usage:
 ```jsx
 import { Legend } from '@chu/widgets';
 
-export default () => <Legend view={view} />;
+const App = () => <Legend view={view} />;
+export default App;
 ```

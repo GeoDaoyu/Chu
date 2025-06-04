@@ -8,9 +8,7 @@ export default () => {
 
   const onClick = async () => {
     const user = await login();
-    console.log('获取用户信息 - 完成');
     const role = await getRole();
-    console.log('获取权限信息 - 完成');
     setInitialState({
       name: user.data.name,
       user: user.data,

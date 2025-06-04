@@ -5,5 +5,6 @@
 ```jsx
 import { Panel } from '@chu/ui';
 
-export default () => <Panel title="标题">内容</Panel>;
+const App = () => <Panel title="标题">内容</Panel>;
+export default App;
 ```

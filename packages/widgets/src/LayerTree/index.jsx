@@ -14,7 +14,7 @@ const LayerTree = ({ view, treeData }) => {
 
   useEffect(() => {
     setTreeData(treeData);
-  }, [treeData]);
+  }, [treeData, setTreeData]);
 
   return (
     <Tree

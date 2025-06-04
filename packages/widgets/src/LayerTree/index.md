@@ -5,5 +5,6 @@ Usage:
 ```jsx
 import { LayerTree } from '@chu/widgets';
 
-export default () => <LayerTree view={view} treeData={treeData} />;
+const App = () => <LayerTree view={view} treeData={treeData} />;
+export default App;
 ```

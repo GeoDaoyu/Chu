@@ -5,5 +5,6 @@ Usage:
 ```jsx
 import { Weather } from '@chu/widgets';
 
-export default () => <Weather view={view} />;
+const App = () => <Weather view={view} />;
+export default App;
 ```

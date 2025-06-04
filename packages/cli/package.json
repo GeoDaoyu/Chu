@@ -1,14 +1,14 @@
 {
   "name": "@geodaoyu/chu-cli",
+  "type": "module",
   "version": "0.0.5",
   "description": "cli",
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "license": "MIT",
   "keywords": [
     "chu",
     "cli"
   ],
-  "license": "MIT",
-  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
-  "type": "module",
   "main": "src/index.js",
   "bin": {
     "chu-cli": "./dist/index.cjs"
@@ -17,6 +17,9 @@
     "bin",
     "dist"
   ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "build": "tsup",
     "prepublishOnly": "npm run build"
@@ -26,8 +29,5 @@
     "chalk": "^5.4.1",
     "commander": "^14.0.0",
     "tsup": "^8.5.0"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }

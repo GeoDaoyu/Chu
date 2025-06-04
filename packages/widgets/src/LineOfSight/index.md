@@ -5,5 +5,6 @@ Usage:
 ```jsx
 import { LineOfSight } from '@chu/widgets';
 
-export default () => <LineOfSight view={view} />;
+const App = () => <LineOfSight view={view} />;
+export default App;
 ```

@@ -5,5 +5,6 @@ Usage:
 ```jsx
 import { LayerList } from '@chu/widgets';
 
-export default () => <LayerList view={view} />;
+const App = () => <LayerList view={view} />;
+export default App;
 ```

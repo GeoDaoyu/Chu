@@ -31,7 +31,7 @@ export default () => {
     view.when(() => {
       initializeView(view);
     });
-  }, [ref]);
+  }, [ref, initializeView]);
 
   return <div className={styles.viewDiv} ref={ref}></div>;
 };

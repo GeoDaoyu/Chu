@@ -3,7 +3,7 @@ import List from './components/List';
 import Zone from './components/Zone';
 import styles from './index.less';
 
-export default ({ dataSource }) => {
+const FunctionList = ({ dataSource }) => {
   const [activeItem, setActiveItem] = useState();
 
   return (
@@ -18,3 +18,5 @@ export default ({ dataSource }) => {
     </div>
   );
 };
+
+export default FunctionList;

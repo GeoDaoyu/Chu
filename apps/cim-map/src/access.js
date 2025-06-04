@@ -3,7 +3,6 @@ export default (initialState) => {
   // 参考文档 https://umijs.org/docs/max/access
   const { user, role } = initialState;
   const canSeeAdmin = user && role === 'admin';
-  console.log('设置权限 - 完成');
   return {
     canSeeAdmin,
   };

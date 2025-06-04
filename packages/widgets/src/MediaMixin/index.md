@@ -7,5 +7,6 @@ Usage:
 ```jsx
 import { ZoomKeeper } from '@chu/widgets';
 
-export default () => <ZoomKeeper view={view} />;
+const App = () => <ZoomKeeper view={view} />;
+export default App;
 ```

@@ -1,7 +1,7 @@
 import { LeftOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-export default ({ goBack, children }) => {
+const Zone = ({ goBack, children }) => {
   return (
     <div>
       <Button type="link" icon={<LeftOutlined />} onClick={goBack}>
@@ -11,3 +11,5 @@ export default ({ goBack, children }) => {
     </div>
   );
 };
+
+export default Zone;

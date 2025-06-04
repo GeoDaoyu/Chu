@@ -7,5 +7,5 @@ export default antfu({
     semi: true,
   },
   lessOpinionated: true,
-  ignores: ['apps/*/public/assets'],
+  ignores: ['apps/*/public/assets', 'apps/*/src/.umi', 'apps/*/src/.umi-production'],
 });

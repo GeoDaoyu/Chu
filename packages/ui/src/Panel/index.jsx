@@ -1,7 +1,7 @@
 import { Card, Empty } from 'antd';
 
-const Panel = ({ title = '', children = <Empty description={false} /> }) => {
-  return <Card title={title}>{children}</Card>;
+const Panel = ({ title = '', children }) => {
+  return <Card title={title}>{children || <Empty description={false} />}</Card>;
 };
 
 export default Panel;

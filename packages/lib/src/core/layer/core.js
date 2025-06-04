@@ -13,7 +13,9 @@ const findNode = (treeData, key) => {
   if (treeData.children) {
     for (const child of treeData.children) {
       const found = findNode(child, key);
-      if (found) { return found; }
+      if (found) {
+        return found;
+      }
     }
   }
 

@@ -10,9 +10,7 @@ export default () => {
       // 从url或storage等获取token
       const token = '';
       const user = await getUser(token);
-      console.log('获取用户信息 - 完成');
       const role = await getRole();
-      console.log('获取权限信息 - 完成');
       setInitialState({
         name: user.data.name,
         user: user.data,
@@ -22,6 +20,6 @@ export default () => {
       history.push('/home');
     };
     login();
-  }, []);
+  }, [setInitialState]);
   return <div>单点登录</div>;
 };

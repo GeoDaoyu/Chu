@@ -1,4 +1,3 @@
-
 ## 环境准备
 
 首先得有 node，并确保 node 版本是 20 或以上。（推荐用 [nvm](https://github.com/nvm-sh/nvm) 来管理 node 版本，windows 下推荐用 [nvm-windows](https://github.com/coreybutler/nvm-windows)）
