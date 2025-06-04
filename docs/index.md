@@ -2,6 +2,7 @@
 
 ## 设计思路
 
+- [命名由来](./philosophy/naming.md)
 - [架构设计](./philosophy/monorepo.md)
 
 ## 教程
