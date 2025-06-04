@@ -1,10 +1,17 @@
-import { history, useLocation } from '@umijs/max';
+import { history, useAppData, useLocation } from '@umijs/max';
 import { Menu } from 'antd';
-import items from './config';
+import { compose, filter, map, values } from 'ramda';
 import styles from './index.less';
 
 const RouteMenu = () => {
   const location = useLocation();
+  const { routes } = useAppData();
+  const items = compose(
+    map(({ name, path }) => ({ label: name, key: path })),
+    filter(({ hideInMenu }) => !hideInMenu),
+    filter(({ name }) => name),
+    values,
+  )(routes);
   const current = location.pathname;
   const onClick = (e) => {
     history.push(e.key);
