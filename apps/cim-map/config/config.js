@@ -5,6 +5,9 @@ import routes from './routes';
 const UMI_ENV = process.env.UMI_ENV;
 
 export default defineConfig({
+  history: {
+    type: 'hash',
+  },
   antd: {},
   access: {},
   model: {},
@@ -13,6 +16,8 @@ export default defineConfig({
   routes,
   mfsu: false,
   npmClient: 'pnpm',
+  jsMinifier: 'terser',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
   headScripts: [
     {
       src: UMI_ENV ? `./config/index.${UMI_ENV}.js` : './config/index.js',
