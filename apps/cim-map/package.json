@@ -11,6 +11,10 @@
     "setup": "max setup",
     "start": "npm run dev"
   },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
   "dependencies": {
     "@chu/store": "workspace:*",
     "@chu/ui": "workspace:*",
@@ -20,9 +24,5 @@
   "devDependencies": {
     "cpx2": "^8.0.0",
     "cross-env": "^7.0.3"
-  },
-  "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
   }
 }

@@ -1,15 +1,16 @@
 {
   "name": "chu",
+  "type": "module",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.5.2",
   "description": "A modern WebGIS framework built on UmiJS with Monorepo architecture.",
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "license": "ISC",
   "keywords": [
     "umi",
     "antd",
     "arcgis"
   ],
-  "license": "ISC",
-  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
-  "type": "module",
   "scripts": {
     "build:cim": "pnpm --filter ./apps/cim-map build",
     "lint": "eslint",
@@ -50,6 +51,5 @@
     "stylelint": "^14.9.1",
     "stylelint-config-standard": "^38.0.0",
     "typescript": "^5.0.3"
-  },
-  "packageManager": "pnpm@10.5.2"
+  }
 }
