@@ -49,7 +49,7 @@ $ pnpm dlx @geodaoyu/chu-cli@latest create
 $ pnpm start:cim
 ```
 
-在浏览器里打开 http://localhost:8000/，能看到地图页面。
+在浏览器中打开 http://localhost:8000/ ，能看到地图页面。
 
 ## 部署发布
 
@@ -59,7 +59,7 @@ $ pnpm start:cim
 > umi build
 ```
 
-产物默认会生成到 `./dist` 目录下，
+产物默认会生成到 `apps/xxx/dist` 目录下，
 
 ```undefined
 ./dist
