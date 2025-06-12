@@ -4,6 +4,7 @@
 
 - [命名由来](./philosophy/naming.md)
 - [架构设计](./philosophy/monorepo.md)
+- [编码规范](./philosophy/lint.md)
 
 ## 教程
 
