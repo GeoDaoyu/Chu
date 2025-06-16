@@ -21,8 +21,9 @@
     "start": "npm run dev"
   },
   "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "@umijs/max": "^4.4.4",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
     "@chu/lib": "workspace:*",
