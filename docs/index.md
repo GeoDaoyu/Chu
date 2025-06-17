@@ -6,6 +6,7 @@
 - [架构设计](./philosophy/monorepo.md)
 - [编码规范](./philosophy/lint.md)
 - [微件开发](./philosophy/widgets.md)
+- [多环境部署](./philosophy/env.md)
 
 ## 教程
 
