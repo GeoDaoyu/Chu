@@ -8,7 +8,7 @@ GIS项目除了互联网环境之后，还可能有政务网和内网环境。�
 
 Chu对于手工部署做了考虑。
 
-⼈⼯部署时，需要修改的配置包括且不限于
+手⼯部署时，需要修改的配置包括且不限于
 
 - config（portal地址、系统登录地址、静态资源地址等）
 - 地图服务（服务地址、渲染样式、字段等）
@@ -34,23 +34,27 @@ Chu采⽤静态配置⽂件加打包脚本来保证需求。
 3. 在config中配置`headScript`
 
 ```js
+import { defineConfig } from "@umijs/max";
 const { BUILD_ENV } = process.env;
-export defineConfig({
+
+export default defineConfig({
   headScript: [
     {
-      src: BUILD_ENV ? `./config/index.${BUILD_ENV}.js` : './config/index.js'
-    }
-  ]
+      src: BUILD_ENV ? `./config/index.${BUILD_ENV}.js` : "./config/index.js",
+    },
+  ],
 });
 ```
 
 4. 在 `package.json`增加配置
 
-   ```json
-   "scripts": {
-     "build:gov": "cross-env BUILD_ENV=gov max build",
-   },
-   ```
+```json
+{
+  "scripts": {
+    "build:gov": "cross-env BUILD_ENV=gov max build"
+  }
+}
+```
 
 5. 打包时通过参数区分环境
 
