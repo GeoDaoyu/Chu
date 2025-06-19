@@ -8,6 +8,7 @@
 - [微件开发](./philosophy/widgets.md)
 - [多环境部署](./philosophy/env.md)
 - [数据流](./philosophy/data-flow.md)
+- [请求](./philosophy/request.md)
 
 ## 教程
 
