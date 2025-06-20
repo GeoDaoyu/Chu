@@ -53,4 +53,4 @@ export default defineConfig({
 
 把css塞到html的header中，跳过Umi的打包。
 
-在`global.(css|less|sass|scss)`中覆盖样式。
+在`overrides.(css|less|sass|scss)`中覆盖样式。
