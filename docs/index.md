@@ -4,6 +4,7 @@
 
 - [命名由来](./philosophy/naming.md)
 - [架构设计](./philosophy/monorepo.md)
+- [地理引擎](./philosophy/gis.md)
 - [编码规范](./philosophy/lint.md)
 - [微件开发](./philosophy/widgets.md)
 - [多环境部署](./philosophy/env.md)
