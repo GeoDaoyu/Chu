@@ -8,6 +8,8 @@
 - [编码规范](./philosophy/lint.md)
 - [微件开发](./philosophy/widgets.md)
 - [多环境部署](./philosophy/env.md)
+- [路由](./philosophy/routes.md)
+- [布局与菜单](./philosophy/layout-menu.md)
 - [数据流](./philosophy/data-flow.md)
 - [请求](./philosophy/request.md)
 
@@ -23,7 +25,7 @@
 - [视线分析](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/LineOfSight/index.md)
 - [天气](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/Weather/index.md)
 - [日照](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/Daylight/index.md)
-- [图例](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/Legend/index.jsx)
+- [图例](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/Legend/index.md)
 
 ### 自定义微件
 
