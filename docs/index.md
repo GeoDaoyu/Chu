@@ -16,6 +16,7 @@
 ## 教程
 
 - [快速上手](./tutorial/quickstart.md)
+- [图层约定](./tutorial/layer-config.md)
 
 ## 示例
 
