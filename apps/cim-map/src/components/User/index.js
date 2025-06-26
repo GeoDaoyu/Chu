@@ -3,7 +3,7 @@ import { Button, Space } from 'antd';
 import { deleteAuthority } from '@/utils/authority';
 import styles from './index.less';
 
-export default () => {
+const User = () => {
   const { refresh } = useModel('@@initialState');
   const login = () => {
     history.push('/login');
@@ -26,3 +26,5 @@ export default () => {
     </div>
   );
 };
+
+export default User;

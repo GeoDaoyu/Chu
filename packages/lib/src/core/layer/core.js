@@ -1,5 +1,6 @@
 import Layer from '@arcgis/core/layers/Layer';
 import createLayer from './createLayer';
+import { cond, prop, T } from 'ramda';
 
 export const hasLayer = (view, id) => {
   const layer = view.map.findLayerById(id);
@@ -28,14 +29,11 @@ export const addLayer = async (view, treeData, key) => {
     return;
   }
   const { url, type, ...rest } = node;
-  const layer = type
-    ? createLayer({ id: key, ...node })
-    : url
-      ? await Layer.fromArcGISServerUrl({
-          url,
-          properties: { id: key, ...rest },
-        })
-      : new Layer({ id: key });
+  const layer = cond([
+    [prop('type'), () => createLayer({ id: key, ...node })],
+    [prop('url'), () => Layer.fromArcGISServerUrl({ url, properties: { id: key, ...rest } })],
+    [T, () => new Layer({ id: key, ...rest })]
+  ])(node);
   view.map.add(layer);
 };
 export const removeLayer = (view, id) => {

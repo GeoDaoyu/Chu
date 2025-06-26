@@ -7,7 +7,7 @@ import styles from './index.less';
 
 esriConfig.assetsPath = './assets';
 
-export default () => {
+const MapComponent = () => {
   const ref = useRef();
   const initializeView = useViewStore((state) => state.initialize);
 
@@ -35,3 +35,5 @@ export default () => {
 
   return <div className={styles.viewDiv} ref={ref} />;
 };
+
+export default MapComponent;
