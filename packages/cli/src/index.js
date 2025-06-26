@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fs from 'node:fs';
 import process from 'node:process';
 import { input, select } from '@inquirer/prompts';
