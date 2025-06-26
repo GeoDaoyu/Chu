@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { setAuthority } from '@/utils/authority';
 import { getRole, login } from './service.js';
 
-export default () => {
+const Login = () => {
   const { setInitialState } = useModel('@@initialState');
 
   const onClick = async () => {
@@ -30,3 +30,5 @@ export default () => {
     </div>
   );
 };
+
+export default Login;

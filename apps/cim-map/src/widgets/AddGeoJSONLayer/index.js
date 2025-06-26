@@ -2,7 +2,7 @@ import { Button, Space } from 'antd';
 import styles from './index.less';
 import useLayer from './useLayer';
 
-export default () => {
+const AddGeoJSONLayer = () => {
   const { add, remove } = useLayer();
   return (
     <div className={styles.text}>
@@ -13,3 +13,5 @@ export default () => {
     </div>
   );
 };
+
+export default AddGeoJSONLayer;

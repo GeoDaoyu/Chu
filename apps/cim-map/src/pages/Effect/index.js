@@ -5,16 +5,16 @@ import dataSource from './config';
 import styles from './index.less';
 
 const ResourcePage = () => {
-  const view = useViewStore(state => state.view);
+  const view = useViewStore((state) => state.view);
   const dataSourceWithView = dataSource({ view });
 
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <Flex gap="large" vertical={true}></Flex>
+        <Flex gap="large" vertical />
       </div>
       <div className={styles.right}>
-        <Flex gap="large" vertical={true}>
+        <Flex gap="large" vertical>
           <Panel title="仿真特效">
             <FunctionList dataSource={dataSourceWithView} />
           </Panel>

@@ -7,7 +7,7 @@ import styles from './index.less';
 import { getLayerTree } from './service.js';
 
 const ResourcePage = () => {
-  const view = useViewStore(state => state.view);
+  const view = useViewStore((state) => state.view);
   const [treeData, setTreeData] = useState([]);
   useEffect(() => {
     getLayerTree().then(({ data }) => setTreeData(data));
@@ -15,14 +15,14 @@ const ResourcePage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <Flex gap="large" vertical={true}>
+        <Flex gap="large" vertical>
           <Panel title="目录树">
             <LayerTree view={view} treeData={treeData} />
           </Panel>
         </Flex>
       </div>
       <div className={styles.right}>
-        <Flex gap="large" vertical={true}>
+        <Flex gap="large" vertical>
           <Panel title="图层列表">
             <LayerList view={view} />
           </Panel>

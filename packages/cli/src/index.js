@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fs from 'node:fs';
 import process from 'node:process';
 import { input, select } from '@inquirer/prompts';
@@ -50,16 +51,11 @@ program
 
       await create(projectName, template);
 
+      console.log(chalk.green(`\n✔ Project ${projectName} created successfully!`));
       console.log(
-        chalk.green(`\n✔ Project ${projectName} created successfully!`),
+        chalk.magenta(`\nNext steps:\n  cd ${projectName}\n  pnpm install\n  pnpm start`),
       );
-      console.log(
-        chalk.magenta(
-          `\nNext steps:\n  cd ${projectName}\n  pnpm install\n  pnpm start`,
-        ),
-      );
-    }
-    catch (error) {
+    } catch (error) {
       console.error(chalk.red('Failed:'), error);
       process.exit(1);
     }

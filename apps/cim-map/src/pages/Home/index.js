@@ -6,14 +6,14 @@ import config from './config';
 import styles from './index.less';
 
 const HomePage = () => {
-  const view = useViewStore(state => state.view);
+  const view = useViewStore((state) => state.view);
   const configWithView = config({ view });
   const leftItem = filter(propEq('left', 'position'))(configWithView);
   const rightItem = filter(propEq('right', 'position'))(configWithView);
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <Flex gap="large" vertical={true}>
+        <Flex gap="large" vertical>
           {leftItem.map(({ title, component }) => (
             <Panel key={title} title={title}>
               {component}
@@ -22,7 +22,7 @@ const HomePage = () => {
         </Flex>
       </div>
       <div className={styles.right}>
-        <Flex gap="large" vertical={true}>
+        <Flex gap="large" vertical>
           {rightItem.map(({ title, component }) => (
             <Panel key={title} title={title}>
               {component}

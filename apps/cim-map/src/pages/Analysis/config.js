@@ -1,7 +1,7 @@
 import { EditOutlined, RedoOutlined, SunOutlined } from '@ant-design/icons';
 import { Daylight, LineOfSight } from '@chu/widgets';
 
-const dataSource = props => [
+const dataSource = (props) => [
   {
     key: '1',
     title: '日照分析',

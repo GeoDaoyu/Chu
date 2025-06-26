@@ -7,11 +7,11 @@
 组件的请求尽量写在自己的`service.js`文件中，方便迁移。如，
 
 ```js
-import { request } from "@umijs/max";
+import { request } from '@umijs/max';
 
 export async function getUser(token) {
-  return request("/api/v1/getUser", {
-    method: "GET",
+  return request('/api/v1/getUser', {
+    method: 'GET',
     params: {
       token,
     },

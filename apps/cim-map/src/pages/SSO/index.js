@@ -2,7 +2,7 @@ import { history, useModel } from '@umijs/max';
 import { useEffect } from 'react';
 import { getRole, getUser } from './service.js';
 
-export default () => {
+const SSO = () => {
   const { setInitialState } = useModel('@@initialState');
 
   useEffect(() => {
@@ -23,3 +23,5 @@ export default () => {
   }, [setInitialState]);
   return <div>单点登录</div>;
 };
+
+export default SSO;

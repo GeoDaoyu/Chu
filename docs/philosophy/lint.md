@@ -4,6 +4,8 @@
 
 但是umi/lint 不支持eslint9，也[没工夫升级](https://github.com/umijs/umi/issues/12261)。
 
-所以使用了另一个支持eslint9的热门开源配置：[@antfu/eslint-config](https://github.com/antfu/eslint-config)。
+中途使用了另一个支持eslint9的热门开源配置：[@antfu/eslint-config](https://github.com/antfu/eslint-config)。
+
+最后使用的阿里的前端规约[eslint-config-ali](https://github.com/alibaba/f2e-spec)，因为它文档依据写的很好。
 
 并没有添加太多的配置，主要是忽略掉ArcGIS JS 的静态文件和Umi的运行文件，详见[eslint.config.js](https://github.com/GeoDaoyu/Chu/blob/main/eslint.config.js)。
