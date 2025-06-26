@@ -2,7 +2,7 @@ import process from 'node:process';
 import { defineConfig } from '@umijs/max';
 import routes from './routes';
 
-const UMI_ENV = process.env.UMI_ENV;
+const { UMI_ENV } = process.env;
 
 export default defineConfig({
   history: {

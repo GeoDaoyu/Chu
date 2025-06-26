@@ -34,13 +34,13 @@ Chu采⽤静态配置⽂件加打包脚本来保证需求。
 3. 在config中配置`headScript`
 
 ```js
-import { defineConfig } from "@umijs/max";
+import { defineConfig } from '@umijs/max';
 const { BUILD_ENV } = process.env;
 
 export default defineConfig({
   headScript: [
     {
-      src: BUILD_ENV ? `./config/index.${BUILD_ENV}.js` : "./config/index.js",
+      src: BUILD_ENV ? `./config/index.${BUILD_ENV}.js` : './config/index.js',
     },
   ],
 });

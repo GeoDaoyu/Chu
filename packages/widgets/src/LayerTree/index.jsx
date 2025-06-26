@@ -16,14 +16,7 @@ const LayerTree = ({ view, treeData }) => {
     setTreeData(treeData);
   }, [treeData, setTreeData]);
 
-  return (
-    <Tree
-      checkable
-      onCheck={onCheck}
-      checkedKeys={checkedKeys}
-      treeData={treeData}
-    />
-  );
+  return <Tree checkable onCheck={onCheck} checkedKeys={checkedKeys} treeData={treeData} />;
 };
 
 export default LayerTree;

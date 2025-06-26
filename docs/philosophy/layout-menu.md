@@ -10,16 +10,16 @@
 当Map组件中`view`实例化之后才会加载路由组件。
 
 ```js
-import { useModel } from "@umijs/max";
-import { Layout } from "antd";
-import { Outlet } from "umi";
-import Map from "@/widgets/Map";
-import styles from "./index.less";
+import { useModel } from '@umijs/max';
+import { Layout } from 'antd';
+import { Outlet } from 'umi';
+import Map from '@/widgets/Map';
+import styles from './index.less';
 
 const { Header, Content } = Layout;
 
 export default function BasicLayout() {
-  const { view } = useModel("global");
+  const { view } = useModel('global');
 
   return (
     <Layout>
@@ -44,10 +44,10 @@ export default function BasicLayout() {
 这里给一个实例参考：
 
 ```js
-import { history, useAppData, useLocation } from "@umijs/max";
-import { Menu } from "antd";
-import { compose, filter, map, values } from "ramda";
-import styles from "./index.less";
+import { history, useAppData, useLocation } from '@umijs/max';
+import { Menu } from 'antd';
+import { compose, filter, map, values } from 'ramda';
+import styles from './index.less';
 
 const RouteMenu = () => {
   const location = useLocation();

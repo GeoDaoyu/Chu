@@ -23,7 +23,7 @@ const RouteMenu = () => {
         selectedKeys={[current]}
         mode="horizontal"
         items={items}
-        disabledOverflow={true}
+        disabledOverflow
       />
     </div>
   );

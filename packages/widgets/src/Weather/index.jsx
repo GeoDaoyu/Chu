@@ -21,7 +21,7 @@ const Widget = ({ view }) => {
     };
   }, [view]);
 
-  return <div ref={ref}></div>;
+  return <div ref={ref} />;
 };
 
 export default Widget;

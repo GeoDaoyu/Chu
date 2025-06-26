@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { id, renderer, template, url } from './config.js';
 
 export default () => {
-  const view = useViewStore(state => state.view);
+  const view = useViewStore((state) => state.view);
   const add = useCallback(() => {
     const geojsonLayer = new GeoJSONLayer({
       id,

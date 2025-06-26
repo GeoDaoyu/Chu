@@ -32,9 +32,9 @@ pnpm安装依赖
 设置`assetsPath`
 
 ```javascript
-import esriConfig from "@arcgis/core/config.js";
+import esriConfig from '@arcgis/core/config.js';
 
-esriConfig.assetsPath = "./assets";
+esriConfig.assetsPath = './assets';
 ```
 
 记得忽略git
@@ -47,7 +47,7 @@ esriConfig.assetsPath = "./assets";
 
 ```javascript
 export default defineConfig({
-  styles: ["./assets/esri/themes/light/main.css"],
+  styles: ['./assets/esri/themes/light/main.css'],
 });
 ```
 

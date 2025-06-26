@@ -22,8 +22,7 @@ const cleanAppsDir = (projectPath, template) => {
         fs.rmSync(itemPath, { recursive: true, force: true });
       }
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.error(chalk.gray(`clean error: ${error.message}`));
   }
 };
@@ -32,16 +31,11 @@ const create = async (projectName, template) => {
   const targetDir = path.resolve(process.cwd(), projectName);
 
   console.log(`\n🚀 clone from GitHub ......`);
-  const cloneResult = spawnSync('git', [
-    'clone',
-    '--depth',
-    '1',
-    '--branch',
-    DEFAULT_BRANCH,
-    '--single-branch',
-    REPO_URL,
-    projectName,
-  ], { stdio: 'inherit' });
+  const cloneResult = spawnSync(
+    'git',
+    ['clone', '--depth', '1', '--branch', DEFAULT_BRANCH, '--single-branch', REPO_URL, projectName],
+    { stdio: 'inherit' },
+  );
 
   if (cloneResult.status !== 0) {
     console.error(chalk.red('❌ clone failed'));

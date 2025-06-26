@@ -9,7 +9,7 @@ esriConfig.assetsPath = './assets';
 
 export default () => {
   const ref = useRef();
-  const initializeView = useViewStore(state => state.initialize);
+  const initializeView = useViewStore((state) => state.initialize);
 
   useEffect(() => {
     if (!ref.current) {
@@ -33,5 +33,5 @@ export default () => {
     });
   }, [ref, initializeView]);
 
-  return <div className={styles.viewDiv} ref={ref}></div>;
+  return <div className={styles.viewDiv} ref={ref} />;
 };
