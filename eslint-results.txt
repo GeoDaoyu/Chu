@@ -1,0 +1,210 @@
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/config/config.js[24m[0m
+[0m  [2m5:7[22m  [33mwarning[39m  Use object destructuring  [2mprefer-destructuring[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/components/RouteMenu/index.js[24m[0m
+[0m  [2m26:9[22m  [31merror[39m  Value must be omitted for boolean attribute `disabledOverflow`  [2mreact/jsx-boolean-value[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/components/SideCollapse/index.js[24m[0m
+[0m  [2m5:16[22m  [33mwarning[39m  Component definition is missing display name  [2mreact/display-name[22m[0m
+[0m  [2m5:19[22m  [33mwarning[39m  'items' is missing in props validation        [2mreact/prop-types[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/components/User/index.js[24m[0m
+[0m  [2m6:16[22m  [33mwarning[39m  Component definition is missing display name  [2mreact/display-name[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/layouts/index.js[24m[0m
+[0m  [2m14:29[22m  [31merror[39m  Replace `state` with `(state)`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Analysis/config.js[24m[0m
+[0m  [2m4:20[22m  [31merror[39m  Replace `props` with `(props)`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Analysis/index.js[24m[0m
+[0m   [2m8:29[22m  [31merror[39m  Replace `state` with `(state)`                          [2mprettier/prettier[22m[0m
+[0m  [2m14:9[22m   [31merror[39m  Empty components are self-closing                       [2mreact/self-closing-comp[22m[0m
+[0m  [2m14:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m  [2m17:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Effect/config.js[24m[0m
+[0m  [2m35:20[22m  [31merror[39m  Replace `props` with `(props)`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Effect/index.js[24m[0m
+[0m   [2m8:29[22m  [31merror[39m  Replace `state` with `(state)`                          [2mprettier/prettier[22m[0m
+[0m  [2m14:9[22m   [31merror[39m  Empty components are self-closing                       [2mreact/self-closing-comp[22m[0m
+[0m  [2m14:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m  [2m17:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Home/config.js[24m[0m
+[0m  [2m4:16[22m  [31merror[39m  Replace `props` with `(props)`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Home/index.js[24m[0m
+[0m   [2m9:29[22m  [31merror[39m  Replace `state` with `(state)`                          [2mprettier/prettier[22m[0m
+[0m  [2m16:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m  [2m25:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Login/index.js[24m[0m
+[0m  [2m6:16[22m  [33mwarning[39m  Component definition is missing display name  [2mreact/display-name[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/Resource/index.js[24m[0m
+[0m  [2m10:29[22m  [31merror[39m  Replace `state` with `(state)`                          [2mprettier/prettier[22m[0m
+[0m  [2m18:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m  [2m25:27[22m  [31merror[39m  Value must be omitted for boolean attribute `vertical`  [2mreact/jsx-boolean-value[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/pages/SSO/index.js[24m[0m
+[0m  [2m5:16[22m  [33mwarning[39m  Component definition is missing display name  [2mreact/display-name[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/widgets/AddGeoJSONLayer/config.js[24m[0m
+[0m  [2m3:17[22m  [31merror[39m  Delete `⏎·`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/widgets/AddGeoJSONLayer/index.js[24m[0m
+[0m  [2m5:16[22m  [33mwarning[39m  Component definition is missing display name  [2mreact/display-name[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/widgets/AddGeoJSONLayer/useLayer.js[24m[0m
+[0m  [2m7:29[22m  [31merror[39m  Replace `state` with `(state)`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/apps/cim-map/src/widgets/Map/index.js[24m[0m
+[0m  [2m10:16[22m  [33mwarning[39m  Component definition is missing display name  [2mreact/display-name[22m[0m
+[0m  [2m12:39[22m  [31merror[39m    Replace `state` with `(state)`                [2mprettier/prettier[22m[0m
+[0m  [2m36:10[22m  [31merror[39m    Empty components are self-closing             [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/cli/bin/index.js[24m[0m
+[0m  [2m6:3[22m  [33mwarning[39m  Unexpected console statement  [2mno-console[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/cli/src/create.js[24m[0m
+[0m  [2m25:4[22m   [31merror[39m    Delete `⏎·`                                                                                                                                                                                                                                 [2mprettier/prettier[22m[0m
+[0m  [2m27:5[22m   [33mwarning[39m  Unexpected console statement                                                                                                                                                                                                                [2mno-console[22m[0m
+[0m  [2m34:3[22m   [33mwarning[39m  Unexpected console statement                                                                                                                                                                                                                [2mno-console[22m[0m
+[0m  [2m35:33[22m  [31merror[39m    Replace `'git',·[` with `⏎····'git',`                                                                                                                                                                                                       [2mprettier/prettier[22m[0m
+[0m  [2m36:5[22m   [31merror[39m    Replace `'clone',⏎····'--depth',⏎····'1',⏎····'--branch',⏎····DEFAULT_BRANCH,⏎····'--single-branch',⏎····REPO_URL,⏎····projectName` with `['clone',·'--depth',·'1',·'--branch',·DEFAULT_BRANCH,·'--single-branch',·REPO_URL,·projectName]`  [2mprettier/prettier[22m[0m
+[0m  [2m44:3[22m   [31merror[39m    Replace `],·{·stdio:·'inherit'·}` with `··{·stdio:·'inherit'·},⏎··`                                                                                                                                                                         [2mprettier/prettier[22m[0m
+[0m  [2m47:5[22m   [33mwarning[39m  Unexpected console statement                                                                                                                                                                                                                [2mno-console[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/cli/src/index.js[24m[0m
+[0m  [2m53:7[22m   [33mwarning[39m  Unexpected console statement                                                                                                                                                 [2mno-console[22m[0m
+[0m  [2m53:19[22m  [31merror[39m    Replace `⏎········chalk.green(`\n✔·Project·${projectName}·created·successfully!`),⏎······` with `chalk.green(`\n✔·Project·${projectName}·created·successfully!`)`            [2mprettier/prettier[22m[0m
+[0m  [2m56:7[22m   [33mwarning[39m  Unexpected console statement                                                                                                                                                 [2mno-console[22m[0m
+[0m  [2m57:23[22m  [31merror[39m    Replace `⏎··········`\nNext·steps:\n··cd·${projectName}\n··pnpm·install\n··pnpm·start`,⏎········` with ``\nNext·steps:\n··cd·${projectName}\n··pnpm·install\n··pnpm·start``  [2mprettier/prettier[22m[0m
+[0m  [2m61:6[22m   [31merror[39m    Delete `⏎···`                                                                                                                                                                [2mprettier/prettier[22m[0m
+[0m  [2m63:7[22m   [33mwarning[39m  Unexpected console statement                                                                                                                                                 [2mno-console[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/lib/index.d.ts[24m[0m
+[0m  [2m0:0[22m  [31merror[39m  Parsing error: /Users/geodaoyu/Documents/GitHub/chu/packages/lib/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/lib/src/core/layer/core.js[24m[0m
+[0m  [2m31:17[22m  [31merror[39m  Do not nest ternary expressions  [2mno-nested-ternary[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/lib/src/middleware/layerControlMiddleware.js[24m[0m
+[0m  [2m10:13[22m  [33mwarning[39m  Use object destructuring  [2mprefer-destructuring[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/store/core/useLayerTreeStore.js[24m[0m
+[0m  [2m4:17[22m  [31merror[39m  Replace `set` with `(set)`                        [2mprettier/prettier[22m[0m
+[0m  [2m7:21[22m  [31merror[39m  Replace `newCheckedKeys` with `(newCheckedKeys)`  [2mprettier/prettier[22m[0m
+[0m  [2m8:18[22m  [31merror[39m  Replace `newTreeData` with `(newTreeData)`        [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/store/core/useViewStore.js[24m[0m
+[0m  [2m3:29[22m  [31merror[39m  Replace `set` with `(set)`          [2mprettier/prettier[22m[0m
+[0m  [2m5:15[22m  [31merror[39m  Replace `newView` with `(newView)`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/store/index.d.ts[24m[0m
+[0m  [2m0:0[22m  [31merror[39m  Parsing error: /Users/geodaoyu/Documents/GitHub/chu/packages/store/index.d.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/ui/.fatherrc.ts[24m[0m
+[0m  [2m0:0[22m  [31merror[39m  Parsing error: /Users/geodaoyu/Documents/GitHub/chu/packages/ui/.fatherrc.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/ui/src/FunctionList/components/List/index.jsx[24m[0m
+[0m   [2m4:19[22m  [31merror[39m    Delete `⏎·`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m   [2m5:8[22m   [33mwarning[39m  'dataSource' is missing in props validation                                                                                                                                                                               [2mreact/prop-types[22m[0m
+[0m   [2m5:20[22m  [33mwarning[39m  'goTo' is missing in props validation                                                                                                                                                                                     [2mreact/prop-types[22m[0m
+[0m   [2m6:3[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m   [2m7:5[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m   [2m8:1[22m   [31merror[39m    Replace `········` with `······`                                                                                                                                                                                          [2mprettier/prettier[22m[0m
+[0m   [2m9:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m10:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m11:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m12:11[22m  [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m13:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m14:15[22m  [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m15:1[22m   [31merror[39m    Replace `················` with `··············`                                                                                                                                                                          [2mprettier/prettier[22m[0m
+[0m  [2m16:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m17:15[22m  [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m18:1[22m   [31merror[39m    Replace `················` with `··············`                                                                                                                                                                          [2mprettier/prettier[22m[0m
+[0m  [2m19:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m20:13[22m  [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m21:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m22:13[22m  [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m23:11[22m  [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m24:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m25:11[22m  [31merror[39m    Replace `··<List.Item.Meta⏎··············avatar={avatar}⏎··············title={title}⏎··············description={description}⏎···········` with `<List.Item.Meta·avatar={avatar}·title={title}·description={description}`  [2mprettier/prettier[22m[0m
+[0m  [2m30:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m31:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m32:5[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m  [2m33:1[22m   [31merror[39m    Replace `····` with `··`                                                                                                                                                                                                  [2mprettier/prettier[22m[0m
+[0m  [2m34:1[22m   [31merror[39m    Delete `··`                                                                                                                                                                                                               [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/ui/src/FunctionList/components/Zone/index.jsx[24m[0m
+[0m  [2m4:17[22m  [33mwarning[39m  'goBack' is missing in props validation    [2mreact/prop-types[22m[0m
+[0m  [2m4:25[22m  [33mwarning[39m  'children' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/ui/src/FunctionList/index.jsx[24m[0m
+[0m   [2m6:25[22m  [33mwarning[39m  'dataSource' is missing in props validation   [2mreact/prop-types[22m[0m
+[0m  [2m11:18[22m  [31merror[39m    Delete `⏎·······`                             [2mprettier/prettier[22m[0m
+[0m  [2m13:1[22m   [31merror[39m    Delete `····`                                 [2mprettier/prettier[22m[0m
+[0m  [2m14:1[22m   [31merror[39m    Replace `··········)⏎·······` with `······)`  [2mprettier/prettier[22m[0m
+[0m  [2m16:1[22m   [31merror[39m    Delete `····`                                 [2mprettier/prettier[22m[0m
+[0m  [2m17:1[22m   [31merror[39m    Delete `····`                                 [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/ui/src/Panel/index.jsx[24m[0m
+[0m  [2m3:18[22m  [33mwarning[39m  'title' is missing in props validation     [2mreact/prop-types[22m[0m
+[0m  [2m3:30[22m  [33mwarning[39m  'children' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/.fatherrc.ts[24m[0m
+[0m  [2m0:0[22m  [31merror[39m  Parsing error: /Users/geodaoyu/Documents/GitHub/chu/packages/widgets/.fatherrc.ts was not found by the project service. Consider either including it in the tsconfig.json or including it in allowDefaultProject[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/Daylight/index.jsx[24m[0m
+[0m   [2m4:19[22m  [33mwarning[39m  'view' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m24:10[22m  [31merror[39m    Empty components are self-closing      [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/LayerList/index.jsx[24m[0m
+[0m   [2m4:19[22m  [33mwarning[39m  'view' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m23:10[22m  [31merror[39m    Empty components are self-closing      [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/LayerTree/index.jsx[24m[0m
+[0m   [2m8:22[22m  [33mwarning[39m  'view' is missing in props validation                                                                                                                                                                                         [2mreact/prop-types[22m[0m
+[0m   [2m8:28[22m  [33mwarning[39m  'treeData' is missing in props validation                                                                                                                                                                                     [2mreact/prop-types[22m[0m
+[0m  [2m19:10[22m  [31merror[39m    Replace `(⏎····<Tree⏎······checkable⏎······onCheck={onCheck}⏎······checkedKeys={checkedKeys}⏎······treeData={treeData}⏎····/>⏎··)` with `<Tree·checkable·onCheck={onCheck}·checkedKeys={checkedKeys}·treeData={treeData}·/>`  [2mprettier/prettier[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/Legend/index.jsx[24m[0m
+[0m   [2m4:19[22m  [33mwarning[39m  'view' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m23:10[22m  [31merror[39m    Empty components are self-closing      [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/LineOfSight/index.jsx[24m[0m
+[0m   [2m4:19[22m  [33mwarning[39m  'view' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m23:10[22m  [31merror[39m    Empty components are self-closing      [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/MediaMixin/index.jsx[24m[0m
+[0m   [2m5:23[22m  [33mwarning[39m  'view' is missing in props validation              [2mreact/prop-types[22m[0m
+[0m   [2m5:29[22m  [33mwarning[39m  'mediaLayerConfig' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m   [2m9:10[22m  [33mwarning[39m  'view.map' is missing in props validation          [2mreact/prop-types[22m[0m
+[0m   [2m9:14[22m  [33mwarning[39m  'view.map.add' is missing in props validation      [2mreact/prop-types[22m[0m
+[0m  [2m11:12[22m  [33mwarning[39m  'view.map' is missing in props validation          [2mreact/prop-types[22m[0m
+[0m  [2m11:16[22m  [33mwarning[39m  'view.map.remove' is missing in props validation   [2mreact/prop-types[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/Sketch/index.jsx[24m[0m
+[0m   [2m5:19[22m  [33mwarning[39m  'view' is missing in props validation             [2mreact/prop-types[22m[0m
+[0m  [2m14:10[22m  [33mwarning[39m  'view.map' is missing in props validation         [2mreact/prop-types[22m[0m
+[0m  [2m14:14[22m  [33mwarning[39m  'view.map.add' is missing in props validation     [2mreact/prop-types[22m[0m
+[0m  [2m26:12[22m  [33mwarning[39m  'view.map' is missing in props validation         [2mreact/prop-types[22m[0m
+[0m  [2m26:16[22m  [33mwarning[39m  'view.map.remove' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m30:10[22m  [31merror[39m    Empty components are self-closing                 [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/Weather/index.jsx[24m[0m
+[0m   [2m4:19[22m  [33mwarning[39m  'view' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m24:10[22m  [31merror[39m    Empty components are self-closing      [2mreact/self-closing-comp[22m[0m
+[0m[0m
+[0m[4m/Users/geodaoyu/Documents/GitHub/chu/packages/widgets/src/ZoomKeeper/index.jsx[24m[0m
+[0m   [2m9:23[22m  [33mwarning[39m  'view' is missing in props validation       [2mreact/prop-types[22m[0m
+[0m  [2m10:11[22m  [33mwarning[39m  'view.zoom' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m  [2m23:18[22m  [33mwarning[39m  'view.zoom' is missing in props validation  [2mreact/prop-types[22m[0m
+[0m[0m
+[0m[31m[1m✖ 122 problems (78 errors, 44 warnings)[22m[39m[0m
+[0m[31m[1m[22m[39m[31m[1m  73 errors and 2 warnings potentially fixable with the `--fix` option.[22m[39m[0m
+[0m[31m[1m[22m[39m[0m
