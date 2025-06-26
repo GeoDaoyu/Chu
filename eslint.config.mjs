@@ -15,4 +15,9 @@ export default [
       'packages/*/bin',
     ],
   },
+  {
+    rules: {
+      'react/prop-types': 'off',
+    },
+  },
 ];
