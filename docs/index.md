@@ -33,3 +33,7 @@
 
 - [层级控制](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/ZoomKeeper/index.md)
 - [视频融合](https://github.com/GeoDaoyu/Chu/blob/main/packages/widgets/src/MediaMixin/index.md)
+
+## FAQ
+
+- [常见问题](./tutorial/faq.md)
