@@ -4,7 +4,7 @@
 
 但是umi/lint 不支持eslint9，也[没工夫升级](https://github.com/umijs/umi/issues/12261)。
 
-中途使用了另一个支持eslint9的热门开源配置：[@antfu/eslint-config](https://github.com/antfu/eslint-config)。
+中途使用过其他支持eslint9的热门开源配置：[xo](https://github.com/xojs/xo)和[@antfu/eslint-config](https://github.com/antfu/eslint-config)。
 
 最后使用的阿里的前端规约[eslint-config-ali](https://github.com/alibaba/f2e-spec)，因为它文档依据写的很好。
 
