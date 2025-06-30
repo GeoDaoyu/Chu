@@ -4,6 +4,9 @@ import { Outlet } from 'umi';
 import RouteMenu from '@/components/RouteMenu';
 import User from '@/components/User';
 import Map from '@/widgets/Map';
+import { Toolbar } from '@chu/ui';
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import ZoomVM from '@arcgis/core/widgets/Zoom/ZoomViewModel.js';
 import styles from './index.less';
 
 const { Title } = Typography;
@@ -32,6 +35,18 @@ export default function BasicLayout() {
           <Map />
           {view && <Outlet />}
           <RouteMenu />
+          <Toolbar
+            dataSource={[
+              {
+                icon: <PlusOutlined />,
+                onClick: () => new ZoomVM({ view }).zoomIn(),
+              },
+              {
+                icon: <MinusOutlined />,
+                onClick: () => new ZoomVM({ view }).zoomOut(),
+              },
+            ]}
+          />
         </div>
       </Content>
     </Layout>
