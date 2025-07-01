@@ -1,4 +1,4 @@
-import { Sketch, ZoomKeeper } from '@chu/widgets';
+import { Sketch, ZoomKeeper, CoordinateConversion } from '@chu/widgets';
 import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
 
 export default (props) => [
@@ -14,7 +14,7 @@ export default (props) => [
   },
   {
     title: '面板三',
-    component: undefined,
+    component: <CoordinateConversion {...props} />,
     position: 'left',
   },
   {

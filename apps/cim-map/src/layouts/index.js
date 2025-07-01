@@ -38,10 +38,12 @@ export default function BasicLayout() {
           <Toolbar
             dataSource={[
               {
+                key: 'zoomIn',
                 icon: <PlusOutlined />,
                 onClick: () => new ZoomVM({ view }).zoomIn(),
               },
               {
+                key: 'zoomOut',
                 icon: <MinusOutlined />,
                 onClick: () => new ZoomVM({ view }).zoomOut(),
               },
