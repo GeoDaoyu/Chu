@@ -1,9 +1,7 @@
-export const withMiddlewares = (store, middlewares) => {
-  return (set, get, api) => {
-    const config = store(set, get, api);
+import { create } from 'zustand';
+import { compose } from 'ramda';
 
-    return middlewares.reduce((acc, middleware) => {
-      return middleware(() => acc)(set, get, api);
-    }, config);
-  };
-};
+const withMiddlewares = (storeCreator, middlewares) =>
+  create(compose(...middlewares)(storeCreator));
+
+export default withMiddlewares;
