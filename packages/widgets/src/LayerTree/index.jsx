@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 
 const useLayerTreeStore = createLayerTreeStore(layerControlMiddleware);
 
-const LayerTree = ({ view, treeData }) => {
+const LayerTree = ({ treeData }) => {
   const { checkedKeys, setCheckedKeys, setTreeData } = useLayerTreeStore();
 
   const onCheck = (checkedKeysValue) => {
-    setCheckedKeys(checkedKeysValue, view);
+    setCheckedKeys(checkedKeysValue);
   };
 
   useEffect(() => {
