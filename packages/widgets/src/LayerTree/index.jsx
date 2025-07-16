@@ -1,4 +1,4 @@
-import { layerControlMiddleware } from '@chu/lib';
+import { layerControlMiddleware } from '@chu/middleware';
 import { createLayerTreeStore } from '@chu/store';
 import { Tree } from 'antd';
 import { useEffect } from 'react';

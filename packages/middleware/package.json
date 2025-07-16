@@ -1,0 +1,17 @@
+{
+  "name": "@chu/middleware",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "module": "./dist/index.js",
+  "types": "./index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "scripts": {},
+  "dependencies": {
+    "@chu/store": "workspace:*",
+    "@chu/lib": "workspace:*"
+  },
+  "devDependencies": {}
+}

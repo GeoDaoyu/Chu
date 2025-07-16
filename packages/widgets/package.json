@@ -27,12 +27,10 @@
   },
   "dependencies": {
     "@chu/lib": "workspace:*",
+    "@chu/middleware": "workspace:*",
     "@chu/store": "workspace:*"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-    "@umijs/lint": "^4.0.0",
     "dumi": "^2.4.13",
     "father": "^4.1.0"
   },

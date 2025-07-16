@@ -1,13 +1,15 @@
 import { difference } from 'ramda';
-import { addLayer, hasLayer, removeLayer } from '../core';
+import { addLayer, hasLayer, removeLayer } from '@chu/lib';
+import { useViewStore } from '@chu/store';
 
-const layerControlMiddleware = config => (set, get, api) => {
+const { view } = useViewStore.getState();
+
+const layerControlMiddleware = (config) => (set, get, api) => {
   const initialState = config(set, get, api);
   return {
     ...initialState,
-    // TODO: 解除view的传参
-    setCheckedKeys: (newValue, view) => {
-      const {treeData} = get();
+    setCheckedKeys: (newValue) => {
+      const { treeData } = get();
       const oldValue = get().checkedKeys;
       const addKeys = difference(newValue, oldValue);
       const removeKeys = difference(oldValue, newValue);
@@ -18,7 +20,7 @@ const layerControlMiddleware = config => (set, get, api) => {
         }
       });
 
-      removeKeys.forEach(key => removeLayer(view, key));
+      removeKeys.forEach((key) => removeLayer(view, key));
 
       set({ checkedKeys: newValue });
     },
