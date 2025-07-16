@@ -4,7 +4,7 @@ import { useViewStore } from '@chu/store';
 
 const { view } = useViewStore.getState();
 
-const layerControlMiddleware = (config) => (set, get, api) => {
+const layerControl = (config) => (set, get, api) => {
   const initialState = config(set, get, api);
   return {
     ...initialState,
@@ -27,4 +27,4 @@ const layerControlMiddleware = (config) => (set, get, api) => {
   };
 };
 
-export default layerControlMiddleware;
+export default layerControl;

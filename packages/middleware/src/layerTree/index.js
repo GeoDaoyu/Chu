@@ -1,1 +1,1 @@
-export { default as layerControlMiddleware } from './layerControl';
+export { default as layerControl } from './layerControl';
