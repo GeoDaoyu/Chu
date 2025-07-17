@@ -1,9 +1,9 @@
-import { layerControl, log } from '@chu/middleware';
+import { layerControl } from '@chu/middleware';
 import { layerTreeStoreCreator, withMiddlewares } from '@chu/store';
 import { Tree } from 'antd';
 import { useEffect } from 'react';
 
-const useLayerTreeStore = withMiddlewares(layerTreeStoreCreator, [log, layerControl]);
+const useLayerTreeStore = withMiddlewares(layerTreeStoreCreator, [layerControl]);
 
 const LayerTree = ({ treeData }) => {
   const { checkedKeys, setCheckedKeys, setTreeData } = useLayerTreeStore();

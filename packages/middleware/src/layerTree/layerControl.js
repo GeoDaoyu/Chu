@@ -4,27 +4,29 @@ import { useViewStore } from '@chu/store';
 
 const { view } = useViewStore.getState();
 
-const layerControl = (config) => (set, get, api) => {
-  const initialState = config(set, get, api);
-  return {
-    ...initialState,
-    setCheckedKeys: (newValue) => {
-      const { treeData } = get();
-      const oldValue = get().checkedKeys;
-      const addKeys = difference(newValue, oldValue);
-      const removeKeys = difference(oldValue, newValue);
+const layerControl = (config) => (set, get, api) =>
+  config(
+    (...args) => {
+      const [{ checkedKeys: newValue }] = args;
+      // 命中 setCheckedKeys
+      if (newValue) {
+        const { treeData, checkedKeys: oldValue } = get();
+        const addKeys = difference(newValue, oldValue);
+        const removeKeys = difference(oldValue, newValue);
 
-      addKeys.forEach((key) => {
-        if (!hasLayer(view, key)) {
-          addLayer(view, treeData, key);
-        }
-      });
+        addKeys.forEach((key) => {
+          if (!hasLayer(view, key)) {
+            addLayer(view, treeData, key);
+          }
+        });
 
-      removeKeys.forEach((key) => removeLayer(view, key));
+        removeKeys.forEach((key) => removeLayer(view, key));
+      }
 
-      set({ checkedKeys: newValue });
+      set(...args);
     },
-  };
-};
+    get,
+    api,
+  );
 
 export default layerControl;
