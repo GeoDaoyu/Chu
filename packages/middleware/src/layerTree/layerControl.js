@@ -1,6 +1,7 @@
 import { difference } from 'ramda';
 import { addLayer, hasLayer, removeLayer } from '@chu/lib';
 import { useViewStore } from '@chu/store';
+import { getLayerInfo } from './util';
 
 const { view } = useViewStore.getState();
 
@@ -16,10 +17,13 @@ const layerControl = (config) => (set, get, api) =>
 
         addKeys.forEach((key) => {
           if (!hasLayer(view, key)) {
-            addLayer(view, treeData, key);
+            // TODO: treeData 只能在这里从store获取吗？
+            const layerInfo = getLayerInfo(treeData, key);
+            addLayer(view, layerInfo);
           }
         });
 
+        // TODO: map.removeMany ?
         removeKeys.forEach((key) => removeLayer(view, key));
       }
 
