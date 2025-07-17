@@ -22,6 +22,7 @@ const data = [
     ],
   },
 ];
+
 export default {
   'GET /api/v1/layerTree': (_, res) => {
     res.json({
