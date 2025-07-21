@@ -1,24 +1,23 @@
 import { difference } from 'ramda';
 import { addLayer, hasLayer, removeLayer } from '@chu/lib';
 import { useViewStore } from '@chu/store';
-import { getLayerInfo } from './util';
 
 const { view } = useViewStore.getState();
 
-const layerControl = (config) => (set, get, api) =>
+// 需要app中传递getLayerInfo函数
+const layerControl = (getLayerInfo) => (config) => (set, get, api) =>
   config(
     (...args) => {
       const [{ checkedKeys: newValue }] = args;
       // 命中 setCheckedKeys
       if (newValue) {
-        const { treeData, checkedKeys: oldValue } = get();
+        const { checkedKeys: oldValue } = get();
         const addKeys = difference(newValue, oldValue);
         const removeKeys = difference(oldValue, newValue);
 
         addKeys.forEach((key) => {
           if (!hasLayer(view, key)) {
-            // TODO: treeData 只能在这里从store获取吗？
-            const layerInfo = getLayerInfo(treeData, key);
+            const layerInfo = getLayerInfo(key);
             addLayer(view, layerInfo);
           }
         });

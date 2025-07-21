@@ -5,6 +5,7 @@ import { Flex } from 'antd';
 import { useEffect, useState } from 'react';
 import styles from './index.less';
 import { getLayerTree } from './service.js';
+import getLayerInfo from '@/utils/getLayerInfo';
 
 const ResourcePage = () => {
   const view = useViewStore((state) => state.view);
@@ -17,7 +18,7 @@ const ResourcePage = () => {
       <div className={styles.left}>
         <Flex gap="large" vertical>
           <Panel title="目录树">
-            <LayerTree view={view} treeData={treeData} />
+            <LayerTree view={view} treeData={treeData} getLayerInfo={getLayerInfo} />
           </Panel>
         </Flex>
       </div>
