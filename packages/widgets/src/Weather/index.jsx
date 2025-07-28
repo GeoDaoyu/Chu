@@ -1,27 +1,16 @@
-import Weather from '@arcgis/core/widgets/Weather';
-import { useEffect, useRef } from 'react';
+import '@arcgis/map-components/components/arcgis-weather';
+import { useEffect } from 'react';
 
 const Widget = ({ view }) => {
-  const ref = useRef();
-  const widgetRef = useRef();
-
   useEffect(() => {
-    if (ref.current) {
-      widgetRef.current = new Weather({
-        view,
-        container: ref.current,
-      });
-    }
-
+    const weather = view.environment.weather.clone();
     return () => {
-      if (widgetRef.current) {
-        // TODO: 还原天气设置
-        widgetRef.current.destroy();
-      }
+      // eslint-disable-next-line
+      view.environment.weather = weather;
     };
   }, [view]);
 
-  return <div ref={ref} />;
+  return <arcgis-weather reference-element="view" />;
 };
 
 export default Widget;

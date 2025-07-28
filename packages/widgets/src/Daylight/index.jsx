@@ -1,27 +1,16 @@
-import Daylight from '@arcgis/core/widgets/Daylight';
-import { useEffect, useRef } from 'react';
+import '@arcgis/map-components/components/arcgis-daylight';
+import { useEffect } from 'react';
 
 const Widget = ({ view }) => {
-  const ref = useRef();
-  const widgetRef = useRef();
-
   useEffect(() => {
-    if (ref.current) {
-      widgetRef.current = new Daylight({
-        view,
-        container: ref.current,
-      });
-    }
-
+    const lighting = view.environment.lighting.clone();
     return () => {
-      if (widgetRef.current) {
-        // TODO: 还原光照设置
-        widgetRef.current.destroy();
-      }
+      // eslint-disable-next-line
+      view.environment.lighting = lighting;
     };
   }, [view]);
 
-  return <div ref={ref} />;
+  return <arcgis-daylight reference-element="view" />;
 };
 
 export default Widget;
