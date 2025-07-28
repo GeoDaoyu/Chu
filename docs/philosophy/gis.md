@@ -11,7 +11,9 @@ pnpm安装依赖
 ```json
 {
   "dependencies": {
-    "@arcgis/core": "^4.31.6"
+    "@arcgis/core": "^4.33.4",
+    "@arcgis/map-components": "^4.33.11",
+    "@esri/calcite-components": "^3.2.1"
   }
 }
 ```
