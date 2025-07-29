@@ -20,6 +20,7 @@ const MapComponent = () => {
     // onArcgisViewReadyChange is not work?
     ref.current.addEventListener('arcgisViewReadyChange', () => {
       initializeView(ref.current.view);
+      ref.current.view.ui.remove('attribution');
     });
   }, [initializeView]);
 
