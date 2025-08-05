@@ -8,6 +8,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write # 允许写入代码
+      pages: write # 允许操作 GitHub Pages
+      id-token: write # 允许 OIDC 认证
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
