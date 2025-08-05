@@ -1,0 +1,36 @@
+name: Deploy with pnpm
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm' # 启用 pnpm 缓存
+
+      - name: Install pnpm
+        run: npm install -g pnpm@10 # 显式指定 pnpm 版本
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile # 强制使用 lockfile
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./apps/cim-map/dist
+          # 若需清理旧文件（可选）
+          keep_files: false

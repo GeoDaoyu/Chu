@@ -20,6 +20,7 @@
   "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
   "type": "module",
   "scripts": {
+    "build": "pnpm --filter ./apps/cim-map build",
     "build:cim": "pnpm --filter ./apps/cim-map build",
     "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
     "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
