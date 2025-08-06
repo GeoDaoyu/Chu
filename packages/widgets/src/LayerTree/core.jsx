@@ -5,8 +5,8 @@ import { useMemo } from 'react';
 
 const LayerTree = ({ treeData, getLayerInfo, ...rest }) => {
   const useLayerTreeStore = useMemo(
-    () => withMiddlewares(layerTreeStoreCreator, [layerControl(getLayerInfo(treeData))]),
-    [treeData, getLayerInfo],
+    () => withMiddlewares(layerTreeStoreCreator, [layerControl(getLayerInfo)]),
+    [getLayerInfo],
   );
   const { checkedKeys, setCheckedKeys } = useLayerTreeStore();
 

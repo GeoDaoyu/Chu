@@ -20,7 +20,7 @@ const ResourcePage = () => {
       <div className={styles.left}>
         <Flex gap="large" vertical>
           <Panel title="目录树">
-            <Tree treeData={treeData} getLayerInfo={getLayerInfo} />
+            <Tree treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
           </Panel>
         </Flex>
       </div>
