@@ -1,8 +1,7 @@
 name: Deploy with pnpm
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch: # 仅手动触发
 
 jobs:
   deploy:
