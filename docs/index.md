@@ -13,6 +13,7 @@
 - [数据流](./philosophy/data-flow.md)
 - [请求](./philosophy/request.md)
 - [Antd Theme方案](./philosophy/antd-theme.md)
+- [目录树设计与图层控制](./philosophy/layerTree-layerControl.md)
 
 ## 教程
 

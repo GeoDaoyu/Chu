@@ -7,7 +7,7 @@ import styles from './index.less';
 import { getLayerTree } from './service.js';
 import getLayerInfo from '@/utils/getLayerInfo';
 
-const Tree = withSearch(LayerTree);
+const LayerTreeWithSearch = withSearch(LayerTree);
 
 const ResourcePage = () => {
   const view = useViewStore((state) => state.view);
@@ -20,7 +20,7 @@ const ResourcePage = () => {
       <div className={styles.left}>
         <Flex gap="large" vertical>
           <Panel title="目录树">
-            <Tree treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
+            <LayerTreeWithSearch treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
           </Panel>
         </Flex>
       </div>
