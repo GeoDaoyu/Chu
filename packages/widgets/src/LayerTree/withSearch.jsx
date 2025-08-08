@@ -12,8 +12,7 @@ const withSearch = (LayerTree) => {
     const [autoExpandParent, setAutoExpandParent] = useState(true);
     const treeData = useMemo(() => {
       const loop = (data) =>
-        data.map((item) => {
-          const strTitle = item.title;
+        data.map(({ title: strTitle, key, children, ...rest }) => {
           const index = strTitle.indexOf(searchValue);
           const beforeStr = strTitle.substring(0, index);
           const afterStr = strTitle.slice(index + searchValue.length);
@@ -31,17 +30,18 @@ const withSearch = (LayerTree) => {
                 <span>{strTitle}</span>
               </Space>
             );
-          if (item.children) {
+          if (children) {
             return {
+              ...rest,
               title,
-              key: item.key,
-              children: loop(item.children),
+              key,
+              children: loop(children),
             };
           }
           return {
+            ...rest,
             title,
-            key: item.key,
-            isLeaf: true,
+            key,
           };
         });
       return loop(originTreeData);

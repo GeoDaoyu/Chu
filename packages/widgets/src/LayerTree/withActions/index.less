@@ -1,0 +1,20 @@
+.container {
+  :global {
+    .ant-tree {
+      .ant-tree-node-content-wrapper .ant-tree-iconEle {
+        position: absolute;
+        right: 16px;
+      }
+    }
+    .ant-tree .ant-tree-node-content-wrapper {
+      .ant-tree-iconEle {
+        display: none;
+      }
+    }
+    .ant-tree .ant-tree-node-content-wrapper:hover {
+      .ant-tree-iconEle {
+        display: block;
+      }
+    }
+  }
+}
