@@ -25,9 +25,9 @@ const withActions = (LayerTree) => {
             );
 
           if (icon) {
-            return { ...rest, isLeaf: true, icon };
+            return { ...rest, key, isLeaf: true, icon };
           } else {
-            return { ...rest, isLeaf: false, children: loop(children) };
+            return { ...rest, key, isLeaf: false, children: loop(children) };
           }
         });
 
