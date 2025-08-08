@@ -4,6 +4,7 @@ import DropMenu from './DropMenu';
 import { useMemo } from 'react';
 import { goToFullExtent } from '@chu/lib';
 import { useViewStore } from '@chu/store';
+import styles from './index.less';
 
 const withActions = (LayerTree) => {
   const WithActions = ({ treeData: originTreeData, getLayerInfo }) => {
@@ -34,7 +35,11 @@ const withActions = (LayerTree) => {
       return loop(originTreeData);
     }, [originTreeData, view]);
 
-    return <LayerTree treeData={treeData} getLayerInfo={getLayerInfo} showIcon />;
+    return (
+      <div className={styles.container}>
+        <LayerTree treeData={treeData} getLayerInfo={getLayerInfo} showIcon blockNode />
+      </div>
+    );
   };
   return WithActions;
 };

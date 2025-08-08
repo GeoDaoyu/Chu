@@ -91,8 +91,6 @@ const withSearch = (LayerTree) => {
         <LayerTree
           treeData={treeData}
           getLayerInfo={getLayerInfo}
-          showIcon
-          blockNode
           onSelect={onSelect}
           onExpand={onExpand}
           expandedKeys={expandedKeys}
