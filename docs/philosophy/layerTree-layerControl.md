@@ -347,3 +347,97 @@ const data = [
   },
 ];
 ```
+
+## 高阶
+
+**HOC**组件组合，如，再增加一个`withActions`的组件。
+
+```js
+import { Space } from 'antd';
+import { GlobalOutlined } from '@ant-design/icons';
+import DropMenu from './DropMenu';
+import { useMemo } from 'react';
+import { goToFullExtent } from '@chu/lib';
+import { useViewStore } from '@chu/store';
+
+const withActions = (LayerTree) => {
+  const WithActions = ({ treeData: originTreeData, getLayerInfo }) => {
+    const view = useViewStore((state) => state.view);
+    const treeData = useMemo(() => {
+      const loop = (data) =>
+        data.map(({ children, key, ...rest }) => {
+          const icon =
+            children && children.length ? null : (
+              <Space>
+                <GlobalOutlined
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToFullExtent(view, key);
+                  }}
+                />
+                <DropMenu />
+              </Space>
+            );
+
+          if (icon) {
+            return { ...rest, isLeaf: true, icon };
+          } else {
+            return { ...rest, isLeaf: false, children: loop(children) };
+          }
+        });
+
+      return loop(originTreeData);
+    }, [originTreeData, view]);
+
+    return <LayerTree treeData={treeData} getLayerInfo={getLayerInfo} showIcon />;
+  };
+  return WithActions;
+};
+
+export default withActions;
+```
+
+通过compose来组合，生成一个既有查询也有操作的`LayerTree`:
+
+```js
+import { useViewStore } from '@chu/store';
+import { Panel } from '@chu/ui';
+import { LayerList, LayerTree, withSearch, Legend, withActions } from '@chu/widgets';
+import { Flex } from 'antd';
+import { useEffect, useState } from 'react';
+import { compose } from 'ramda';
+import styles from './index.less';
+import { getLayerTree } from './service.js';
+import getLayerInfo from '@/utils/getLayerInfo';
+
+const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
+
+const ResourcePage = () => {
+  const view = useViewStore((state) => state.view);
+  const [treeData, setTreeData] = useState([]);
+  useEffect(() => {
+    getLayerTree().then(({ data }) => setTreeData(data));
+  }, []);
+  return (
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <Flex gap="large" vertical>
+          <Panel title="目录树">
+            <EnhancedLayerTree treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
+          </Panel>
+        </Flex>
+      </div>
+      <div className={styles.right}>
+        <Flex gap="large" vertical>
+          <Panel title="图层列表">
+            <LayerList view={view} />
+          </Panel>
+          <Panel title="图例">
+            <Legend view={view} />
+          </Panel>
+        </Flex>
+      </div>
+    </div>
+  );
+};
+```
