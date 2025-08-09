@@ -8,3 +8,4 @@ export { default as Sketch } from './Sketch';
 export { default as Weather } from './Weather';
 export { default as ZoomKeeper } from './ZoomKeeper';
 export { default as CoordinateConversion } from './CoordinateConversion';
+export { default as ElevationProfile } from './ElevationProfile';
