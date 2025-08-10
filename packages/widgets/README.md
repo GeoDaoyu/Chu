@@ -1,16 +1,12 @@
-# @mr/widgets
+# @chu/widgets
 
-[![NPM version](https://img.shields.io/npm/v/@mr/ui.svg?style=flat)](https://npmjs.org/package/@mr/ui) [![NPM downloads](http://img.shields.io/npm/dm/@mr/ui.svg?style=flat)](https://npmjs.org/package/@mr/ui)
-
-A react library developed with dumi
+A react library developed for Chu with dumi.
 
 ## Usage
 
-TODO
-
-## Options
-
-TODO
+```js
+import { LayerTree } from '@chu/widgets';
+```
 
 ## Development
 
