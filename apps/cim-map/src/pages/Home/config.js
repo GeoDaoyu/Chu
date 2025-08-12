@@ -1,4 +1,6 @@
-import { Sketch, ZoomKeeper, CoordinateConversion } from '@chu/widgets';
+import CoordinateConversion from '@chu/widgets/CoordinateConversion';
+import Sketch from '@chu/widgets/Sketch';
+import ZoomKeeper from '@chu/widgets/ZoomKeeper';
 import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
 
 export default (props) => [
