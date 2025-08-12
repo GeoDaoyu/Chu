@@ -8,9 +8,7 @@
   "types": "src/index.ts",
   "exports": {
     ".": "./src/index.js",
-    "./Sketch": "./src/Sketch/index.jsx",
-    "./ZoomKeeper": "./src/ZoomKeeper/index.jsx",
-    "./CoordinateConversion": "./src/CoordinateConversion/index.jsx"
+    "./*": "./src/*/index.jsx"
   },
   "files": [
     "src"
