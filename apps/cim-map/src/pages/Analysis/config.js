@@ -1,20 +1,22 @@
 import { EditOutlined, RedoOutlined, SunOutlined, StockOutlined } from '@ant-design/icons';
-import { Daylight, LineOfSight, ElevationProfile } from '@chu/widgets';
+import Daylight from '@chu/widgets/Daylight';
+import LineOfSight from '@chu/widgets/LineOfSight';
+import ElevationProfile from '@chu/widgets/ElevationProfile';
 
-const dataSource = (props) => [
+const dataSource = [
   {
     key: 'Daylight',
     title: '日照分析',
     avatar: <SunOutlined />,
     description: '我是日照分析',
-    component: <Daylight {...props} />,
+    component: <Daylight />,
   },
   {
     key: 'EditOutlined',
     title: '视线分析',
     avatar: <EditOutlined />,
     description: '我是视线分析',
-    component: <LineOfSight {...props} />,
+    component: <LineOfSight />,
   },
   {
     key: 'RedoOutlined',

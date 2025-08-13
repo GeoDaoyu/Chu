@@ -1,9 +1,11 @@
 import LineOfSight from '@arcgis/core/widgets/LineOfSight';
 import { useEffect, useRef } from 'react';
+import { useViewStore } from '@chu/store';
 
-const Widget = ({ view }) => {
+const Widget = () => {
   const ref = useRef();
   const widgetRef = useRef();
+  const { view } = useViewStore();
 
   useEffect(() => {
     if (ref.current) {

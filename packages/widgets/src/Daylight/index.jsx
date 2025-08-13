@@ -1,11 +1,12 @@
 import '@arcgis/map-components/components/arcgis-daylight';
 import { useEffect } from 'react';
+import { useViewStore } from '@chu/store';
 
-const Widget = ({ view }) => {
+const Widget = () => {
+  const { view } = useViewStore();
   useEffect(() => {
     const lighting = view.environment.lighting.clone();
     return () => {
-      // eslint-disable-next-line
       view.environment.lighting = lighting;
     };
   }, [view]);
