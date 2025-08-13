@@ -9,7 +9,8 @@ import {
 import Extent from '@arcgis/core/geometry/Extent';
 import ExtentAndRotationGeoreference from '@arcgis/core/layers/support/ExtentAndRotationGeoreference';
 import VideoElement from '@arcgis/core/layers/support/VideoElement';
-import { MediaMixin, Weather } from '@chu/widgets';
+import MediaMixin from '@chu/widgets/MediaMixin';
+import Weather from '@chu/widgets/Weather';
 
 const element = new VideoElement({
   video:
@@ -32,18 +33,18 @@ const mediaLayerConfig = {
   title: '2017 Hurricanes and Aerosols Simulation',
 };
 
-const dataSource = (props) => [
+const dataSource = [
   {
     key: '1',
     title: '视频融合',
     avatar: <PlayCircleOutlined />,
-    component: <MediaMixin mediaLayerConfig={mediaLayerConfig} {...props} />,
+    component: <MediaMixin mediaLayerConfig={mediaLayerConfig} />,
   },
   {
     key: '2',
     title: '天气',
     avatar: <DashboardOutlined />,
-    component: <Weather {...props} />,
+    component: <Weather />,
   },
   {
     key: '3',

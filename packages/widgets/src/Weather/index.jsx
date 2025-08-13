@@ -1,11 +1,12 @@
 import '@arcgis/map-components/components/arcgis-weather';
+import { useViewStore } from '@chu/store';
 import { useEffect } from 'react';
 
-const Widget = ({ view }) => {
+const Widget = () => {
+  const view = useViewStore((state) => state.view);
   useEffect(() => {
     const weather = view.environment.weather.clone();
     return () => {
-      // eslint-disable-next-line
       view.environment.weather = weather;
     };
   }, [view]);
