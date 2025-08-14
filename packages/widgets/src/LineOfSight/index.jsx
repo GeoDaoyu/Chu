@@ -1,27 +1,7 @@
-import LineOfSight from '@arcgis/core/widgets/LineOfSight';
-import { useEffect, useRef } from 'react';
-import { useViewStore } from '@chu/store';
+import '@arcgis/map-components/components/arcgis-line-of-sight';
 
 const Widget = () => {
-  const ref = useRef();
-  const widgetRef = useRef();
-  const { view } = useViewStore();
-
-  useEffect(() => {
-    if (ref.current) {
-      widgetRef.current = new LineOfSight({
-        view,
-        container: ref.current,
-      });
-    }
-
-    return () => {
-      if (widgetRef.current) {
-        widgetRef.current.destroy();
-      }
-    };
-  }, [view]);
-
-  return <div ref={ref} />;
+  return <arcgis-line-of-sight reference-element="view" />;
 };
+
 export default Widget;
