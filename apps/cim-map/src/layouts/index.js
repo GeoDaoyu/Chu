@@ -39,13 +39,13 @@ export default function BasicLayout() {
             dataSource={[
               {
                 name: 'zoomIn',
-                tooltip: 'zoomIn',
+                tooltip: '放大',
                 icon: <PlusOutlined />,
                 onClick: () => new ZoomVM({ view }).zoomIn(),
               },
               {
                 name: 'zoomOut',
-                tooltip: 'zoomOut',
+                tooltip: '缩小',
                 icon: <MinusOutlined />,
                 onClick: () => new ZoomVM({ view }).zoomOut(),
               },
