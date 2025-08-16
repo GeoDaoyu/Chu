@@ -1,9 +1,24 @@
-import { EditOutlined, RedoOutlined, SunOutlined, StockOutlined } from '@ant-design/icons';
+import { EditOutlined, RedoOutlined, SunOutlined, StockOutlined, LineOutlined, BorderOutlined } from '@ant-design/icons';
 import Daylight from '@chu/widgets/Daylight';
 import LineOfSight from '@chu/widgets/LineOfSight';
 import ElevationProfile from '@chu/widgets/ElevationProfile';
+import DirectLineMeasurement3D from '@chu/widgets/DirectLineMeasurement3D'
 
 const dataSource = [
+  {
+    key: 'DirectLineMeasurement3D',
+    title: '距离测量',
+    avatar: <LineOutlined />,
+    description: '我是距离测量',
+    component: <DirectLineMeasurement3D  />,
+  },
+    {
+    key: 'AreaMeasurement3D',
+    title: '面积测量',
+    avatar: <BorderOutlined />,
+    description: '我是面积测量',
+    component: <AreaMeasurement3D />,
+  },
   {
     key: 'Daylight',
     title: '日照分析',
