@@ -6,6 +6,7 @@ import {
   LineOutlined,
   BorderOutlined,
   BorderVerticleOutlined,
+  PicLeftOutlined,
 } from '@ant-design/icons';
 import Daylight from '@chu/widgets/Daylight';
 import LineOfSight from '@chu/widgets/LineOfSight';
@@ -13,6 +14,7 @@ import ElevationProfile from '@chu/widgets/ElevationProfile';
 import DirectLineMeasurement3D from '@chu/widgets/DirectLineMeasurement3D';
 import AreaMeasurement3D from '@chu/widgets/AreaMeasurement3D';
 import Slice from '@chu/widgets/Slice';
+import BuildingExplorer from '@chu/widgets/BuildingExplorer';
 
 const dataSource = [
   {
@@ -63,6 +65,13 @@ const dataSource = [
     avatar: <BorderVerticleOutlined />,
     description: '我是剖切分析',
     component: <Slice />,
+  },
+  {
+    key: 'BuildingExplorer',
+    title: 'BIM浏览器',
+    avatar: <PicLeftOutlined />,
+    description: '我是BIM浏览器',
+    component: <BuildingExplorer />,
   },
 ];
 export default dataSource;
