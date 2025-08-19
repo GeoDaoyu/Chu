@@ -3,8 +3,8 @@
 Usage:
 
 ```jsx
-import { Daylight } from '@chu/widgets';
+import Daylight from '@chu/widgets/Daylight';
 
-const App = () => <Daylight view={view} />;
+const App = () => <Daylight />;
 export default App;
 ```

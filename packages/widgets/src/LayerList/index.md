@@ -3,7 +3,7 @@
 Usage:
 
 ```jsx
-import { LayerList } from '@chu/widgets';
+import LayerList from '@chu/widgets/LayerList';
 
 const App = () => <LayerList />;
 export default App;
