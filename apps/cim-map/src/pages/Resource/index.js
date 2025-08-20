@@ -1,6 +1,8 @@
 import { useViewStore } from '@chu/store';
 import Panel from '@chu/ui/Panel';
-import { LayerList, LayerTree, withSearch, Legend, withActions } from '@chu/widgets';
+import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
+import LayerList from '@chu/widgets/LayerList';
+import Legend from '@chu/widgets/Legend';
 import { Flex } from 'antd';
 import { useEffect, useState } from 'react';
 import { compose } from 'ramda';
