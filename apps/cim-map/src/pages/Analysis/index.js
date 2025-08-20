@@ -1,4 +1,5 @@
-import { FunctionList, Panel } from '@chu/ui';
+import Panel from '@chu/ui/Panel';
+import FunctionList from '@chu/ui/FunctionList';
 import { Flex } from 'antd';
 import dataSource from './config';
 import styles from './index.less';

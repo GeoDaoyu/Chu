@@ -5,7 +5,7 @@ A react library developed for Chu with dumi.
 ## Usage
 
 ```js
-import { LayerTree } from '@chu/widgets';
+import LayerTree from '@chu/widgets/LayerTree';
 ```
 
 ## Development

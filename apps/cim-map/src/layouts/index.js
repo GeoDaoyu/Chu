@@ -4,7 +4,7 @@ import { Outlet } from 'umi';
 import RouteMenu from '@/components/RouteMenu';
 import User from '@/components/User';
 import Map from '@/widgets/Map';
-import { Toolbar } from '@chu/ui';
+import Toolbar from '@chu/ui/Toolbar';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import ZoomVM from '@arcgis/core/widgets/Zoom/ZoomViewModel.js';
 import styles from './index.less';

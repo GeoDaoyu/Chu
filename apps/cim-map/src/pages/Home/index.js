@@ -1,5 +1,5 @@
 import { useViewStore } from '@chu/store';
-import { Panel } from '@chu/ui';
+import Panel from '@chu/ui/Panel';
 import { Flex } from 'antd';
 import { filter, propEq } from 'ramda';
 import config from './config';

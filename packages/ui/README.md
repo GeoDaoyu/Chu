@@ -5,7 +5,7 @@ A react library developed for Chu with dumi.
 ## Usage
 
 ```js
-import { Panel } from '@chu/ui';
+import Panel from '@chu/ui/Panel';
 ```
 
 ## Development

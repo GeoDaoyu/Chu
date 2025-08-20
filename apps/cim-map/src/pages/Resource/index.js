@@ -1,5 +1,5 @@
 import { useViewStore } from '@chu/store';
-import { Panel } from '@chu/ui';
+import Panel from '@chu/ui/Panel';
 import { LayerList, LayerTree, withSearch, Legend, withActions } from '@chu/widgets';
 import { Flex } from 'antd';
 import { useEffect, useState } from 'react';
