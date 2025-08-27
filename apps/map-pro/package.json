@@ -1,0 +1,31 @@
+{
+  "name": "map-pro",
+  "version": "1.0.0",
+  "description": "App Template for 2D MapView",
+  "private": true,
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
+  "scripts": {
+    "build": "max build",
+    "build:prod": "cross-env UMI_ENV=prod max build",
+    "copy": "cpx ../../node_modules/@arcgis/core/assets/**/*.* ./public/assets/",
+    "dev": "max dev",
+    "format": "prettier --cache --write .",
+    "postinstall": "max setup && npm run copy",
+    "setup": "max setup",
+    "start": "npm run dev"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@chu/store": "workspace:*",
+    "@chu/ui": "workspace:*",
+    "@chu/widgets": "workspace:*",
+    "@umijs/max": "^4.4.4"
+  },
+  "devDependencies": {
+    "cpx2": "^8.0.0",
+    "cross-env": "^7.0.3"
+  }
+}

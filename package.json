@@ -20,13 +20,14 @@
   "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter ./apps/cim-map build",
-    "build:cim": "pnpm --filter ./apps/cim-map build",
+    "build": "pnpm --filter ./apps/scene-pro build",
+    "build:map": "pnpm --filter ./apps/map-pro build",
     "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
     "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
     "lint:fix": "prettier --write . && eslint --fix . && stylelint --allow-empty-input --fix \"**/*.{css,less,scss}\"",
     "prepare": "husky",
-    "start:cim": "pnpm --filter ./apps/cim-map start"
+    "start": "pnpm --filter ./apps/scene-pro start",
+    "start:map": "pnpm --filter ./apps/map-pro start"
   },
   "commitlint": {
     "extends": [

@@ -52,7 +52,7 @@ pnpm dlx @geodaoyu/chu-cli@latest create
 
 ```shell
 pnpm install
-pnpm start:cim
+pnpm start
 ```
 
 ## 🤝 参与贡献

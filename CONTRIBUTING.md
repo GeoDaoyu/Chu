@@ -24,7 +24,7 @@ pnpm install
 
 ```bash
 # 运行应用
-pnpm start:cim
+pnpm start
 ```
 
 ## 4.代码风格
