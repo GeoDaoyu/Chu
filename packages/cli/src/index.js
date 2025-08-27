@@ -10,19 +10,14 @@ program.name('chu-cli').description('cli for Chu').version('1.0.0');
 
 const TEMPLATES = [
   {
-    name: 'cim-map',
-    description: 'City Information Modeling, CIM, 城市信息模型',
-    value: 'cim-map',
+    name: 'scene-pro',
+    description: '三维一张图',
+    value: 'scene-pro',
   },
   {
-    name: 'uam-map',
-    description: 'Urban Air Mobility, UAM, 城市空中交通',
-    value: 'uam-map',
-  },
-  {
-    name: 'smart-mapping-map',
-    description: 'smart mapping, 智能制图',
-    value: 'smart-mapping-map',
+    name: 'map-pro',
+    description: '二维一张图',
+    value: 'map-pro',
   },
 ];
 

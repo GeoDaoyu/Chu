@@ -1,0 +1,30 @@
+import esriConfig from '@arcgis/core/config.js';
+import '@arcgis/map-components/components/arcgis-map';
+import { useViewStore } from '@chu/store';
+import { useEffect, useRef } from 'react';
+
+esriConfig.assetsPath = './assets';
+
+const viewProperties = {
+  zoom: 9,
+  center: [120, 30],
+  basemap: 'topo-vector',
+  ground: 'world-elevation',
+};
+
+const MapComponent = () => {
+  const initializeView = useViewStore((state) => state.initialize);
+  const ref = useRef();
+
+  useEffect(() => {
+    // onArcgisViewReadyChange is not work?
+    ref.current.addEventListener('arcgisViewReadyChange', () => {
+      initializeView(ref.current.view);
+      ref.current.view.ui.remove('attribution');
+    });
+  }, [initializeView]);
+
+  return <arcgis-map ref={ref} id="view" {...viewProperties} />;
+};
+
+export default MapComponent;

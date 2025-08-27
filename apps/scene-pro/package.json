@@ -1,6 +1,9 @@
 {
+  "name": "scene-pro",
+  "version": "1.0.0",
+  "description": "App Template for 3D SceneView",
   "private": true,
-  "author": "zhanggy <zhanggy@geoscene.cn>",
+  "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
   "scripts": {
     "build": "max build",
     "build:prod": "cross-env UMI_ENV=prod max build",
