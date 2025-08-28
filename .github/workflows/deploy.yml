@@ -39,6 +39,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./apps/cim-map/dist
+          publish_dir: ./apps/scene-pro/dist
           # 若需清理旧文件（可选）
           keep_files: false
