@@ -1,3 +1,3 @@
 window.appcfg = {
-  title: '基础一张图',
+  title: '二维一张图',
 };

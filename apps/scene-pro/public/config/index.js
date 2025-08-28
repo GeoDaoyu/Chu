@@ -1,3 +1,3 @@
 window.appcfg = {
-  title: 'CIM 基础一张图',
+  title: '三维一张图',
 };
