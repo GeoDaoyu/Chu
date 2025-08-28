@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkscene_pro=self.webpackChunkscene_pro||[]).push([[45472],{45472:function(e,t,n){n.r(t),n.d(t,{default:function(){return c}});n(44194);var u=n(54191),r=n(31549);function c(){var e=(0,u.useOutletContext)();return(0,r.jsx)(u.Outlet,{context:e})}}}]);

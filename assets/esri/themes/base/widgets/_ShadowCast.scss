@@ -1,0 +1,191 @@
+@mixin shadowCast() {
+  $width: 200;
+  $slider-thumb-size: 8px;
+  $tooltip-arrow-size: 8px;
+
+  .esri-shadow-cast {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: var(--calcite-spacing-xxl);
+    padding: var(--esri-widget-padding);
+    width: $width;
+    overflow: hidden;
+
+    &__time-range {
+      display: flex;
+      flex-direction: column;
+      font-size: var(--calcite-font-size-sm);
+
+      /* stylelint-disable-next-line order/order */
+      @include timeSlider();
+
+      .esri-slider__segment-1 {
+        background: $border-color--active;
+      }
+
+      .esri-slider.esri-slider--horizontal {
+        padding-top: $slider-thumb-size;
+        padding-bottom: 42px;
+      }
+
+      &__indicator {
+        display: flex;
+        gap: var(--calcite-spacing-px);
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--calcite-spacing-xs);
+      }
+    }
+
+    &__date-picker-container:not(:first-of-type) {
+      margin-top: var(--calcite-spacing-md);
+    }
+
+    &__date-picker {
+      display: block;
+      flex-grow: 1;
+    }
+
+    &__visualization {
+      display: flex;
+      flex-direction: column;
+
+      &__select {
+        margin-bottom: var(--calcite-spacing-md);
+      }
+
+      &__config--hidden {
+        display: none;
+      }
+    }
+
+    &__threshold-config,
+    &__duration-config,
+    &__discrete-config {
+      --calcite-label-margin-bottom: 0;
+
+      display: flex;
+      flex-direction: column;
+      gap: var(--calcite-spacing-md);
+
+      calcite-label {
+        display: block;
+
+        // Labels shouldn't really be focusable, but we had to make the color
+        // picker label focusable with tabindex=-1 (not tabbable). Without it,
+        // Safari does not include the label in FocusEvent.relatedTarget which
+        // we use to determine whether the color picker popover should be closed
+        // right away or not.
+        &:focus,
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+
+    &__threshold-config {
+      /* stylelint-disable-next-line order/order */
+      @include timeSlider();
+
+      .esri-slider {
+        &.esri-slider--horizontal {
+          // Fit slider content since default API slider doesn't do it for us.
+          padding-top: $slider-thumb-size;
+          padding-bottom: 25px;
+
+          // Move labels and ticks up to make slider more compact.
+          .esri-slider__tick-label {
+            margin-top: 12px;
+          }
+
+          // Mark slider area above the threshold
+          .esri-slider__segment-1 {
+            background: $border-color--active;
+          }
+        }
+      }
+
+      &__discrete-block {
+        --calcite-label-margin-bottom: 0;
+
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__discrete-label {
+        margin-bottom: var(--calcite-spacing-xs);
+        width: 100%;
+        font-weight: $font-weight--medium;
+
+        &--empty {
+          font-weight: inherit;
+        }
+
+        &-text {
+          opacity: var(--calcite-opacity-disabled);
+        }
+
+        &--open &-text {
+          opacity: inherit;
+        }
+      }
+
+      /* nested discrete config inside threshold config */
+      .esri-shadow-cast__discrete-config {
+        gap: var(--calcite-spacing-xs);
+        padding: 0 var(--calcite-spacing-xs);
+      }
+    }
+
+    &__duration-config {
+      &__radio-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        calcite-button {
+          height: 35px; // Match height of `<calcite-select>`
+        }
+      }
+    }
+
+    &__tooltip {
+      color: $font-color;
+      font-size: $font-size--small;
+
+      &__content {
+        position: absolute;
+
+        // center horizontally and place it above the mouse pointer
+        transform: translate(-50%, -100%);
+        margin-top: -$tooltip-arrow-size - var(--calcite-spacing-xxs);
+        background: $background-color;
+        padding: var(--calcite-spacing-xs) var(--calcite-spacing-sm);
+        width: max-content;
+
+        // Tooltip arrow
+        &::after {
+          display: block;
+          position: absolute;
+
+          // Place arrow below the tooltip
+          bottom: 1px; // make the arrow overlap so the "seam" isn't noticeable
+          left: 50%;
+          transform: translate(-50%, 100%);
+          border-top: $tooltip-arrow-size solid $background-color;
+          border-right: $tooltip-arrow-size solid transparent;
+          border-bottom: $tooltip-arrow-size solid transparent;
+          border-left: $tooltip-arrow-size solid transparent;
+          width: 0;
+          height: 0;
+          content: "";
+        }
+      }
+    }
+  }
+}
+
+@if $include_ShadowCast == true {
+  @include shadowCast();
+}

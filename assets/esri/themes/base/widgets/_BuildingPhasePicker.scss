@@ -1,0 +1,99 @@
+/**
+ * Adds all the styles for the phase picker used in the building explorer.
+ */
+@mixin buildingPhasePicker() {
+  .esri-building-phase-picker {
+    --num-phases: 7; // Should be an odd number so that we can have a phase in the middle
+    --container-width: 100cqw;
+    --phase-size: 24px;
+    --arrow-width: 16px;
+    --padding: var(--calcite-spacing-xxs);
+    --divider-width-min: var(--calcite-spacing-base);
+    --divider-width-max: var(--calcite-spacing-xl);
+
+    // prettier-ignore
+    --divider-width: calc(
+      (var(--container-width) -
+        (var(--phase-size) * var(--num-phases)) -
+        (var(--arrow-width) * 2) -
+        (var(--padding) * 2)
+      ) / (var(--num-phases) - 1)
+    );
+
+    container-type: inline-size;
+
+    &,
+    &__phases-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__phases-container {
+      position: relative;
+      flex-shrink: 1;
+      padding: var(--calcite-spacing-xxs);
+      overflow: hidden;
+    }
+
+    &__phase {
+      appearance: none;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      border: solid var(--calcite-border-width-sm) $border-color;
+      border-radius: var(--calcite-corner-radius-pill);
+      background: var(--calcite-color-background);
+      cursor: pointer;
+      padding: 0;
+      padding-top: 1px; // Visually center the text
+      width: var(--phase-size);
+      height: var(--phase-size);
+      color: var(--calcite-color-text-1);
+      font-family: var(--calcite-sans-family);
+      font-size: var(--calcite-font-size);
+      font-weight: var(--calcite-font-weight-regular);
+
+      &:hover {
+        border-width: var(--calcite-border-width-md);
+        border-color: var(--calcite-color-brand);
+      }
+
+      &:focus:focus-visible {
+        @include calciteExternalOutline();
+      }
+
+      &--active {
+        border-color: var(--calcite-color-brand);
+        background-color: $background-color--active;
+      }
+
+      &--current {
+        background-color: var(--calcite-color-brand);
+        color: var(--calcite-color-text-inverse);
+      }
+    }
+
+    // Force the arrows to have a fixed width so that we can properly calculate the width of the
+    // container in order to center the phases and decide their size.
+    &__arrow-left,
+    &__arrow-right {
+      --calcite-internal-action-padding-inline: 0;
+
+      width: var(--arrow-width);
+      min-width: var(--arrow-width);
+    }
+
+    &__divider {
+      flex: 0;
+      background: var(--calcite-color-border-1);
+      min-width: clamp(var(--divider-width-min), var(--divider-width), var(--divider-width-max));
+      height: var(--calcite-border-width-sm);
+
+      &--active {
+        background-color: var(--calcite-color-brand);
+      }
+    }
+  }
+}
