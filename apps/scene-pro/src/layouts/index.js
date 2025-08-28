@@ -4,9 +4,7 @@ import { Outlet } from 'umi';
 import RouteMenu from '@/components/RouteMenu';
 import User from '@/components/User';
 import Map from '@/widgets/Map';
-import Toolbar from '@chu/ui/Toolbar';
-import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
-import ZoomVM from '@arcgis/core/widgets/Zoom/ZoomViewModel.js';
+import BasemapToggle from '@chu/widgets/BasemapToggle';
 import styles from './index.less';
 
 const { Title } = Typography;
@@ -35,22 +33,9 @@ export default function BasicLayout() {
           <Map />
           {view && <Outlet />}
           <RouteMenu />
-          <Toolbar
-            dataSource={[
-              {
-                name: 'zoomIn',
-                tooltip: '放大',
-                icon: <PlusOutlined />,
-                onClick: () => new ZoomVM({ view }).zoomIn(),
-              },
-              {
-                name: 'zoomOut',
-                tooltip: '缩小',
-                icon: <MinusOutlined />,
-                onClick: () => new ZoomVM({ view }).zoomOut(),
-              },
-            ]}
-          />
+          <div className={styles.basemap}>
+            <BasemapToggle nextBasemap="streets-3d" />
+          </div>
         </div>
       </Content>
     </Layout>
