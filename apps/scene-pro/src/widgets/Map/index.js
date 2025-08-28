@@ -8,7 +8,7 @@ esriConfig.assetsPath = './assets';
 const viewProperties = {
   zoom: 9,
   center: [120, 30],
-  basemap: 'topo-vector',
+  basemap: 'topo-3d',
   ground: 'world-elevation',
 };
 
