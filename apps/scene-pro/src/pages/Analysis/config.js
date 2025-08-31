@@ -74,4 +74,5 @@ const dataSource = [
     component: <BuildingExplorer />,
   },
 ];
+
 export default dataSource;
