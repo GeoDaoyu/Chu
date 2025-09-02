@@ -1,10 +1,10 @@
-# Sketch
+# BasemapToggle
 
 Usage:
 
 ```jsx
-import Sketch from '@chu/widgets/Sketch';
+import BasemapToggle from '@chu/widgets/BasemapToggle';
 
-const App = () => <Sketch />;
+const App = () => <BasemapToggle />;
 export default App;
 ```
