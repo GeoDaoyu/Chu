@@ -61,7 +61,7 @@ export const useLayerTreeStore = create(layerTreeStoreCreator);
 ```js
 import { difference } from 'ramda';
 import { addLayer, hasLayer, removeLayer } from '@chu/lib';
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 
 const { view } = useViewStore.getState();
 
@@ -274,7 +274,7 @@ export default withSearch;
 最后是在应用中的使用，
 
 ```javascript
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 import { Panel } from '@chu/ui';
 import { LayerList, LayerTree, withSearch, Legend } from '@chu/widgets';
 import { Flex } from 'antd';
@@ -358,7 +358,7 @@ import { GlobalOutlined } from '@ant-design/icons';
 import DropMenu from './DropMenu';
 import { useMemo } from 'react';
 import { goToFullExtent } from '@chu/lib';
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 
 const withActions = (LayerTree) => {
   const WithActions = ({ treeData: originTreeData, getLayerInfo }) => {
@@ -400,7 +400,7 @@ export default withActions;
 通过compose来组合，生成一个既有查询也有操作的`LayerTree`:
 
 ```js
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 import { Panel } from '@chu/ui';
 import { LayerList, LayerTree, withSearch, Legend, withActions } from '@chu/widgets';
 import { Flex } from 'antd';

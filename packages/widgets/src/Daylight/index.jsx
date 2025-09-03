@@ -1,6 +1,6 @@
 import '@arcgis/map-components/components/arcgis-daylight';
+import useViewStore from '@chu/store/useViewStore';
 import { useEffect } from 'react';
-import { useViewStore } from '@chu/store';
 
 const Widget = () => {
   const { view } = useViewStore();

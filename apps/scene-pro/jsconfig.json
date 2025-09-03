@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../../",
+    "paths": {
+      "@chu/widgets/*": ["packages/widgets/src/*"],
+      "@chu/ui/*": ["packages/ui/src/*"],
+      "@chu/store/*": ["packages/store/src/*"]
+    }
+  }
+}

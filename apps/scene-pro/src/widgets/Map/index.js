@@ -1,6 +1,6 @@
 import esriConfig from '@arcgis/core/config.js';
 import '@arcgis/map-components/components/arcgis-scene';
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 import { useEffect, useRef } from 'react';
 
 esriConfig.assetsPath = './assets';

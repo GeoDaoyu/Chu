@@ -1,14 +1,14 @@
-import { useViewStore } from '@chu/store';
+import getLayerInfo from '@/utils/getLayerInfo';
+import useViewStore from '@chu/store/useViewStore';
 import Panel from '@chu/ui/Panel';
-import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
 import LayerList from '@chu/widgets/LayerList';
+import LayerTree, { withActions, withSearch } from '@chu/widgets/LayerTree';
 import Legend from '@chu/widgets/Legend';
 import { Flex } from 'antd';
-import { useEffect, useState } from 'react';
 import { compose } from 'ramda';
+import { useEffect, useState } from 'react';
 import styles from './index.less';
 import { getLayerTree } from './service.js';
-import getLayerInfo from '@/utils/getLayerInfo';
 
 const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
 

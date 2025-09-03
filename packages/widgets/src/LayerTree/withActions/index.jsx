@@ -1,9 +1,9 @@
-import { Space } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
-import DropMenu from './DropMenu';
-import { useMemo } from 'react';
 import { goToFullExtent } from '@chu/lib';
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
+import { Space } from 'antd';
+import { useMemo } from 'react';
+import DropMenu from './DropMenu';
 import styles from './index.less';
 
 const withActions = (LayerTree) => {

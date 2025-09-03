@@ -1,7 +1,7 @@
 import MediaLayer from '@arcgis/core/layers/MediaLayer';
+import useViewStore from '@chu/store/useViewStore';
 import { Button, Flex } from 'antd';
 import { useEffect, useRef } from 'react';
-import { useViewStore } from '@chu/store';
 
 const MediaMixin = ({ mediaLayerConfig }) => {
   const view = useViewStore((state) => state.view);

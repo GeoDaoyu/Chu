@@ -1,12 +1,12 @@
-import { useViewStore } from '@chu/store';
-import { Button, Flex, Layout, Space, Typography } from 'antd';
-import { Outlet } from 'umi';
 import RouteMenu from '@/components/RouteMenu';
 import User from '@/components/User';
 import Map from '@/widgets/Map';
-import Toolbar from '@chu/ui/Toolbar';
-import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ZoomVM from '@arcgis/core/widgets/Zoom/ZoomViewModel.js';
+import useViewStore from '@chu/store/useViewStore';
+import Toolbar from '@chu/ui/Toolbar';
+import { Button, Flex, Layout, Space, Typography } from 'antd';
+import { Outlet } from 'umi';
 import styles from './index.less';
 
 const { Title } = Typography;

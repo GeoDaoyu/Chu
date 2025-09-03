@@ -1,5 +1,5 @@
 import '@arcgis/map-components/components/arcgis-weather';
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 import { useEffect } from 'react';
 
 const Widget = () => {

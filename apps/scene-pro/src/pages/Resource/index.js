@@ -1,4 +1,4 @@
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 import Panel from '@chu/ui/Panel';
 import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
 import LayerList from '@chu/widgets/LayerList';

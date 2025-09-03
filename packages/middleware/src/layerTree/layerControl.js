@@ -1,6 +1,6 @@
-import { difference } from 'ramda';
 import { addLayer, hasLayer, removeLayer } from '@chu/lib';
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
+import { difference } from 'ramda';
 
 const { view } = useViewStore.getState();
 

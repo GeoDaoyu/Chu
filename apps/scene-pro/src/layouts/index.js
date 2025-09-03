@@ -1,4 +1,4 @@
-import { useViewStore } from '@chu/store';
+import useViewStore from '@chu/store/useViewStore';
 import { Button, Flex, Layout, Space, Typography } from 'antd';
 import { Outlet } from 'umi';
 import RouteMenu from '@/components/RouteMenu';
