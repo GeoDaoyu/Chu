@@ -6,7 +6,7 @@ const { Search } = Input;
 const { Text } = Typography;
 
 const withSearch = (LayerTree) => {
-  const WithSearch = ({ treeData: originTreeData, getLayerInfo }) => {
+  const WithSearch = ({ treeData: originTreeData, getLayerInfo, ...layerTreeRest }) => {
     const [expandedKeys, setExpandedKeys] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [autoExpandParent, setAutoExpandParent] = useState(true);
@@ -89,6 +89,7 @@ const withSearch = (LayerTree) => {
       <div>
         <Search placeholder="请输入关键词搜索" onChange={onChange} />
         <LayerTree
+          {...layerTreeRest}
           treeData={treeData}
           getLayerInfo={getLayerInfo}
           onSelect={onSelect}

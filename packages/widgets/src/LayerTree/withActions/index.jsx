@@ -7,7 +7,7 @@ import DropMenu from './DropMenu';
 import styles from './index.less';
 
 const withActions = (LayerTree) => {
-  const WithActions = ({ treeData: originTreeData, getLayerInfo }) => {
+  const WithActions = ({ treeData: originTreeData, getLayerInfo, ...layerTreeRest }) => {
     const view = useViewStore((state) => state.view);
     const treeData = useMemo(() => {
       const loop = (data) =>
@@ -37,7 +37,13 @@ const withActions = (LayerTree) => {
 
     return (
       <div className={styles.container}>
-        <LayerTree treeData={treeData} getLayerInfo={getLayerInfo} showIcon blockNode />
+        <LayerTree
+          {...layerTreeRest}
+          treeData={treeData}
+          getLayerInfo={getLayerInfo}
+          showIcon
+          blockNode
+        />
       </div>
     );
   };
