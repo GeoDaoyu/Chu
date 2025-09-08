@@ -1,12 +1,15 @@
 {
   "name": "@chu/store",
   "version": "1.0.0",
-  "main": "./index.js",
-  "module": "./dist/index.js",
-  "types": "./index.d.ts",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./index.js",
+    "./*": "./core/*.js"
+  },
   "files": [
-    "dist",
-    "index.d.ts"
+    "src"
   ],
   "scripts": {},
   "dependencies": {
