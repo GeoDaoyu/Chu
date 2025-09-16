@@ -2,11 +2,12 @@ import CoordinateConversion from '@chu/widgets/CoordinateConversion';
 import Sketch from '@chu/widgets/Sketch';
 import ZoomKeeper from '@chu/widgets/ZoomKeeper';
 import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
+import Identify from '@chu/widgets/Identify';
 
 export default (props) => [
   {
     title: '面板一',
-    component: undefined,
+    component: <Identify {...props} />,
     position: 'left',
   },
   {

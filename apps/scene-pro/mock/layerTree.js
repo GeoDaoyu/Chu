@@ -21,6 +21,17 @@ const data = [
       },
     ],
   },
+  {
+    title: '动态服务',
+    key: '112jdf',
+    children: [
+      {
+        key: 'ffi132',
+        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/MapServer',
+        title: 'DamageAssessment',
+      },
+    ],
+  },
 ];
 
 export default {
