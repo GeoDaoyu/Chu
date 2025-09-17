@@ -1,6 +1,7 @@
 import { isEmpty } from 'ramda';
 import { Input, Space, Typography } from 'antd';
 import { useMemo, useState } from 'react';
+import styles from './index.less';
 
 const { Search } = Input;
 const { Text } = Typography;
@@ -12,7 +13,7 @@ const withSearch = (LayerTree) => {
     const [autoExpandParent, setAutoExpandParent] = useState(true);
     const treeData = useMemo(() => {
       const loop = (data) =>
-        data.map(({ title: strTitle, key, children, ...rest }) => {
+        data.map(({ title: strTitle, key, children, count, ...rest }) => {
           const index = strTitle.indexOf(searchValue);
           const beforeStr = strTitle.substring(0, index);
           const afterStr = strTitle.slice(index + searchValue.length);
@@ -24,10 +25,12 @@ const withSearch = (LayerTree) => {
                   <Text type="danger">{searchValue}</Text>
                   {afterStr}
                 </span>
+                {count && count > 0 ? `(${count})` : null}
               </Space>
             ) : (
               <Space>
                 <span>{strTitle}</span>
+                {count && count > 0 ? `(${count})` : null}
               </Space>
             );
           if (children) {
@@ -87,7 +90,7 @@ const withSearch = (LayerTree) => {
 
     return (
       <div>
-        <Search placeholder="请输入关键词搜索" onChange={onChange} />
+        <Search placeholder="请输入关键词搜索" onChange={onChange} className={styles.search} />
         <LayerTree
           {...layerTreeRest}
           treeData={treeData}

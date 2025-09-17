@@ -8,6 +8,7 @@ const data = [
   {
     title: '要素类型',
     key: '3f4d6d',
+    count: 2,
     children: [
       {
         key: 'f98djk',
@@ -24,6 +25,7 @@ const data = [
   {
     title: '动态服务',
     key: '112jdf',
+    count: 1,
     children: [
       {
         key: 'ffi132',

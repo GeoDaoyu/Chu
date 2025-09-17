@@ -319,7 +319,7 @@ export default ResourcePage;
 
 ## 附件
 
-补充treeData的样例，key是唯一编码
+补充treeData的样例，key是唯一编码，可以给目录count属性，做统计用。
 
 ```javascript
 const data = [
