@@ -7,7 +7,12 @@ import DropMenu from './DropMenu';
 import styles from './index.less';
 
 const withActions = (LayerTree) => {
-  const WithActions = ({ treeData: originTreeData, getLayerInfo, ...layerTreeRest }) => {
+  const WithActions = ({
+    treeData: originTreeData,
+    getLayerInfo,
+    dropMenuItems = [],
+    ...layerTreeRest
+  }) => {
     const view = useViewStore((state) => state.view);
     const treeData = useMemo(() => {
       const loop = (data) =>
@@ -21,7 +26,7 @@ const withActions = (LayerTree) => {
                     goToFullExtent(view, key);
                   }}
                 />
-                <DropMenu />
+                <DropMenu items={dropMenuItems} />
               </Space>
             );
 
@@ -33,7 +38,7 @@ const withActions = (LayerTree) => {
         });
 
       return loop(originTreeData);
-    }, [originTreeData, view]);
+    }, [originTreeData, dropMenuItems, view]);
 
     return (
       <div className={styles.container}>

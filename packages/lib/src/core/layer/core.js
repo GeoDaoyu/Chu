@@ -15,7 +15,7 @@ export const addLayer = async (view, layerInfo) => {
   const layer = cond([
     [has('type'), () => createLayer({ id: key, ...layerInfo })],
     [has('url'), () => Layer.fromArcGISServerUrl({ url, properties: { id: key, ...rest } })],
-    [T, () => new Layer({ id: key, ...rest })]
+    [T, () => new Layer({ id: key, ...rest })],
   ])(layerInfo);
   view.map.add(layer);
 };

@@ -3,18 +3,37 @@ import Panel from '@chu/ui/Panel';
 import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
 import LayerList from '@chu/widgets/LayerList';
 import Legend from '@chu/widgets/Legend';
-import { Flex } from 'antd';
+import { Flex, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { compose } from 'ramda';
 import styles from './index.less';
 import { getLayerTree } from './service.js';
 import getLayerInfo from '@/utils/getLayerInfo';
+import { HeartOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
 
 const ResourcePage = () => {
   const view = useViewStore((state) => state.view);
   const [treeData, setTreeData] = useState([]);
+  const dropMenuItems = [
+    {
+      label: '收藏',
+      icon: <HeartOutlined />,
+      key: 'favorite',
+      onClick: () => {
+        message.success(`收藏成功`);
+      },
+    },
+    {
+      label: '删除',
+      icon: <DeleteOutlined />,
+      key: 'delete',
+      onClick: () => {
+        message.success(`删除`);
+      },
+    },
+  ];
   useEffect(() => {
     getLayerTree().then(({ data }) => setTreeData(data));
   }, []);
@@ -23,7 +42,11 @@ const ResourcePage = () => {
       <div className={styles.left}>
         <Flex gap="large" vertical>
           <Panel title="目录树">
-            <EnhancedLayerTree treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
+            <EnhancedLayerTree
+              treeData={treeData}
+              getLayerInfo={getLayerInfo(treeData)}
+              dropMenuItems={dropMenuItems}
+            />
           </Panel>
         </Flex>
       </div>
