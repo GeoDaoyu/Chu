@@ -1,10 +1,12 @@
 import { history, useModel } from '@umijs/max';
-import { Button, Space } from 'antd';
+import { Dropdown, Avatar, Space } from 'antd';
 import { deleteAuthority } from '@/utils/authority';
+import { LogoutOutlined, LoginOutlined } from '@ant-design/icons';
 import styles from './index.less';
 
 const User = () => {
-  const { refresh } = useModel('@@initialState');
+  const { refresh, initialState } = useModel('@@initialState');
+  const { name, role } = initialState;
   const login = () => {
     history.push('/login');
   };
@@ -12,17 +14,35 @@ const User = () => {
     deleteAuthority();
     refresh();
   };
+  const items = [
+    {
+      key: 'login',
+      icon: <LoginOutlined />,
+      label: '登录',
+      onClick: login,
+      role: ['guest'],
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: '退出',
+      onClick: logout,
+      role: ['admin', 'user'],
+    },
+  ];
 
   return (
     <div className={styles.container}>
-      <Space>
-        <Button type="link" onClick={login}>
-          去登录
-        </Button>
-        <Button type="link" onClick={logout}>
-          登出
-        </Button>
-      </Space>
+      <Dropdown
+        menu={{
+          items: items.filter(({ role: dropdownRole }) => dropdownRole.includes(role)),
+        }}
+      >
+        <Space>
+          <Avatar src={<img src="./avatar.png" alt="avatar" />} />
+          <span>{name}</span>
+        </Space>
+      </Dropdown>
     </div>
   );
 };
