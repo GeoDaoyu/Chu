@@ -1,9 +1,11 @@
 import { RightOutlined } from '@ant-design/icons';
 import { Button, List } from 'antd';
+import styles from './index.less';
 
 const FunctionList = ({ dataSource, goTo }) => {
   return (
     <List
+      className={styles.list}
       itemLayout="horizontal"
       dataSource={dataSource}
       renderItem={({ avatar, title, description, component }) => (
