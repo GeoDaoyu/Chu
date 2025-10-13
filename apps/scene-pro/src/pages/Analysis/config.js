@@ -15,6 +15,7 @@ import DirectLineMeasurement3D from '@chu/widgets/DirectLineMeasurement3D';
 import AreaMeasurement3D from '@chu/widgets/AreaMeasurement3D';
 import Slice from '@chu/widgets/Slice';
 import BuildingExplorer from '@chu/widgets/BuildingExplorer';
+import Viewshed from '@chu/widgets/Viewshed';
 
 const dataSource = [
   {
@@ -39,18 +40,18 @@ const dataSource = [
     component: <Daylight />,
   },
   {
-    key: 'EditOutlined',
+    key: 'LineOfSight',
     title: '视线分析',
     avatar: <EditOutlined />,
     description: '我是视线分析',
     component: <LineOfSight />,
   },
   {
-    key: 'RedoOutlined',
+    key: 'Viewshed',
     title: '视域分析',
     avatar: <RedoOutlined />,
     description: '我是视域分析',
-    component: undefined,
+    component: <Viewshed />,
   },
   {
     key: 'ElevationProfile ',
