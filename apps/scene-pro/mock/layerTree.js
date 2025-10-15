@@ -82,7 +82,7 @@ const data = [
 ];
 
 export default {
-  'GET /api/v1/layerTree': (_, res) => {
+  'GET /api/v1/layerTree.json': (_, res) => {
     res.json({
       success: true,
       data,
