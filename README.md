@@ -33,12 +33,19 @@ Chu，中文发音为「啾」，是一个现代的WebGIS框架。总体使用Mo
 - 标绘（Sketch）
 - 天气（Weather）
 - 图例（Legend）
+- 测量（AreaMeasurement2D、AreaMeasurement3D、DirectLineMeasurement3D、DistanceMeasurement2D）
+- 底图切换（BasemapToggle）
+- 指北针（Compass）
+- 坐标转换（CoordinateConversion）
+- 全屏（Fullscreen）
+- 视线分析（LineOfSight）
 
 #### 自定义微件
 
 - 图层树（LayerTree）
 - 地图级数控制（ZoomKeeper）
 - 视频融合（MediaMixin）
+- 点图查询（Identify）
 
 ## 📦 如何使用
 

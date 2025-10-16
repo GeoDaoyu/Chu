@@ -1,4 +1,3 @@
-
 English | [简体中文](./README.zh-CN.md)
 
 <h1 align="center">Chu</h1>
@@ -30,16 +29,23 @@ Powered by [ArcGIS](https://developers.arcgis.com/javascript/latest/), featuring
 
 #### Official ArcGIS Widgets
 
-- Daylight Analysis (Daylight)
+- Daylight
 - Sketch
 - Weather
 - Legend
+- AreaMeasurement2D、AreaMeasurement3D、DirectLineMeasurement3D、DistanceMeasurement2D
+- BasemapToggle
+- Compass
+- CoordinateConversion
+- Fullscreen
+- LineOfSight
 
 #### Custom Widgets
 
 - LayerTree
 - ZoomKeeper
 - MediaMixin
+- Identify
 
 ## 📦 How to Use
 
@@ -57,7 +63,9 @@ pnpm start:cim
 ```
 
 ## 🤝 Contributing
+
 If you'd like to contribute to the development, please follow our [CONTRIBUTING](./CONTRIBUTING.md).
 
 ## 📄 License
+
 The code and documentation are released under the [MIT license](./LICENSE).
