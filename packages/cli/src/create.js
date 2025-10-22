@@ -28,6 +28,13 @@ const cleanAppsDir = (projectPath, template) => {
   }
 };
 
+const cleanCliDir = (projectPath) => {
+  const cliDir = path.join(projectPath, 'packages', 'cli');
+  if (fs.existsSync(cliDir)) {
+    fs.rmSync(cliDir, { recursive: true, force: true });
+  }
+};
+
 const create = async (projectName, template) => {
   const targetDir = path.resolve(process.cwd(), projectName);
 
@@ -48,6 +55,7 @@ const create = async (projectName, template) => {
   fs.rmSync(gitDir, { recursive: true, force: true });
 
   cleanAppsDir(targetDir, template);
+  cleanCliDir(targetDir);
 
   return targetDir;
 };
