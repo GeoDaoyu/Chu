@@ -1,4 +1,4 @@
-import "@arcgis/map-components/components/arcgis-search";
+import '@arcgis/map-components/components/arcgis-search';
 
 const Widget = () => {
   return <arcgis-search reference-element="view" />;
