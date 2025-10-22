@@ -46,8 +46,8 @@ program
 
       await create(projectName, template);
 
-      console.log(chalk.green(`\n✔ Project ${projectName} created successfully!`));
-      console.log(
+      console.info(chalk.green(`\n✔ Project ${projectName} created successfully!`));
+      console.info(
         chalk.magenta(`\nNext steps:\n  cd ${projectName}\n  pnpm install\n  pnpm start`),
       );
     } catch (error) {

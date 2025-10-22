@@ -4,41 +4,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import chalk from 'chalk';
+import { cleanAppsDir, cleanCliDir } from './utils/rmDir.js';
 
 const REPO_URL = 'https://github.com/geodaoyu/Chu.git';
 const DEFAULT_BRANCH = 'main';
 
-const cleanAppsDir = (projectPath, template) => {
-  const appsDir = path.join(projectPath, 'apps');
-  if (!fs.existsSync(appsDir)) {
-    return;
-  }
-
-  try {
-    const items = fs.readdirSync(appsDir);
-
-    items.forEach((item) => {
-      const itemPath = path.join(appsDir, item);
-      if (fs.statSync(itemPath).isDirectory() && item !== template) {
-        fs.rmSync(itemPath, { recursive: true, force: true });
-      }
-    });
-  } catch (error) {
-    console.error(chalk.gray(`clean error: ${error.message}`));
-  }
-};
-
-const cleanCliDir = (projectPath) => {
-  const cliDir = path.join(projectPath, 'packages', 'cli');
-  if (fs.existsSync(cliDir)) {
-    fs.rmSync(cliDir, { recursive: true, force: true });
-  }
-};
-
 const create = async (projectName, template) => {
   const targetDir = path.resolve(process.cwd(), projectName);
 
-  console.log(`\n🚀 clone from GitHub ......`);
+  console.info(`\n🚀 clone from GitHub ......`);
   const cloneResult = spawnSync(
     'git',
     ['clone', '--depth', '1', '--branch', DEFAULT_BRANCH, '--single-branch', REPO_URL, projectName],
