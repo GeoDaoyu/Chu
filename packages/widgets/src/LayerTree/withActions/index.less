@@ -1,19 +1,19 @@
 .container {
   :global {
     .ant-tree {
-      .ant-tree-node-content-wrapper .ant-tree-iconEle {
-        position: absolute;
-        right: 16px;
-      }
-    }
-    .ant-tree .ant-tree-node-content-wrapper {
-      .ant-tree-iconEle {
-        display: none;
-      }
-    }
-    .ant-tree .ant-tree-node-content-wrapper:hover {
-      .ant-tree-iconEle {
-        display: block;
+      .ant-tree-node-content-wrapper {
+        position: relative;
+        
+        .ant-tree-iconEle {
+          position: absolute;
+          right: 16px;
+          display: none;
+          transition: display 0.2s ease;
+        }
+        
+        &:hover .ant-tree-iconEle {
+          display: block;
+        }
       }
     }
   }
