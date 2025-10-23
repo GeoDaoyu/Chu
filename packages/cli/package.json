@@ -22,7 +22,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "npm version patch && npm publish"
   },
   "devDependencies": {
     "@inquirer/prompts": "^7.5.3",
