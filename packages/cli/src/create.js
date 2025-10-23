@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 import { spawnSync } from 'node:child_process';
-import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import chalk from 'chalk';
-import { cleanAppsDir, cleanCliDir } from './utils/rmDir.js';
+import { cleanAppsDir, cleanCliDir, cleanGitDir } from './utils/rmDir.js';
 
 const REPO_URL = 'https://github.com/geodaoyu/Chu.git';
 const DEFAULT_BRANCH = 'main';
@@ -24,10 +23,7 @@ const create = async (projectName, template) => {
     process.exit(1);
   }
 
-  // clear .git
-  const gitDir = path.join(targetDir, '.git');
-  fs.rmSync(gitDir, { recursive: true, force: true });
-
+  cleanGitDir(targetDir);
   cleanAppsDir(targetDir, template);
   cleanCliDir(targetDir);
 

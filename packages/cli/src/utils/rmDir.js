@@ -28,3 +28,10 @@ export const cleanCliDir = (projectPath) => {
     fs.rmSync(cliDir, { recursive: true, force: true });
   }
 };
+
+export const cleanGitDir = (projectPath) => {
+  const gitDir = path.join(projectPath, '.git');
+  if (fs.existsSync(gitDir)) {
+    fs.rmSync(gitDir, { recursive: true, force: true });
+  }
+};
