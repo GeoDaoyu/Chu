@@ -1,0 +1,61 @@
+{
+  "name": "{{{ name }}}",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter ./apps/{{{ app }}} build",
+    "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
+    "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
+    "lint:fix": "prettier --write . && eslint --fix . && stylelint --allow-empty-input --fix \"**/*.{css,less,scss}\"",
+    "prepare": "husky",
+    "start": "pnpm --filter ./apps/{{{ app }}} start",
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{cjs,cts,js,jsx,mjs,mts,ts,tsx,vue}": "eslint --fix",
+    "*.{css,less,scss}": "stylelint --fix",
+    "*.{cjs,css,cts,html,js,json,jsx,less,md,mjs,mts,scss,ts,tsx,vue,yaml,yml}": "prettier --write"
+  },
+  "prettier": "prettier-config-ali",
+  "stylelint": {
+    "extends": [
+      "stylelint-config-ali",
+      "stylelint-prettier/recommended"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@ant-design/pro-components": "^2.4.4",
+    "@arcgis/core": "^4.33.4",
+    "@arcgis/map-components": "^4.33.11",
+    "@esri/calcite-components": "^3.2.1",
+    "antd": "^5.24.7",
+    "ramda": "^0.30.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "eslint": "^9.29.0",
+    "eslint-config-ali": "^16.3.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.1",
+    "prettier-config-ali": "^1.3.4",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-packagejson": "^2.5.12",
+    "stylelint": "^16.21.0",
+    "stylelint-config-ali": "^2.1.2",
+    "stylelint-prettier": "^5.0.3",
+    "typescript": "^5.0.3"
+  },
+  "packageManager": "pnpm@10.5.2"
+}
