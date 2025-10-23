@@ -8,6 +8,7 @@ export default defineConfig({
   bundle: true,
   minify: true,
   external: [],
+  publicDir: 'public',
   banner: {
     js: '#!/usr/bin/env node',
   },

@@ -38,7 +38,7 @@ const cleanProject = (targetDir, template) => {
 };
 
 const applyTemplate = (targetDir, projectName, template) => {
-  const templatePath = path.join(__dirname, '../../templates/package.json.tpl');
+  const templatePath = path.join(__dirname, './templates/package.json.tpl');
   const packageJsonPath = path.join(targetDir, 'package.json');
 
   let templateContent = fs.readFileSync(templatePath, 'utf8');
