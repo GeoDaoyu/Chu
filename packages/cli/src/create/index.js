@@ -4,14 +4,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import chalk from 'chalk';
-import rmDir from './utils/rmDir.js';
+import rmDir from '../utils/rmDir.js';
 
 const REPO_URL = 'https://github.com/geodaoyu/Chu.git';
 const DEFAULT_BRANCH = 'main';
 
-const create = async (projectName, template) => {
-  const targetDir = path.resolve(process.cwd(), projectName);
-
+const cloneRepository = (projectName) => {
   console.info(`\n🚀 clone from GitHub ......`);
   const cloneResult = spawnSync(
     'git',
@@ -23,7 +21,9 @@ const create = async (projectName, template) => {
     console.error(chalk.red('❌ clone failed'));
     process.exit(1);
   }
+};
 
+const cleanProject = (targetDir, template) => {
   rmDir(path.join(targetDir, '.git'));
   rmDir(path.join(targetDir, 'packages', 'cli'));
 
@@ -36,4 +36,14 @@ const create = async (projectName, template) => {
     }
   });
 };
+
+const create = async (projectName, template) => {
+  const targetDir = path.resolve(process.cwd(), projectName);
+
+  cloneRepository(projectName);
+  cleanProject(targetDir, template);
+
+  return targetDir;
+};
+
 export default create;

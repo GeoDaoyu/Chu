@@ -4,7 +4,7 @@ import process from 'node:process';
 import { input, select } from '@inquirer/prompts';
 import chalk from 'chalk';
 import { program } from 'commander';
-import create from './create.js';
+import create from './create';
 
 program.name('chu-cli').description('cli for Chu').version('1.0.0');
 
