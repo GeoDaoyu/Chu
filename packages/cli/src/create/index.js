@@ -53,7 +53,7 @@ const create = async (projectName, template) => {
 
   cloneRepository(projectName);
   cleanProject(targetDir, template);
-  applyTemplate(targetDir, projectName);
+  applyTemplate(targetDir, projectName, template);
 
   return targetDir;
 };

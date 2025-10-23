@@ -1,7 +1,7 @@
 {
   "name": "@geodaoyu/chu-cli",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "cli",
   "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
   "license": "MIT",

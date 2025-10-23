@@ -7,7 +7,7 @@
     "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
     "lint:fix": "prettier --write . && eslint --fix . && stylelint --allow-empty-input --fix \"**/*.{css,less,scss}\"",
     "prepare": "husky",
-    "start": "pnpm --filter ./apps/{{{ app }}} start",
+    "start": "pnpm --filter ./apps/{{{ app }}} start"
   },
   "commitlint": {
     "extends": [
