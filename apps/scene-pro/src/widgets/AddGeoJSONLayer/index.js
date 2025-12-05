@@ -1,9 +1,16 @@
 import { Button, Space } from 'antd';
 import styles from './index.less';
-import useLayer from './useLayer';
+import { useModel } from '@umijs/max';
 
 const AddGeoJSONLayer = () => {
-  const { add, remove } = useLayer();
+  const add = () => {
+    setLayerList(['0f4621']);
+  };
+  const remove = () => {
+    setLayerList([]);
+  };
+  const { setLayerList } = useModel('layers');
+
   return (
     <div className={styles.text}>
       <Space>
