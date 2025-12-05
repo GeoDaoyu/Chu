@@ -8,7 +8,9 @@ export default defineConfig({
   history: {
     type: 'hash',
   },
-  antd: {},
+  antd: {
+    style: 'css',
+  },
   access: {},
   model: {},
   initialState: {},
