@@ -10,7 +10,6 @@ import styles from './index.less';
 import { getLayerTree } from './service.js';
 import getLayerInfo from '@/utils/getLayerInfo';
 import { HeartOutlined, DeleteOutlined } from '@ant-design/icons';
-import AddGeoJSONLayer from '@/widgets/AddGeoJSONLayer';
 
 const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
 
@@ -58,9 +57,6 @@ const ResourcePage = () => {
           </Panel>
           <Panel title="图例">
             <Legend view={view} />
-          </Panel>
-          <Panel title="加载图层">
-            <AddGeoJSONLayer view={view} />
           </Panel>
         </Flex>
       </div>
