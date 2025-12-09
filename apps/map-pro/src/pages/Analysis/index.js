@@ -4,12 +4,9 @@ import { Flex } from 'antd';
 import dataSource from './config';
 import styles from './index.less';
 
-const ResourcePage = () => {
+const AnalysisPage = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.left}>
-        <Flex gap="large" vertical />
-      </div>
       <div className={styles.right}>
         <Flex gap="large" vertical>
           <Panel title="空间分析">
@@ -21,4 +18,4 @@ const ResourcePage = () => {
   );
 };
 
-export default ResourcePage;
+export default AnalysisPage;
