@@ -24,5 +24,5 @@ export default defineConfig({
       src: UMI_ENV ? `./config/index.${UMI_ENV}.js` : './config/index.js',
     },
   ],
-  styles: ['./assets/esri/themes/light/main.css'],
+  styles: ['./assets/esri/themes/light/main.css', './css/overrides-calcite.css'],
 });
