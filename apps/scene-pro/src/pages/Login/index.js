@@ -29,27 +29,17 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className={styles.loginWrapper}>
         <Card
-          style={{
-            minWidth: 280,
-            maxWidth: '75vw',
-          }}
+          className={styles.loginCard}
           title={
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img alt="logo" src="/logo.svg" style={{ height: 40, marginRight: 8 }} />
+            <div className={styles.loginLogo}>
+              <img alt="logo" src="/logo.svg" className={styles.loginLogoImg} />
               <span>Chu</span>
             </div>
           }
           extra={
-            <div style={{ textAlign: 'center' }}>
+            <div className={styles.loginSubtitle}>
               <div>现代的WebGIS框架</div>
             </div>
           }
@@ -89,24 +79,19 @@ const Login = () => {
                 placeholder="密码: （无密码）"
               />
             </Form.Item>
-            <div
-              style={{
-                marginBottom: 24,
-              }}
-            >
+            <div className={styles.loginFormItem}>
               <Form.Item name="autoLogin" valuePropName="checked" noStyle>
                 <Checkbox>自动登录</Checkbox>
               </Form.Item>
-              <a
-                style={{
-                  float: 'right',
-                }}
-              >
-                忘记密码
-              </a>
+              <a className={styles.forgotPassword}>忘记密码</a>
             </div>
             <Form.Item>
-              <Button type="primary" htmlType="submit" size="large" style={{ width: '100%' }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                className={styles.loginFormButton}
+              >
                 登录
               </Button>
             </Form.Item>
