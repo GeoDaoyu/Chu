@@ -32,10 +32,4 @@ export default [
     path: '/sso',
     component: './SSO',
   },
-  {
-    name: '权限演示',
-    path: '/access',
-    component: './Access',
-    hideInMenu: true,
-  },
 ];
