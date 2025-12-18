@@ -8,6 +8,24 @@
       "type": "geojson"
     },
     {
+      "key": "dfa297",
+      "title": "组",
+      "type": "group",
+      "layers": [
+        {
+          "key": "1fdaih",
+          "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+          "title": "地震1",
+          "type": "geojson"
+        },
+        {
+          "key": "2dfudh",
+          "url": "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0",
+          "title": "树木"
+        }
+      ]
+    },
+    {
       "title": "要素服务",
       "key": "3f4d6d",
       "count": 2,
