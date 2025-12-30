@@ -518,3 +518,66 @@ const ResourcePage = () => {
   );
 };
 ```
+
+## 后台接口字段对接
+
+图层树的字段限制了后台接口字段。
+
+解决方案：
+在apps/scene-pro/src/utils/normalizeLayerTree.js增加转接器。
+将后台数据转成mock数据中的树结构。使用设定的字段名称。
+
+示例代码：
+
+```js
+const typeMap = new Map([
+  ['FeatureServer', 'feature'],
+  ['SceneLayer', 'scene'],
+]);
+
+const transformNode = (node) => {
+  const isCatalogNode = node.type === 'catalog' || node.show === 'expand';
+  return isCatalogNode ? catalog2menu(node) : layer2menu(node);
+};
+
+const catalog2menu = (node) => {
+  const { name, id, children, resource, show } = node;
+
+  return {
+    key: id,
+    title: name,
+    children: show ? resource?.map(transformNode) : children?.map(transformNode),
+  };
+};
+
+const layer2menu = (node) => {
+  const { show } = node;
+  return show === 'merge' ? group(node) : normal(node);
+};
+
+const group = (node) => {
+  const { id, name, resource } = node;
+  return {
+    key: id,
+    type: 'group',
+    title: name,
+    layers: resource?.map(transformNode),
+  };
+};
+
+const normal = (node) => {
+  const { rid, name, type, url } = node;
+  return {
+    key: rid,
+    url: url,
+    type: typeMap.get(type) || 'map-image',
+    title: name,
+  };
+};
+
+const normalizeLayerTree = (data) => {
+  return data.map(transformNode);
+};
+
+export default normalizeLayerTree;
+```
