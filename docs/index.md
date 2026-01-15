@@ -14,6 +14,7 @@
 - [请求](./philosophy/request.md)
 - [主题](./philosophy/theme.md)
 - [目录树设计与图层控制](./philosophy/layerTree-layerControl.md)
+- [重要时间节点](./philosophy/timing.md)
 
 ## 教程
 
