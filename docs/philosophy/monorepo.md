@@ -11,9 +11,8 @@
 ```plain
 Chu
 ├─ apps
-│  ├─ cim-map
-│  ├─ uam-map
-│  └─ smart-mapping-map
+│  ├─ map-pro
+│  └─ scene-pro
 │     ├─ .umirc.ts
 │     ├─ package.json
 │     └─ src
@@ -30,4 +29,77 @@ Chu
 ├─ README.md
 ├─ package.json
 └─ pnpm-workspace.yaml
+```
+
+## 应用目录
+
+子包app的目录结构，沿用umi的[目录结构](https://umijs.org/docs/guides/directory-structure)
+
+**不使用`.umirc.ts`，而是统一使用`config/config.js`**
+
+```plain
+.
+├── config
+│   ├── config.js
+│   └── router.js
+├── dist
+├── mock
+│   └── app.js｜jsx
+├── public
+│   ├── assets // jsapi assets专用目录
+│   ├── config
+│   │   ├── index.js
+│   │   └── index.prod.js
+│   ├── css
+│   ├── fonts
+│   └── libs
+├── src
+│   ├── .umi
+│   ├── .umi-production
+│   ├── layoujs
+│   │   ├── BasicLayout.jsx
+│   │   ├── index.less
+│   ├── models
+│   │   ├── global.js
+│   │   └── index.js
+│   ├── pages
+│   │   ├── index.less
+│   │   └── index.jsx
+│   ├── utils // 推荐目录
+│   │   └── index.js
+│   ├── services // 推荐目录
+│   │   └── api.js
+│   ├── app.(js|jsx)
+│   ├── global.js
+│   ├── global.(css|less|sass|scss)
+│   ├── overrides.(css|less|sass|scss)
+│   ├── favicon.(ico|gif|png|jpg|jpeg|svg|avif|webp)
+│   └── loading.jsx
+├── node_modules
+│   └── .cache
+│       ├── bundler-webpack
+│       ├── mfsu
+│       └── mfsu-deps
+├── .env
+├── plugin.js
+├── package.json
+└── jsconfig.json
+```
+
+## 组件目录
+
+对组件的目录也做了约定，图片统一放`images`，配置统一放`config.js`等：
+
+```plain
+.
+├── components
+│   └── MyComponent
+│   		├── index.(js|jsx)
+│   		└── index.less
+├── images
+├── viewModel.js
+├── useHooks.js
+├── config.js
+├── index.(js|jsx)
+└── index.less
 ```
