@@ -20,6 +20,7 @@
 
 - [快速上手](./tutorial/quickstart.md)
 - [图层约定](./tutorial/layer-config.md)
+- [React最佳实践](./tutorial/react-best-practices.md)
 
 ## 示例
 
