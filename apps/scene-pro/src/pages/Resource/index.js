@@ -1,20 +1,19 @@
-import useViewStore from '@chu/store/useViewStore';
 import Panel from '@chu/ui/Panel';
 import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
-import LayerList from '@chu/widgets/LayerList';
-import Legend from '@chu/widgets/Legend';
 import { Flex, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { compose } from 'ramda';
 import styles from './index.less';
 import { getLayerTree } from './service.js';
 import getLayerInfo from '@/utils/getLayerInfo';
+import { filter, propEq } from 'ramda';
+import config from './config';
 import { HeartOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
 
 const ResourcePage = () => {
-  const view = useViewStore((state) => state.view);
+  const items = filter(propEq('right', 'position'))(config);
   const [treeData, setTreeData] = useState([]);
   const dropMenuItems = [
     {
@@ -52,12 +51,11 @@ const ResourcePage = () => {
       </div>
       <div className={styles.right}>
         <Flex gap="large" vertical>
-          <Panel title="图层列表">
-            <LayerList view={view} />
-          </Panel>
-          <Panel title="图例">
-            <Legend view={view} />
-          </Panel>
+          {items.map(({ title, component }) => (
+            <Panel key={title} title={title}>
+              {component}
+            </Panel>
+          ))}
         </Flex>
       </div>
     </div>
