@@ -1,27 +1,12 @@
-import GeoJSONLayer from '@arcgis/core/layers/GeoJSONLayer';
-import useViewStore from '@chu/store/useViewStore';
-import { useCallback } from 'react';
-import { id, renderer, template, url } from './config.js';
+import { id } from './config.js';
+import { useLayerTreeStore } from '@chu/store';
 
 export default () => {
-  const view = useViewStore((state) => state.view);
-  const add = useCallback(() => {
-    const geojsonLayer = new GeoJSONLayer({
-      id,
-      url,
-      copyright: 'USGS Earthquakes',
-      popupTemplate: template,
-      renderer,
-      orderBy: {
-        field: 'mag',
-      },
-    });
-    view.map.add(geojsonLayer);
-  }, [view]);
-  const remove = useCallback(() => {
-    const layer = view.map.findLayerById(id);
-    view.map.remove(layer);
-  }, [view]);
+  const { checkedKeys, setCheckedKeys } = useLayerTreeStore();
+
+  const add = () => setCheckedKeys([...checkedKeys, id]);
+  const remove = () => setCheckedKeys(checkedKeys.filter((key) => key !== id));
+
   return {
     add,
     remove,
