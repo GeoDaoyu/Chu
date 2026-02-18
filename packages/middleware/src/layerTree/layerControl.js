@@ -1,23 +1,22 @@
 import { addLayer, hasLayer, removeLayer } from '@chu/lib';
 import useViewStore from '@chu/store/useViewStore';
 import { difference } from 'ramda';
+import getLayerInfo from './getLayerInfo';
 
-const { view } = useViewStore.getState();
-
-// 需要app中传递getLayerInfo函数
-const layerControl = (getLayerInfo) => (config) => (set, get, api) =>
+const layerControl = (config) => (set, get, api) =>
   config(
     (...args) => {
       const [{ checkedKeys: newValue }] = args;
+      const { view } = useViewStore.getState();
       // 命中 setCheckedKeys
       if (newValue) {
-        const { checkedKeys: oldValue } = get();
+        const { checkedKeys: oldValue, treeData } = get();
         const addKeys = difference(newValue, oldValue);
         const removeKeys = difference(oldValue, newValue);
 
         addKeys.forEach((key) => {
           if (!hasLayer(view, key)) {
-            const layerInfo = getLayerInfo(key);
+            const layerInfo = getLayerInfo(treeData, key);
             addLayer(view, layerInfo);
           }
         });

@@ -1,14 +1,17 @@
 import esriConfig from '@arcgis/core/config.js';
 import useViewStore from '@chu/store/useViewStore';
+import useLayerTreeStore from '@chu/store/useLayerTreeStore';
 import SceneView from '@arcgis/core/views/SceneView';
 import Map from '@arcgis/core/Map';
 import { useEffect, useRef } from 'react';
 import styles from './index.less';
+import getLayerTree from '@/services/getLayerTree.js';
 
 esriConfig.assetsPath = './assets';
 
 const MapComponent = () => {
   const initializeView = useViewStore((state) => state.initialize);
+  const setTreeData = useLayerTreeStore((state) => state.setTreeData);
   const ref = useRef();
 
   useEffect(() => {
@@ -32,6 +35,11 @@ const MapComponent = () => {
       initializeView(view);
     });
   }, [initializeView]);
+
+  // TODO: 到底放哪儿？map组件里面应该放treeData吗？
+  useEffect(() => {
+    getLayerTree().then(({ data }) => setTreeData(data));
+  }, [setTreeData]);
 
   return <div id="view" ref={ref} className={styles.container} />;
 };

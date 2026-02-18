@@ -15,7 +15,7 @@ const findNode = (node, key) => {
   return null;
 };
 
-const getLayerInfo = (treeData) => (key) => {
+const getLayerInfo = (treeData, key) => {
   const node = findNode({ children: treeData }, key);
   return node;
 };
