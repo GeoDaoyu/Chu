@@ -7,7 +7,7 @@ const { Search } = Input;
 const { Text } = Typography;
 
 const withSearch = (LayerTree) => {
-  const WithSearch = ({ treeData: originTreeData, getLayerInfo, ...layerTreeRest }) => {
+  const WithSearch = ({ treeData: originTreeData, ...layerTreeRest }) => {
     const [expandedKeys, setExpandedKeys] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [autoExpandParent, setAutoExpandParent] = useState(true);
@@ -94,7 +94,6 @@ const withSearch = (LayerTree) => {
         <LayerTree
           {...layerTreeRest}
           treeData={treeData}
-          getLayerInfo={getLayerInfo}
           onSelect={onSelect}
           onExpand={onExpand}
           expandedKeys={expandedKeys}

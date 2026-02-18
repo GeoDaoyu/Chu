@@ -13,6 +13,8 @@
   ],
   "scripts": {},
   "dependencies": {
+    "@chu/lib": "workspace:*",
+    "@chu/middleware": "workspace:*",
     "zustand": "^5.0.4"
   },
   "devDependencies": {}

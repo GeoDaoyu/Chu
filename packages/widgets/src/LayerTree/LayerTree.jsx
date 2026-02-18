@@ -1,13 +1,7 @@
-import { layerControl } from '@chu/middleware';
-import { layerTreeStoreCreator, withMiddlewares } from '@chu/store';
+import useLayerTreeStore from '@chu/store/useLayerTreeStore';
 import { Tree } from 'antd';
-import { useMemo } from 'react';
 
-const LayerTree = ({ treeData, getLayerInfo, ...rest }) => {
-  const useLayerTreeStore = useMemo(
-    () => withMiddlewares(layerTreeStoreCreator, [layerControl(getLayerInfo)]),
-    [getLayerInfo],
-  );
+const LayerTree = ({ treeData, ...rest }) => {
   const { checkedKeys, setCheckedKeys } = useLayerTreeStore();
 
   const onCheck = (checkedKeysValue) => {
