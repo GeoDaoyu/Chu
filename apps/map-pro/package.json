@@ -22,7 +22,7 @@
     "@chu/store": "workspace:*",
     "@chu/ui": "workspace:*",
     "@chu/widgets": "workspace:*",
-    "@umijs/max": "^4.4.4"
+    "@umijs/max": "^4.6.29"
   },
   "devDependencies": {}
 }
