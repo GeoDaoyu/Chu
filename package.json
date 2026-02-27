@@ -61,6 +61,8 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "cpx2": "^8.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.29.0",
     "eslint-config-ali": "^16.3.0",
     "eslint-config-prettier": "^10.1.5",

@@ -24,8 +24,5 @@
     "@chu/widgets": "workspace:*",
     "@umijs/max": "^4.4.4"
   },
-  "devDependencies": {
-    "cpx2": "^8.0.0",
-    "cross-env": "^7.0.3"
-  }
+  "devDependencies": {}
 }
