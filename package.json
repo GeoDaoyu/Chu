@@ -20,6 +20,7 @@
   "author": "GeoDaoyu <geodaoyu@foxmail.cn>",
   "type": "module",
   "scripts": {
+    "fix:arcgis": "node fix-arcgis-syntax-error.cjs",
     "build": "pnpm --filter ./apps/scene-pro build",
     "build:map": "pnpm --filter ./apps/map-pro build",
     "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
