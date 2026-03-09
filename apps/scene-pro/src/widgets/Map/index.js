@@ -27,6 +27,7 @@ const MapComponent = () => {
       ui: {
         components: [],
       },
+      attributionVisible: false,
     });
     // binding view for map-components
     ref.current.view = view;
