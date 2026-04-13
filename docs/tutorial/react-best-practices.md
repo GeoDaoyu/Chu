@@ -44,3 +44,53 @@ React19在GIS框架下的最佳实践
 ├── index.(js|jsx)                      // 主文件
 └── index.less                          // 样式文件
 ```
+
+## 示例代码
+
+useSketch:
+
+```jsx
+import { useEffect, useRef, useEffectEvent } from 'react';
+import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
+import SketchViewModel from '@arcgis/core/widgets/Sketch/SketchViewModel';
+
+export default ({ setGeometry, view }) => {
+  const sketchViewModel = useRef();
+  const layer = useRef();
+
+  const draw = () => {
+    layer.current.removeAll();
+    sketchViewModel.current.create('polygon');
+  };
+  const clear = () => {
+    layer.current.removeAll();
+  };
+  const onSkethchComplete = useEffectEvent((geometry) => {
+    setGeometry(geometry);
+  });
+
+  useEffect(() => {
+    layer.current = new GraphicsLayer({});
+    view.map.add(layer.current);
+    sketchViewModel.current = new SketchViewModel({
+      layer: layer.current,
+      view: view,
+      updateOnGraphicClick: false,
+    });
+    sketchViewModel.current.on('create', (event) => {
+      if (e.state === 'complete') {
+        onSkethchComplete(event.graphic.geometry);
+      }
+    });
+    return () => {
+      layer.current.removeAll();
+      sketchViewModel.current.destroy();
+    };
+  }, [setGeometry, view]);
+
+  return {
+    draw,
+    clear,
+  };
+};
+```
