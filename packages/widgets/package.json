@@ -32,7 +32,9 @@
   "dependencies": {
     "@chu/lib": "workspace:*",
     "@chu/middleware": "workspace:*",
-    "@chu/store": "workspace:*"
+    "@chu/store": "workspace:*",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1"
   },
   "devDependencies": {
     "dumi": "^2.4.13",
