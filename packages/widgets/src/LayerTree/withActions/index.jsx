@@ -26,7 +26,7 @@ const withActions = (LayerTree) => {
                     goToFullExtent(view, key);
                   }}
                 />
-                <DropMenu items={dropMenuItems} />
+                {dropMenuItems?.length ? <DropMenu items={dropMenuItems} /> : null}
               </Space>
             );
 
