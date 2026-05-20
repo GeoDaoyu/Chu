@@ -34,13 +34,10 @@ const MapComponent = () => {
 
     view.when(() => {
       initializeView(view);
+      // TODO: 到底放哪儿？map组件里面应该放treeData吗？
+      getLayerTree().then(({ data }) => setTreeData(data));
     });
-  }, [initializeView]);
-
-  // TODO: 到底放哪儿？map组件里面应该放treeData吗？
-  useEffect(() => {
-    getLayerTree().then(({ data }) => setTreeData(data));
-  }, [setTreeData]);
+  }, [initializeView, setTreeData]);
 
   return <div id="view" ref={ref} className={styles.container} />;
 };

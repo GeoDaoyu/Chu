@@ -4,6 +4,7 @@ const data = [
     url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
     title: '地震',
     type: 'geojson',
+    defaultChecked: true,
   },
   {
     key: 'dfa297',
