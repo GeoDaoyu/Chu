@@ -17,7 +17,7 @@ const layerControl = (config) => (set, get, api) =>
         addKeys.forEach((key) => {
           if (!hasLayer(view, key)) {
             const layerInfo = getLayerInfo(treeData, key);
-            addLayer(view, layerInfo);
+            if (layerInfo) addLayer(view, layerInfo);
           }
         });
 
