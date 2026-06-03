@@ -186,7 +186,7 @@ store 中管理 `checkedKeys` 和 `treeData` 状态，通过 `withMiddlewares` �
 import { layerControl } from '@chu/middleware';
 import withMiddlewares from '../util/withMiddlewares';
 
-const storeCreator = (set) => ({
+export const storeCreator = (set) => ({
   checkedKeys: [],
   setCheckedKeys: (newCheckedKeys) => set({ checkedKeys: newCheckedKeys }),
   treeData: [],
@@ -417,16 +417,17 @@ export const goToFullExtent = (view, id) => {
 
 ### widgets
 
-在 widgets 中，`LayerTree` 组件直接导入模块级的 `useLayerTreeStore`，不再需要在组件内创建 store 实例。
+在 widgets 中，`LayerTree` 组件默认使用模块级单例 `useLayerTreeStore`，同时支持通过 `useStore` prop 注入独立的 store 实例。
 
 `LayerTree.jsx`：
 
 ```javascript
-import useLayerTreeStore from '@chu/store/useLayerTreeStore';
+import defaultUseLayerTreeStore from '@chu/store/useLayerTreeStore';
 import { Tree } from 'antd';
 
-const LayerTree = ({ treeData, ...rest }) => {
-  const { checkedKeys, setCheckedKeys } = useLayerTreeStore();
+const LayerTree = ({ treeData, useStore, ...rest }) => {
+  const store = useStore ?? defaultUseLayerTreeStore;
+  const { checkedKeys, setCheckedKeys } = store();
 
   const onCheck = (checkedKeysValue) => {
     setCheckedKeys(checkedKeysValue);
@@ -859,6 +860,43 @@ const data = [
   },
 ];
 ```
+
+## 多实例
+
+当需要多个独立的 `LayerTree`（例如左侧"基础图层"和右侧"业务图层"各自管理勾选状态，但操作同一地图）时，可以在 app 层创建独立的 store 并通过 `useStore` prop 注入。
+
+`storeCreator` 是纯函数，不含 `create()`，每次配合 `withMiddlewares` 调用都生成全新的 Zustand store：
+
+```javascript
+import { storeCreator, withMiddlewares } from '@chu/store';
+import { layerControl } from '@chu/middleware';
+import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
+import { compose } from 'ramda';
+import { useMemo } from 'react';
+
+const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
+
+const MultiTreePage = () => {
+  // 在组件内或模块顶层创建独立 store
+  const useBaseStore = useMemo(() => withMiddlewares(storeCreator, [layerControl]), []);
+  const useBizStore = useMemo(() => withMiddlewares(storeCreator, [layerControl]), []);
+
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      <Panel title="基础图层">
+        <EnhancedLayerTree treeData={baseTreeData} useStore={useBaseStore} />
+      </Panel>
+      <Panel title="业务图层">
+        <EnhancedLayerTree treeData={bizTreeData} useStore={useBizStore} />
+      </Panel>
+    </div>
+  );
+};
+```
+
+两个 store 各自维护 `checkedKeys`，但都通过 `layerControl` 中间件操作同一个全局 `view`（从 `useViewStore` 获取），所以图层加载/卸载最终作用于同一张地图。
+
+不传 `useStore` 时，`LayerTree` 退回到默认的单例 store，现有代码无需改动。
 
 ## 后台接口字段对接
 
