@@ -34,53 +34,226 @@
 
 通过中间件，把**视图**、**数据获取**和**图层控制**逻辑做区分。
 
+### 架构总览
+
+```mermaid
+graph TB
+    subgraph App["apps/scene-pro"]
+        Map["Map 组件<br/>初始化 ArcGIS View<br/>获取 treeData"]
+        Resource["ResourcePage<br/>组合 HOC 并渲染"]
+    end
+
+    subgraph Store["packages/store"]
+        ViewStore["useViewStore<br/>view / initialize"]
+        LayerTreeStore["useLayerTreeStore<br/>checkedKeys / treeData<br/>setCheckedKeys / setTreeData"]
+    end
+
+    subgraph Middleware["packages/middleware"]
+        LC["layerControl<br/>拦截 setCheckedKeys → 加载/卸载图层<br/>拦截 setTreeData → 自动勾选 defaultChecked"]
+        GLI["getLayerInfo<br/>从 treeData 递归查找节点"]
+        GDC["getDefaultCheckedKeys<br/>收集 defaultChecked 节点"]
+    end
+
+    subgraph Widgets["packages/widgets"]
+        LT["LayerTree<br/>消费 useLayerTreeStore<br/>渲染 antd Tree"]
+        WS["withSearch<br/>HOC: 搜索过滤"]
+        WA["withActions<br/>HOC: 缩放至 + DropMenu"]
+        DM["DropMenu<br/>节点操作菜单"]
+    end
+
+    subgraph Lib["packages/lib"]
+        AL["addLayer / removeLayer / hasLayer<br/>图层增删查"]
+        CL["createLayer<br/>图层工厂（type/url）"]
+        GFE["goToFullExtent<br/>缩放至图层范围"]
+    end
+
+    subgraph External["外部"]
+        API["后台接口<br/>/Chu/api/v1/layerTree.json"]
+        ArcGIS["ArcGIS MapView / SceneView"]
+        Antd["antd Tree"]
+    end
+
+    %% 数据流
+    Map -->|"setTreeData(data)"| LayerTreeStore
+    Map -->|"initialize(view)"| ViewStore
+    API -->|"fetch"| Map
+
+    LayerTreeStore -->|"withMiddlewares 组合"| LC
+    LC --> GLI
+    LC --> GDC
+    LC -->|"addLayer / removeLayer"| AL
+    LC -->|"useViewStore.getState()"| ViewStore
+    AL --> CL
+    AL -->|"view.map.add / remove"| ArcGIS
+
+    Resource -->|"compose(withSearch, withActions)(LayerTree)"| LT
+    Resource -->|"读取 treeData"| LayerTreeStore
+    LT -->|"渲染"| Antd
+    LT -->|"读取 checkedKeys<br/>调用 setCheckedKeys"| LayerTreeStore
+    WA -->|"goToFullExtent"| GFE
+    WA --> DM
+    GFE -->|"view.goTo(layer.fullExtent)"| ArcGIS
+
+    WS -.->|"包裹"| LT
+    WA -.->|"包裹"| LT
+
+    style App fill:#e6f7ff,stroke:#1890ff
+    style Store fill:#f6ffed,stroke:#52c41a
+    style Middleware fill:#fff7e6,stroke:#fa8c16
+    style Widgets fill:#f9f0ff,stroke:#722ed1
+    style Lib fill:#fff1f0,stroke:#f5222d
+    style External fill:#f5f5f5,stroke:#8c8c8c
+```
+
+### 用户勾选节点的数据流
+
+```mermaid
+sequenceDiagram
+    participant User as 用户
+    participant Tree as antd Tree
+    participant LT as LayerTree 组件
+    participant Store as useLayerTreeStore
+    participant MW as layerControl 中间件
+    participant Lib as @chu/lib
+    participant View as ArcGIS View
+
+    User->>Tree: 勾选 / 取消勾选节点
+    Tree->>LT: onCheck(checkedKeys)
+    LT->>Store: setCheckedKeys(newKeys)
+    Store->>MW: 拦截 action
+
+    MW->>Store: get() 获取 oldKeys + treeData
+    MW->>MW: difference(newKeys, oldKeys) → addKeys
+    MW->>MW: difference(oldKeys, newKeys) → removeKeys
+
+    loop 每个需要添加的 key
+        MW->>Lib: hasLayer(view, key)
+        Lib->>View: findLayerById(key)
+        View-->>Lib: layer | null
+        alt layer 不存在
+            MW->>MW: getLayerInfo(treeData, key)
+            MW->>Lib: addLayer(view, layerInfo)
+            Lib->>Lib: createLayer(layerInfo)
+            Lib->>View: view.map.add(layer)
+        end
+    end
+
+    loop 每个需要移除的 key
+        MW->>Lib: removeLayer(view, key)
+        Lib->>View: view.map.remove(layer)
+    end
+
+    MW->>Store: set(...args) 更新 checkedKeys
+    Store-->>Tree: checkedKeys 变更 → 重渲染
+```
+
+### 初始化自动加载流程
+
+```mermaid
+sequenceDiagram
+    participant Map as Map 组件
+    participant API as 后台接口
+    participant Store as useLayerTreeStore
+    participant MW as layerControl 中间件
+    participant Lib as @chu/lib
+    participant View as ArcGIS View
+
+    Map->>API: fetch /Chu/api/v1/layerTree.json
+    API-->>Map: treeData
+    Map->>Store: setTreeData(treeData)
+    Store->>MW: 拦截 action（"treeData" in arg）
+
+    MW->>Store: set(...args) 先更新 treeData
+    MW->>MW: getDefaultCheckedKeys(treeData)
+    MW->>Store: get().checkedKeys
+    MW->>Store: setCheckedKeys(union(checkedKeys, defaultKeys))
+    Store->>MW: 再次拦截，命中 setCheckedKeys
+
+    loop 每个 defaultChecked key
+        MW->>Lib: hasLayer(view, key)
+        MW->>Lib: addLayer(view, layerInfo)
+        Lib->>View: view.map.add(layer)
+    end
+```
+
 ## 实现过程
 
 ### store
 
-先写store，store中只处理checkedKeys状态，非常纯净。
+store 中管理 `checkedKeys` 和 `treeData` 状态，通过 `withMiddlewares` 组合 `layerControl` 中间件。store 在模块顶层创建为单例。
+
+```javascript
+import { layerControl } from '@chu/middleware';
+import withMiddlewares from '../util/withMiddlewares';
+
+const storeCreator = (set) => ({
+  checkedKeys: [],
+  setCheckedKeys: (newCheckedKeys) => set({ checkedKeys: newCheckedKeys }),
+  treeData: [],
+  setTreeData: (newTreeData) => set({ treeData: newTreeData }),
+});
+
+const useLayerTreeStore = withMiddlewares(storeCreator, [layerControl]);
+
+export default useLayerTreeStore;
+```
+
+`withMiddlewares` 使用 Ramda 的 `compose` 组合多个中间件：
 
 ```javascript
 import { create } from 'zustand';
+import { compose } from 'ramda';
 
-export const layerTreeStoreCreator = (set) => ({
-  checkedKeys: [],
-  setCheckedKeys: (newCheckedKeys) => set({ checkedKeys: newCheckedKeys }),
-});
+const withMiddlewares = (storeCreator, middlewares) =>
+  create(compose(...middlewares)(storeCreator));
 
-export const useLayerTreeStore = create(layerTreeStoreCreator);
+export default withMiddlewares;
 ```
 
 ### middleware
 
-再写中间件，
+中间件 `layerControl` 拦截两个 action：
 
-1. `view`通过`useViewStore.getState`获取，所以`LayerTree`不需要`view`的传参。
-2. 因为要分离**数据获取**，`layerControl`中间件比普通中间件多了一层`getLayerInfo`函数的传递。
-3. Zustand的中间件写法和Dva的略有不同。需要从args[key]判断命中。
+1. `setTreeData` — 设置树数据后，自动勾选 `defaultChecked: true` 的节点
+2. `setCheckedKeys` — 勾选变更时，自动加载/卸载对应图层
 
-```js
-import { difference } from 'ramda';
+`view` 通过 `useViewStore.getState()` 动态获取，`getLayerInfo` 从同级模块导入，不再通过柯里化参数传递。
+
+```javascript
 import { addLayer, hasLayer, removeLayer } from '@chu/lib';
 import useViewStore from '@chu/store/useViewStore';
+import { difference, union } from 'ramda';
+import getLayerInfo from './getLayerInfo';
+import getDefaultCheckedKeys from './getDefaultCheckedKeys';
 
-const { view } = useViewStore.getState();
-
-// 需要app中传递getLayerInfo函数
-const layerControl = (getLayerInfo) => (config) => (set, get, api) =>
+const layerControl = (config) => (set, get, api) =>
   config(
     (...args) => {
-      const [{ checkedKeys: newValue }] = args;
+      const [arg] = args;
+      const { view } = useViewStore.getState();
+
+      // 命中 setTreeData — 自动勾选 defaultChecked 的节点
+      if (arg && 'treeData' in arg) {
+        set(...args);
+        const defaultKeys = getDefaultCheckedKeys(arg.treeData);
+        if (defaultKeys.length) {
+          const { checkedKeys } = get();
+          get().setCheckedKeys(union(checkedKeys, defaultKeys));
+        }
+        return;
+      }
+
       // 命中 setCheckedKeys
+      const [{ checkedKeys: newValue }] = args;
       if (newValue) {
-        const { checkedKeys: oldValue } = get();
+        const { checkedKeys: oldValue, treeData } = get();
         const addKeys = difference(newValue, oldValue);
         const removeKeys = difference(oldValue, newValue);
 
         addKeys.forEach((key) => {
           if (!hasLayer(view, key)) {
-            const layerInfo = getLayerInfo(key);
-            addLayer(view, layerInfo);
+            const layerInfo = getLayerInfo(treeData, key);
+            if (layerInfo) addLayer(view, layerInfo);
           }
         });
 
@@ -96,14 +269,124 @@ const layerControl = (getLayerInfo) => (config) => (set, get, api) =>
 export default layerControl;
 ```
 
+`getLayerInfo` 从 treeData 中递归查找节点：
+
+```javascript
+const findNode = (node, key) => {
+  if (node.key === key) {
+    return node;
+  }
+
+  if (node.children) {
+    for (const child of node.children) {
+      const found = findNode(child, key);
+      if (found) {
+        return found;
+      }
+    }
+  }
+
+  return null;
+};
+
+const getLayerInfo = (treeData, key) => {
+  const node = findNode({ children: treeData }, key);
+  return node;
+};
+
+export default getLayerInfo;
+```
+
+`getDefaultCheckedKeys` 遍历 treeData 收集所有 `defaultChecked: true` 的节点 key，支持 `children` 和 `layers`（group 类型）两种嵌套：
+
+```javascript
+const getDefaultCheckedKeys = (treeData) => {
+  const keys = [];
+  const traverse = (nodes) => {
+    nodes.forEach((node) => {
+      if (node.defaultChecked) {
+        keys.push(node.key);
+      }
+      if (node.children) {
+        traverse(node.children);
+      }
+      if (node.layers) {
+        traverse(node.layers);
+      }
+    });
+  };
+  traverse(treeData);
+  return keys;
+};
+
+export default getDefaultCheckedKeys;
+```
+
 ### lib
 
-图层控制方法写到lib中，这部分可以按业务修改。
+图层控制方法拆分到 lib 中。`createLayer` 独立成文件，通过 `supportLayerMap` 支持多种图层类型。
+
+`packages/lib/src/core/layer/createLayer.js`：
 
 ```javascript
 import Layer from '@arcgis/core/layers/Layer';
-import createLayer from './createLayer';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import GeoJSONLayer from '@arcgis/core/layers/GeoJSONLayer';
+import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
+import ImageryLayer from '@arcgis/core/layers/ImageryLayer';
+import ImageryTileLayer from '@arcgis/core/layers/ImageryTileLayer';
+import IntegratedMesh3DTilesLayer from '@arcgis/core/layers/IntegratedMesh3DTilesLayer';
+import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
+import TileLayer from '@arcgis/core/layers/TileLayer';
+import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer';
+import GroupLayer from '@arcgis/core/layers/GroupLayer';
 import { cond, has, T } from 'ramda';
+
+const supportLayerMap = new Map([
+  ['feature', FeatureLayer],
+  ['geojson', GeoJSONLayer],
+  ['graphics', GraphicsLayer],
+  ['imagery', ImageryLayer],
+  ['imagery-tile', ImageryTileLayer],
+  ['integrated-mesh-3d-tiles', IntegratedMesh3DTilesLayer],
+  ['map-image', MapImageLayer],
+  ['tile', TileLayer],
+  ['vector-tile', VectorTileLayer],
+]);
+
+const createLayerByUrl = async ({ key, url, ...rest }) =>
+  await Layer.fromArcGISServerUrl({ url, properties: { id: key, ...rest } });
+
+const createLayerByType = ({ type, key, ...rest }) => {
+  if (type === 'group') {
+    return createGroupLayer(rest);
+  }
+  const LayerClass = supportLayerMap.get(type);
+  return new LayerClass({ id: key, ...rest });
+};
+
+const createGroupLayer = async ({ layers: layerInfos, key, ...rest }) => {
+  const layers = await Promise.all(layerInfos.map(createLayer));
+  return new GroupLayer({
+    ...rest,
+    id: key,
+    layers,
+  });
+};
+
+const createLayer = cond([
+  [has('type'), createLayerByType],
+  [has('url'), createLayerByUrl],
+  [T, () => undefined],
+]);
+
+export default createLayer;
+```
+
+`packages/lib/src/core/layer/core.js`（图层增删查）：
+
+```javascript
+import createLayer from './createLayer';
 
 export const hasLayer = (view, id) => {
   const layer = view.map.findLayerById(id);
@@ -111,15 +394,7 @@ export const hasLayer = (view, id) => {
 };
 
 export const addLayer = async (view, layerInfo) => {
-  if (!layerInfo) {
-    return;
-  }
-  const { key, url, type, ...rest } = layerInfo;
-  const layer = cond([
-    [has('type'), () => createLayer({ id: key, ...layerInfo })],
-    [has('url'), () => Layer.fromArcGISServerUrl({ url, properties: { id: key, ...rest } })],
-    [T, () => new Layer({ id: key, ...rest })],
-  ])(layerInfo);
+  const layer = await createLayer(layerInfo);
   view.map.add(layer);
 };
 
@@ -129,21 +404,28 @@ export const removeLayer = (view, id) => {
 };
 ```
 
-### widgets
-
-在widgets中引入store和middleware，创建视图。
+`packages/lib/src/core/layer/operation.js`（图层操作）：
 
 ```javascript
-import { layerControl } from '@chu/middleware';
-import { layerTreeStoreCreator, withMiddlewares } from '@chu/store';
-import { Tree } from 'antd';
-import { useMemo } from 'react';
+export const goToFullExtent = (view, id) => {
+  const layer = view.map.findLayerById(id);
+  if (layer) {
+    view.goTo(layer.fullExtent);
+  }
+};
+```
 
-const LayerTree = ({ treeData, getLayerInfo, ...rest }) => {
-  const useLayerTreeStore = useMemo(
-    () => withMiddlewares(layerTreeStoreCreator, [layerControl(getLayerInfo)]),
-    [getLayerInfo],
-  );
+### widgets
+
+在 widgets 中，`LayerTree` 组件直接导入模块级的 `useLayerTreeStore`，不再需要在组件内创建 store 实例。
+
+`LayerTree.jsx`：
+
+```javascript
+import useLayerTreeStore from '@chu/store/useLayerTreeStore';
+import { Tree } from 'antd';
+
+const LayerTree = ({ treeData, ...rest }) => {
   const { checkedKeys, setCheckedKeys } = useLayerTreeStore();
 
   const onCheck = (checkedKeysValue) => {
@@ -158,25 +440,25 @@ const LayerTree = ({ treeData, getLayerInfo, ...rest }) => {
 export default LayerTree;
 ```
 
-通过**HOC**的方式，可以对`LayerTree`进行功能增强。此处以查询图层树为例：
+通过 **HOC** 的方式，可以对 `LayerTree` 进行功能增强。此处以查询图层树为例：
 
-```js
+```javascript
 import { isEmpty } from 'ramda';
 import { Input, Space, Typography } from 'antd';
 import { useMemo, useState } from 'react';
+import styles from './index.less';
 
 const { Search } = Input;
 const { Text } = Typography;
 
 const withSearch = (LayerTree) => {
-  const WithSearch = ({ treeData: originTreeData, getLayerInfo }) => {
+  const WithSearch = ({ treeData: originTreeData, ...layerTreeRest }) => {
     const [expandedKeys, setExpandedKeys] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [autoExpandParent, setAutoExpandParent] = useState(true);
     const treeData = useMemo(() => {
       const loop = (data) =>
-        data.map((item) => {
-          const strTitle = item.title;
+        data.map(({ title: strTitle, key, children, count, ...rest }) => {
           const index = strTitle.indexOf(searchValue);
           const beforeStr = strTitle.substring(0, index);
           const afterStr = strTitle.slice(index + searchValue.length);
@@ -188,23 +470,26 @@ const withSearch = (LayerTree) => {
                   <Text type="danger">{searchValue}</Text>
                   {afterStr}
                 </span>
+                {count && count > 0 ? `(${count})` : null}
               </Space>
             ) : (
               <Space>
                 <span>{strTitle}</span>
+                {count && count > 0 ? `(${count})` : null}
               </Space>
             );
-          if (item.children) {
+          if (children) {
             return {
+              ...rest,
               title,
-              key: item.key,
-              children: loop(item.children),
+              key,
+              children: loop(children),
             };
           }
           return {
+            ...rest,
             title,
-            key: item.key,
-            isLeaf: true,
+            key,
           };
         });
       return loop(originTreeData);
@@ -250,12 +535,10 @@ const withSearch = (LayerTree) => {
 
     return (
       <div>
-        <Search placeholder="请输入关键词搜索" onChange={onChange} />
+        <Search placeholder="请输入关键词搜索" onChange={onChange} className={styles.search} />
         <LayerTree
+          {...layerTreeRest}
           treeData={treeData}
-          getLayerInfo={getLayerInfo}
-          showIcon
-          blockNode
           onSelect={onSelect}
           onExpand={onExpand}
           expandedKeys={expandedKeys}
@@ -270,45 +553,196 @@ const withSearch = (LayerTree) => {
 export default withSearch;
 ```
 
-### app
+## 高阶
 
-最后是在应用中的使用，
+**HOC** 组件组合，如 `withActions` 组件，在叶子节点上添加"缩放至"和操作菜单。`DropMenu` 只在传入 `dropMenuItems` 时条件渲染。
 
 ```javascript
+import { GlobalOutlined } from '@ant-design/icons';
+import { goToFullExtent } from '@chu/lib';
 import useViewStore from '@chu/store/useViewStore';
-import { Panel } from '@chu/ui';
-import { LayerList, LayerTree, withSearch, Legend } from '@chu/widgets';
-import { Flex } from 'antd';
-import { useEffect, useState } from 'react';
+import { Space } from 'antd';
+import { useMemo } from 'react';
+import DropMenu from './DropMenu';
 import styles from './index.less';
-import { getLayerTree } from './service.js';
-import getLayerInfo from '@/utils/getLayerInfo';
 
-const LayerTreeWithSearch = withSearch(LayerTree);
+const withActions = (LayerTree) => {
+  const WithActions = ({ treeData: originTreeData, dropMenuItems = [], ...layerTreeRest }) => {
+    const view = useViewStore((state) => state.view);
+    const treeData = useMemo(() => {
+      const loop = (data) =>
+        data.map(({ children, key, ...rest }) => {
+          const icon =
+            children && children.length ? null : (
+              <Space>
+                <GlobalOutlined
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToFullExtent(view, key);
+                  }}
+                />
+                {dropMenuItems?.length ? <DropMenu items={dropMenuItems} /> : null}
+              </Space>
+            );
+
+          if (icon) {
+            return { ...rest, key, isLeaf: true, icon };
+          } else {
+            return { ...rest, key, isLeaf: false, children: loop(children) };
+          }
+        });
+
+      return loop(originTreeData);
+    }, [originTreeData, dropMenuItems, view]);
+
+    return (
+      <div className={styles.container}>
+        <LayerTree {...layerTreeRest} treeData={treeData} showIcon blockNode />
+      </div>
+    );
+  };
+  return WithActions;
+};
+
+export default withActions;
+```
+
+`DropMenu` 组件，使用 antd 的 `Dropdown` 实现：
+
+```javascript
+import { Dropdown } from 'antd';
+import { MoreOutlined } from '@ant-design/icons';
+
+const DropMenu = ({ items }) => {
+  return (
+    <Dropdown
+      menu={{
+        items,
+      }}
+    >
+      <MoreOutlined />
+    </Dropdown>
+  );
+};
+
+export default DropMenu;
+```
+
+通过 `compose` 来组合，生成一个既有查询也有操作的 `LayerTree`：
+
+```javascript
+import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
+import { compose } from 'ramda';
+
+const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
+```
+
+### app
+
+在 Map 组件中初始化时获取图层树数据并存入 Zustand store，`ResourcePage` 直接从 store 读取 `treeData`。
+
+`apps/scene-pro/src/widgets/Map/index.js`：
+
+```javascript
+import esriConfig from '@arcgis/core/config.js';
+import useViewStore from '@chu/store/useViewStore';
+import useLayerTreeStore from '@chu/store/useLayerTreeStore';
+import SceneView from '@arcgis/core/views/SceneView';
+import Map from '@arcgis/core/Map';
+import { useEffect, useRef } from 'react';
+import styles from './index.less';
+import getLayerTree from '@/services/getLayerTree.js';
+
+esriConfig.assetsPath = './assets';
+
+const MapComponent = () => {
+  const initializeView = useViewStore((state) => state.initialize);
+  const setTreeData = useLayerTreeStore((state) => state.setTreeData);
+  const ref = useRef();
+
+  useEffect(() => {
+    const map = new Map({
+      basemap: 'topo-3d',
+      ground: 'world-elevation',
+    });
+    const view = new SceneView({
+      map,
+      zoom: 9,
+      center: [120, 30],
+      container: ref.current,
+      ui: {
+        components: [],
+      },
+      attributionVisible: false,
+    });
+    ref.current.view = view;
+
+    view.when(() => {
+      initializeView(view);
+      getLayerTree().then(({ data }) => setTreeData(data));
+    });
+  }, [initializeView, setTreeData]);
+
+  return <div id="view" ref={ref} className={styles.container} />;
+};
+
+export default MapComponent;
+```
+
+`apps/scene-pro/src/pages/Resource/index.js`：
+
+```javascript
+import Panel from '@chu/ui/Panel';
+import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
+import useLayerTreeStore from '@chu/store/useLayerTreeStore';
+import { Flex, message } from 'antd';
+import { compose } from 'ramda';
+import styles from './index.less';
+import { filter, propEq } from 'ramda';
+import config from './config';
+import { HeartOutlined, DeleteOutlined } from '@ant-design/icons';
+
+const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
 
 const ResourcePage = () => {
-  const view = useViewStore((state) => state.view);
-  const [treeData, setTreeData] = useState([]);
-  useEffect(() => {
-    getLayerTree().then(({ data }) => setTreeData(data));
-  }, []);
+  const { treeData } = useLayerTreeStore();
+
+  const items = filter(propEq('right', 'position'))(config);
+  const dropMenuItems = [
+    {
+      label: '收藏',
+      icon: <HeartOutlined />,
+      key: 'favorite',
+      onClick: () => {
+        message.success(`收藏成功`);
+      },
+    },
+    {
+      label: '删除',
+      icon: <DeleteOutlined />,
+      key: 'delete',
+      onClick: () => {
+        message.success(`删除`);
+      },
+    },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <Flex gap="large" vertical>
           <Panel title="目录树">
-            <LayerTreeWithSearch treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
+            <EnhancedLayerTree dropMenuItems={dropMenuItems} treeData={treeData} />
           </Panel>
         </Flex>
       </div>
       <div className={styles.right}>
         <Flex gap="large" vertical>
-          <Panel title="图层列表">
-            <LayerList view={view} />
-          </Panel>
-          <Panel title="图例">
-            <Legend view={view} />
-          </Panel>
+          {items.map(({ title, component }) => (
+            <Panel key={title} title={title}>
+              {component}
+            </Panel>
+          ))}
         </Flex>
       </div>
     </div>
@@ -320,7 +754,7 @@ export default ResourcePage;
 
 ## 附件
 
-补充treeData的样例，key是唯一编码，可以给目录count属性，做统计用。
+补充 treeData 的样例，key 是唯一编码，可以给目录 count 属性，做统计用。节点支持 `defaultChecked: true` 用于初始加载时自动勾选。
 
 ```javascript
 const data = [
@@ -329,6 +763,7 @@ const data = [
     url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson',
     title: '地震',
     type: 'geojson',
+    defaultChecked: true,
   },
   {
     key: 'dfa297',
@@ -425,107 +860,9 @@ const data = [
 ];
 ```
 
-## 高阶
-
-**HOC**组件组合，如，再增加一个`withActions`的组件。
-
-```js
-import { Space } from 'antd';
-import { GlobalOutlined } from '@ant-design/icons';
-import DropMenu from './DropMenu';
-import { useMemo } from 'react';
-import { goToFullExtent } from '@chu/lib';
-import useViewStore from '@chu/store/useViewStore';
-
-const withActions = (LayerTree) => {
-  const WithActions = ({ treeData: originTreeData, getLayerInfo }) => {
-    const view = useViewStore((state) => state.view);
-    const treeData = useMemo(() => {
-      const loop = (data) =>
-        data.map(({ children, key, ...rest }) => {
-          const icon =
-            children && children.length ? null : (
-              <Space>
-                <GlobalOutlined
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    goToFullExtent(view, key);
-                  }}
-                />
-                <DropMenu />
-              </Space>
-            );
-
-          if (icon) {
-            return { ...rest, isLeaf: true, icon };
-          } else {
-            return { ...rest, isLeaf: false, children: loop(children) };
-          }
-        });
-
-      return loop(originTreeData);
-    }, [originTreeData, view]);
-
-    return <LayerTree treeData={treeData} getLayerInfo={getLayerInfo} showIcon />;
-  };
-  return WithActions;
-};
-
-export default withActions;
-```
-
-通过compose来组合，生成一个既有查询也有操作的`LayerTree`:
-
-```js
-import useViewStore from '@chu/store/useViewStore';
-import { Panel } from '@chu/ui';
-import { LayerList, LayerTree, withSearch, Legend, withActions } from '@chu/widgets';
-import { Flex } from 'antd';
-import { useEffect, useState } from 'react';
-import { compose } from 'ramda';
-import styles from './index.less';
-import { getLayerTree } from './service.js';
-import getLayerInfo from '@/utils/getLayerInfo';
-
-const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
-
-const ResourcePage = () => {
-  const view = useViewStore((state) => state.view);
-  const [treeData, setTreeData] = useState([]);
-  useEffect(() => {
-    getLayerTree().then(({ data }) => setTreeData(data));
-  }, []);
-  return (
-    <div className={styles.container}>
-      <div className={styles.left}>
-        <Flex gap="large" vertical>
-          <Panel title="目录树">
-            <EnhancedLayerTree treeData={treeData} getLayerInfo={getLayerInfo(treeData)} />
-          </Panel>
-        </Flex>
-      </div>
-      <div className={styles.right}>
-        <Flex gap="large" vertical>
-          <Panel title="图层列表">
-            <LayerList view={view} />
-          </Panel>
-          <Panel title="图例">
-            <Legend view={view} />
-          </Panel>
-        </Flex>
-      </div>
-    </div>
-  );
-};
-```
-
 ## 后台接口字段对接
 
-图层树的字段限制了后台接口字段。
-
-解决方案：
-在apps/scene-pro/src/utils/normalizeLayerTree.js增加转接器。
-将后台数据转成mock数据中的树结构。使用设定的字段名称。
+图层树的字段限制了后台接口字段。在 `apps/scene-pro/src/utils/normalizeLayerTree.js` 中增加转接器，将后台数据转成 mock 数据中的树结构，使用设定的字段名称。
 
 示例代码：
 
