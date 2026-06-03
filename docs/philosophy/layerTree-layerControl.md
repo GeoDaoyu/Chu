@@ -170,9 +170,9 @@ sequenceDiagram
 
 ### store
 
-store 中管理 `checkedKeys` 和 `treeData` 状态。使用 Zustand 的 `subscribeWithSelector` 中间件监听状态变更，替代了早期通过 middleware 拦截 action 的方式——action 和副作用不再耦合在同一个函数中。
+store 管理 `checkedKeys` 和 `treeData` 状态，通过 `subscribeWithSelector` 监听变更。`checkedKeys` 变更后委托给 `layerControl` 对象处理实际的图层加载/卸载，默认行为是单 key 单图层的增删。
 
-`factory` 模式（`createLayerTreeStore`）替换了之前的 `storeCreator`：返回的是已经装配好订阅的完整 store，调用方无需手动绑定 middleware。
+`createLayerTreeStore` 接受可选的 `layerControl` 参数，用于覆盖默认的图层控制逻辑（例如勾选一个 key 加载多个关联图层）。
 
 ```javascript
 import { create } from 'zustand';
@@ -181,7 +181,23 @@ import { difference, union } from 'ramda';
 import { addLayer, getDefaultCheckedKeys, getLayerInfo, hasLayer, removeLayer } from '@chu/lib';
 import useViewStore from './useViewStore';
 
-const createLayerTreeStore = () => {
+const defaultLayerControl = {
+  onAddKeys(addKeys, { view, treeData }) {
+    addKeys.forEach((key) => {
+      if (!hasLayer(view, key)) {
+        const layerInfo = getLayerInfo(treeData, key);
+        if (layerInfo) addLayer(view, layerInfo);
+      }
+    });
+  },
+  onRemoveKeys(removeKeys, { view }) {
+    removeKeys.forEach((key) => removeLayer(view, key));
+  },
+};
+
+const createLayerTreeStore = (layerControl) => {
+  const control = layerControl ?? defaultLayerControl;
+
   const store = create(
     subscribeWithSelector((set) => ({
       checkedKeys: [],
@@ -204,7 +220,7 @@ const createLayerTreeStore = () => {
     { fireImmediately: false },
   );
 
-  // checkedKeys 变更 → 加载/卸载图层
+  // checkedKeys 变更 → 委托给 layerControl
   store.subscribe(
     (state) => state.checkedKeys,
     (newKeys, oldKeys) => {
@@ -214,14 +230,8 @@ const createLayerTreeStore = () => {
       const addKeys = difference(newKeys, oldKeys ?? []);
       const removeKeys = difference(oldKeys ?? [], newKeys);
 
-      addKeys.forEach((key) => {
-        if (!hasLayer(view, key)) {
-          const layerInfo = getLayerInfo(treeData, key);
-          if (layerInfo) addLayer(view, layerInfo);
-        }
-      });
-
-      removeKeys.forEach((key) => removeLayer(view, key));
+      if (addKeys.length) control.onAddKeys(addKeys, { view, treeData });
+      if (removeKeys.length) control.onRemoveKeys(removeKeys, { view });
     },
     { fireImmediately: false },
   );
@@ -865,6 +875,45 @@ const MultiTreePage = () => {
 每个 store 内部已通过 `subscribe` 绑定了图层加载逻辑，各自维护 `checkedKeys`，但都操作同一个全局 `view`（从 `useViewStore` 获取），所以图层加载/卸载最终作用于同一张地图。
 
 不传 `useStore` 时，`LayerTree` 退回到默认的单例 store，现有代码无需改动。
+
+### 自定义图层控制逻辑
+
+当默认的单 key 单图层行为不满足需求时（例如勾选一个 key 需要同时加载多个关联图层），传入自定义的 `layerControl` 即可：
+
+```javascript
+import { createLayerTreeStore } from '@chu/store';
+import { addLayer, hasLayer, getLayerInfo } from '@chu/lib';
+
+// 自定义：勾选一个 key 同时加载其关联的二维/三维图层
+const multiLayerControl = {
+  onAddKeys(addKeys, { view, treeData }) {
+    addKeys.forEach((key) => {
+      const layerInfo = getLayerInfo(treeData, key);
+      if (!layerInfo) return;
+
+      // 加载主图层
+      if (!hasLayer(view, key)) {
+        addLayer(view, layerInfo);
+      }
+
+      // 加载关联图层（如二三维关联、查询服务关联）
+      layerInfo.relatedKeys?.forEach((relatedKey) => {
+        if (!hasLayer(view, relatedKey)) {
+          const relatedInfo = getLayerInfo(treeData, relatedKey);
+          if (relatedInfo) addLayer(view, relatedInfo);
+        }
+      });
+    });
+  },
+  onRemoveKeys(removeKeys, { view }) {
+    removeKeys.forEach((key) => removeLayer(view, key));
+  },
+};
+
+const useStore = createLayerTreeStore(multiLayerControl);
+```
+
+不传 `layerControl` 时，走默认的 `defaultLayerControl`（单 key 单图层增删），现有代码无需改动。
 
 ## 后台接口字段对接
 

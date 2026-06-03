@@ -4,7 +4,23 @@ import { difference, union } from 'ramda';
 import { addLayer, getDefaultCheckedKeys, getLayerInfo, hasLayer, removeLayer } from '@chu/lib';
 import useViewStore from './useViewStore';
 
-const createLayerTreeStore = () => {
+const defaultLayerControl = {
+  onAddKeys(addKeys, { view, treeData }) {
+    addKeys.forEach((key) => {
+      if (!hasLayer(view, key)) {
+        const layerInfo = getLayerInfo(treeData, key);
+        if (layerInfo) addLayer(view, layerInfo);
+      }
+    });
+  },
+  onRemoveKeys(removeKeys, { view }) {
+    removeKeys.forEach((key) => removeLayer(view, key));
+  },
+};
+
+const createLayerTreeStore = (layerControl) => {
+  const control = layerControl ?? defaultLayerControl;
+
   const store = create(
     subscribeWithSelector((set) => ({
       checkedKeys: [],
@@ -27,7 +43,7 @@ const createLayerTreeStore = () => {
     { fireImmediately: false },
   );
 
-  // checkedKeys 变更 → 加载/卸载图层
+  // checkedKeys 变更 → 委托给 layerControl
   store.subscribe(
     (state) => state.checkedKeys,
     (newKeys, oldKeys) => {
@@ -37,14 +53,8 @@ const createLayerTreeStore = () => {
       const addKeys = difference(newKeys, oldKeys ?? []);
       const removeKeys = difference(oldKeys ?? [], newKeys);
 
-      addKeys.forEach((key) => {
-        if (!hasLayer(view, key)) {
-          const layerInfo = getLayerInfo(treeData, key);
-          if (layerInfo) addLayer(view, layerInfo);
-        }
-      });
-
-      removeKeys.forEach((key) => removeLayer(view, key));
+      if (addKeys.length) control.onAddKeys(addKeys, { view, treeData });
+      if (removeKeys.length) control.onRemoveKeys(removeKeys, { view });
     },
     { fireImmediately: false },
   );
