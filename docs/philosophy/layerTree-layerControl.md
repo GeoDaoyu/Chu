@@ -48,12 +48,6 @@ graph TB
         LayerTreeStore["useLayerTreeStore<br/>checkedKeys / treeData<br/>setCheckedKeys / setTreeData"]
     end
 
-    subgraph Middleware["packages/middleware"]
-        LC["layerControl<br/>拦截 setCheckedKeys → 加载/卸载图层<br/>拦截 setTreeData → 自动勾选 defaultChecked"]
-        GLI["getLayerInfo<br/>从 treeData 递归查找节点"]
-        GDC["getDefaultCheckedKeys<br/>收集 defaultChecked 节点"]
-    end
-
     subgraph Widgets["packages/widgets"]
         LT["LayerTree<br/>消费 useLayerTreeStore<br/>渲染 antd Tree"]
         WS["withSearch<br/>HOC: 搜索过滤"]
@@ -64,6 +58,7 @@ graph TB
     subgraph Lib["packages/lib"]
         AL["addLayer / removeLayer / hasLayer<br/>图层增删查"]
         CL["createLayer<br/>图层工厂（type/url）"]
+        TD["getLayerInfo / getDefaultCheckedKeys<br/>树数据工具函数"]
         GFE["goToFullExtent<br/>缩放至图层范围"]
     end
 
@@ -78,11 +73,10 @@ graph TB
     Map -->|"initialize(view)"| ViewStore
     API -->|"fetch"| Map
 
-    LayerTreeStore -->|"withMiddlewares 组合"| LC
-    LC --> GLI
-    LC --> GDC
-    LC -->|"addLayer / removeLayer"| AL
-    LC -->|"useViewStore.getState()"| ViewStore
+    LayerTreeStore -->|"subscribe 监听<br/>treeData / checkedKeys"| LayerTreeStore
+    LayerTreeStore -->|"addLayer / removeLayer"| AL
+    LayerTreeStore -->|"getLayerInfo / getDefaultCheckedKeys"| TD
+    LayerTreeStore -->|"useViewStore.getState()"| ViewStore
     AL --> CL
     AL -->|"view.map.add / remove"| ArcGIS
 
@@ -99,7 +93,6 @@ graph TB
 
     style App fill:#e6f7ff,stroke:#1890ff
     style Store fill:#f6ffed,stroke:#52c41a
-    style Middleware fill:#fff7e6,stroke:#fa8c16
     style Widgets fill:#f9f0ff,stroke:#722ed1
     style Lib fill:#fff1f0,stroke:#f5222d
     style External fill:#f5f5f5,stroke:#8c8c8c
@@ -113,37 +106,35 @@ sequenceDiagram
     participant Tree as antd Tree
     participant LT as LayerTree 组件
     participant Store as useLayerTreeStore
-    participant MW as layerControl 中间件
+    participant Sub as subscribe 回调
     participant Lib as @chu/lib
     participant View as ArcGIS View
 
     User->>Tree: 勾选 / 取消勾选节点
     Tree->>LT: onCheck(checkedKeys)
     LT->>Store: setCheckedKeys(newKeys)
-    Store->>MW: 拦截 action
+    Store->>Sub: checkedKeys 变更触发 subscribe
 
-    MW->>Store: get() 获取 oldKeys + treeData
-    MW->>MW: difference(newKeys, oldKeys) → addKeys
-    MW->>MW: difference(oldKeys, newKeys) → removeKeys
+    Sub->>Sub: difference(newKeys, oldKeys) → addKeys
+    Sub->>Sub: difference(oldKeys, newKeys) → removeKeys
 
     loop 每个需要添加的 key
-        MW->>Lib: hasLayer(view, key)
+        Sub->>Lib: hasLayer(view, key)
         Lib->>View: findLayerById(key)
         View-->>Lib: layer | null
         alt layer 不存在
-            MW->>MW: getLayerInfo(treeData, key)
-            MW->>Lib: addLayer(view, layerInfo)
+            Sub->>Lib: getLayerInfo(treeData, key)
+            Sub->>Lib: addLayer(view, layerInfo)
             Lib->>Lib: createLayer(layerInfo)
             Lib->>View: view.map.add(layer)
         end
     end
 
     loop 每个需要移除的 key
-        MW->>Lib: removeLayer(view, key)
+        Sub->>Lib: removeLayer(view, key)
         Lib->>View: view.map.remove(layer)
     end
 
-    MW->>Store: set(...args) 更新 checkedKeys
     Store-->>Tree: checkedKeys 变更 → 重渲染
 ```
 
@@ -154,24 +145,23 @@ sequenceDiagram
     participant Map as Map 组件
     participant API as 后台接口
     participant Store as useLayerTreeStore
-    participant MW as layerControl 中间件
+    participant Sub as subscribe 回调
     participant Lib as @chu/lib
     participant View as ArcGIS View
 
     Map->>API: fetch /Chu/api/v1/layerTree.json
     API-->>Map: treeData
     Map->>Store: setTreeData(treeData)
-    Store->>MW: 拦截 action（"treeData" in arg）
+    Store->>Sub: treeData 变更触发 subscribe
 
-    MW->>Store: set(...args) 先更新 treeData
-    MW->>MW: getDefaultCheckedKeys(treeData)
-    MW->>Store: get().checkedKeys
-    MW->>Store: setCheckedKeys(union(checkedKeys, defaultKeys))
-    Store->>MW: 再次拦截，命中 setCheckedKeys
+    Sub->>Lib: getDefaultCheckedKeys(treeData)
+    Sub->>Store: getState().checkedKeys
+    Sub->>Store: setCheckedKeys(union(checkedKeys, defaultKeys))
+    Store->>Sub: checkedKeys 变更触发 subscribe
 
     loop 每个 defaultChecked key
-        MW->>Lib: hasLayer(view, key)
-        MW->>Lib: addLayer(view, layerInfo)
+        Sub->>Lib: hasLayer(view, key)
+        Sub->>Lib: addLayer(view, layerInfo)
         Lib->>View: view.map.add(layer)
     end
 ```
@@ -180,146 +170,70 @@ sequenceDiagram
 
 ### store
 
-store 中管理 `checkedKeys` 和 `treeData` 状态，通过 `withMiddlewares` 组合 `layerControl` 中间件。store 在模块顶层创建为单例。
+store 中管理 `checkedKeys` 和 `treeData` 状态。使用 Zustand 的 `subscribeWithSelector` 中间件监听状态变更，替代了早期通过 middleware 拦截 action 的方式——action 和副作用不再耦合在同一个函数中。
 
-```javascript
-import { layerControl } from '@chu/middleware';
-import withMiddlewares from '../util/withMiddlewares';
-
-export const storeCreator = (set) => ({
-  checkedKeys: [],
-  setCheckedKeys: (newCheckedKeys) => set({ checkedKeys: newCheckedKeys }),
-  treeData: [],
-  setTreeData: (newTreeData) => set({ treeData: newTreeData }),
-});
-
-const useLayerTreeStore = withMiddlewares(storeCreator, [layerControl]);
-
-export default useLayerTreeStore;
-```
-
-`withMiddlewares` 使用 Ramda 的 `compose` 组合多个中间件：
+`factory` 模式（`createLayerTreeStore`）替换了之前的 `storeCreator`：返回的是已经装配好订阅的完整 store，调用方无需手动绑定 middleware。
 
 ```javascript
 import { create } from 'zustand';
-import { compose } from 'ramda';
-
-const withMiddlewares = (storeCreator, middlewares) =>
-  create(compose(...middlewares)(storeCreator));
-
-export default withMiddlewares;
-```
-
-### middleware
-
-中间件 `layerControl` 拦截两个 action：
-
-1. `setTreeData` — 设置树数据后，自动勾选 `defaultChecked: true` 的节点
-2. `setCheckedKeys` — 勾选变更时，自动加载/卸载对应图层
-
-`view` 通过 `useViewStore.getState()` 动态获取，`getLayerInfo` 从同级模块导入，不再通过柯里化参数传递。
-
-```javascript
-import { addLayer, hasLayer, removeLayer } from '@chu/lib';
-import useViewStore from '@chu/store/useViewStore';
+import { subscribeWithSelector } from 'zustand/middleware';
 import { difference, union } from 'ramda';
-import getLayerInfo from './getLayerInfo';
-import getDefaultCheckedKeys from './getDefaultCheckedKeys';
+import { addLayer, getDefaultCheckedKeys, getLayerInfo, hasLayer, removeLayer } from '@chu/lib';
+import useViewStore from './useViewStore';
 
-const layerControl = (config) => (set, get, api) =>
-  config(
-    (...args) => {
-      const [arg] = args;
-      const { view } = useViewStore.getState();
-
-      // 命中 setTreeData — 自动勾选 defaultChecked 的节点
-      if (arg && 'treeData' in arg) {
-        set(...args);
-        const defaultKeys = getDefaultCheckedKeys(arg.treeData);
-        if (defaultKeys.length) {
-          const { checkedKeys } = get();
-          get().setCheckedKeys(union(checkedKeys, defaultKeys));
-        }
-        return;
-      }
-
-      // 命中 setCheckedKeys
-      const [{ checkedKeys: newValue }] = args;
-      if (newValue) {
-        const { checkedKeys: oldValue, treeData } = get();
-        const addKeys = difference(newValue, oldValue);
-        const removeKeys = difference(oldValue, newValue);
-
-        addKeys.forEach((key) => {
-          if (!hasLayer(view, key)) {
-            const layerInfo = getLayerInfo(treeData, key);
-            if (layerInfo) addLayer(view, layerInfo);
-          }
-        });
-
-        removeKeys.forEach((key) => removeLayer(view, key));
-      }
-
-      set(...args);
-    },
-    get,
-    api,
+const createLayerTreeStore = () => {
+  const store = create(
+    subscribeWithSelector((set) => ({
+      checkedKeys: [],
+      setCheckedKeys: (newCheckedKeys) => set({ checkedKeys: newCheckedKeys }),
+      treeData: [],
+      setTreeData: (newTreeData) => set({ treeData: newTreeData }),
+    })),
   );
 
-export default layerControl;
-```
-
-`getLayerInfo` 从 treeData 中递归查找节点：
-
-```javascript
-const findNode = (node, key) => {
-  if (node.key === key) {
-    return node;
-  }
-
-  if (node.children) {
-    for (const child of node.children) {
-      const found = findNode(child, key);
-      if (found) {
-        return found;
+  // treeData 变更 → 自动勾选 defaultChecked 的节点
+  store.subscribe(
+    (state) => state.treeData,
+    (newTreeData) => {
+      const defaultKeys = getDefaultCheckedKeys(newTreeData);
+      if (defaultKeys.length) {
+        const { checkedKeys } = store.getState();
+        store.getState().setCheckedKeys(union(checkedKeys, defaultKeys));
       }
-    }
-  }
+    },
+    { fireImmediately: false },
+  );
 
-  return null;
+  // checkedKeys 变更 → 加载/卸载图层
+  store.subscribe(
+    (state) => state.checkedKeys,
+    (newKeys, oldKeys) => {
+      const { view } = useViewStore.getState();
+      const { treeData } = store.getState();
+
+      const addKeys = difference(newKeys, oldKeys ?? []);
+      const removeKeys = difference(oldKeys ?? [], newKeys);
+
+      addKeys.forEach((key) => {
+        if (!hasLayer(view, key)) {
+          const layerInfo = getLayerInfo(treeData, key);
+          if (layerInfo) addLayer(view, layerInfo);
+        }
+      });
+
+      removeKeys.forEach((key) => removeLayer(view, key));
+    },
+    { fireImmediately: false },
+  );
+
+  return store;
 };
 
-const getLayerInfo = (treeData, key) => {
-  const node = findNode({ children: treeData }, key);
-  return node;
-};
+// 默认单例
+const useLayerTreeStore = createLayerTreeStore();
 
-export default getLayerInfo;
-```
-
-`getDefaultCheckedKeys` 遍历 treeData 收集所有 `defaultChecked: true` 的节点 key，支持 `children` 和 `layers`（group 类型）两种嵌套：
-
-```javascript
-const getDefaultCheckedKeys = (treeData) => {
-  const keys = [];
-  const traverse = (nodes) => {
-    nodes.forEach((node) => {
-      if (node.defaultChecked) {
-        keys.push(node.key);
-      }
-      if (node.children) {
-        traverse(node.children);
-      }
-      if (node.layers) {
-        traverse(node.layers);
-      }
-    });
-  };
-  traverse(treeData);
-  return keys;
-};
-
-export default getDefaultCheckedKeys;
+export { createLayerTreeStore };
+export default useLayerTreeStore;
 ```
 
 ### lib
@@ -412,6 +326,51 @@ export const goToFullExtent = (view, id) => {
   if (layer) {
     view.goTo(layer.fullExtent);
   }
+};
+```
+
+`packages/lib/src/core/layer/treeData.js`（树数据工具函数）：
+
+```javascript
+const findNode = (node, key) => {
+  if (node.key === key) {
+    return node;
+  }
+
+  if (node.children) {
+    for (const child of node.children) {
+      const found = findNode(child, key);
+      if (found) {
+        return found;
+      }
+    }
+  }
+
+  return null;
+};
+
+export const getLayerInfo = (treeData, key) => {
+  const node = findNode({ children: treeData }, key);
+  return node;
+};
+
+export const getDefaultCheckedKeys = (treeData) => {
+  const keys = [];
+  const traverse = (nodes) => {
+    nodes.forEach((node) => {
+      if (node.defaultChecked) {
+        keys.push(node.key);
+      }
+      if (node.children) {
+        traverse(node.children);
+      }
+      if (node.layers) {
+        traverse(node.layers);
+      }
+    });
+  };
+  traverse(treeData);
+  return keys;
 };
 ```
 
@@ -876,11 +835,10 @@ const data = [
 
 判断标准很简单：**想让两个 `LayerTree` 的勾选框各自独立、互不影响，就各传一个 `useStore`；想让它们同步勾选，就共用同一个 store（或不传，都用默认单例）。**
 
-`storeCreator` 是纯函数，不含 `create()`，每次配合 `withMiddlewares` 调用都生成全新的 Zustand store：
+`createLayerTreeStore()` 每次调用都返回一个已装配好订阅的独立 store：
 
 ```javascript
-import { storeCreator, withMiddlewares } from '@chu/store';
-import { layerControl } from '@chu/middleware';
+import { createLayerTreeStore } from '@chu/store';
 import LayerTree, { withSearch, withActions } from '@chu/widgets/LayerTree';
 import { compose } from 'ramda';
 import { useMemo } from 'react';
@@ -888,9 +846,8 @@ import { useMemo } from 'react';
 const EnhancedLayerTree = compose(withSearch, withActions)(LayerTree);
 
 const MultiTreePage = () => {
-  // 在组件内或模块顶层创建独立 store
-  const useBaseStore = useMemo(() => withMiddlewares(storeCreator, [layerControl]), []);
-  const useBizStore = useMemo(() => withMiddlewares(storeCreator, [layerControl]), []);
+  const useBaseStore = useMemo(() => createLayerTreeStore(), []);
+  const useBizStore = useMemo(() => createLayerTreeStore(), []);
 
   return (
     <div style={{ display: 'flex', gap: 16 }}>
@@ -905,7 +862,7 @@ const MultiTreePage = () => {
 };
 ```
 
-两个 store 各自维护 `checkedKeys`，但都通过 `layerControl` 中间件操作同一个全局 `view`（从 `useViewStore` 获取），所以图层加载/卸载最终作用于同一张地图。
+每个 store 内部已通过 `subscribe` 绑定了图层加载逻辑，各自维护 `checkedKeys`，但都操作同一个全局 `view`（从 `useViewStore` 获取），所以图层加载/卸载最终作用于同一张地图。
 
 不传 `useStore` 时，`LayerTree` 退回到默认的单例 store，现有代码无需改动。
 
