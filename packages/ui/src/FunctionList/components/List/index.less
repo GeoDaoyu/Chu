@@ -1,5 +1,41 @@
 .list {
-  max-height: calc(100vh - 240px);
-  overflow: auto;
   scrollbar-width: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.description {
+  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 22px;
 }
