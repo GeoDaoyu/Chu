@@ -1,32 +1,35 @@
-name: Deploy with pnpm
+name: Deploy to GitHub Pages
 
 on:
-  workflow_dispatch: # 仅手动触发
+  push:
+    branches: [main] # push 到 main 自动触发部署
+  workflow_dispatch: # 也支持手动触发
+
+permissions:
+  contents: read
+  pages: write # 允许部署 GitHub Pages
+  id-token: write # 允许 OIDC 认证
+
+# 同一时间只允许一个部署任务
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write # 允许写入代码
-      pages: write # 允许操作 GitHub Pages
-      id-token: write # 允许 OIDC 认证
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
+      # 自动读取 package.json 的 packageManager 字段（pnpm@11.18.0）
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 24 # 与本机 Node 24 保持一致
           cache: 'pnpm' # 启用 pnpm 缓存
 
       - name: Install dependencies
@@ -35,10 +38,21 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./apps/scene-pro/dist
-          # 若需清理旧文件（可选）
-          keep_files: false
+          path: ./apps/scene-pro/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
