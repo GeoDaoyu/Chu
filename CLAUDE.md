@@ -20,9 +20,6 @@ pnpm build:map          # Build map-pro
 # Linting & Formatting
 pnpm lint               # ESLint + Stylelint
 pnpm lint:fix           # Prettier + ESLint fix + Stylelint fix
-
-# Fix ArcGIS SceneView syntax error (required after install)
-pnpm fix:arcgis
 ```
 
 Packages use `father` for building and `dumi` for component documentation. Run `pnpm build` inside a package directory to build it, or `pnpm dev` for dumi doc preview.
@@ -50,8 +47,6 @@ packages/
 
 **Post-install**: After `pnpm install`, apps run `max setup` then copy ArcGIS assets from `node_modules/@arcgis/core/assets/` to `public/assets/` via `cpx`.
 
-**ArcGIS SceneView fix**: `@arcgis/core` v5 has a syntax error in `SceneView.js`. Running `pnpm fix:arcgis` applies prettier formatting to that file as a workaround. This must be done after each install.
-
 **Conventional commits** are enforced via commitlint (Angular convention). Types: feat, fix, docs, style, refactor, perf, test, chore, deps.
 
 ## Linting Conventions
@@ -65,6 +60,7 @@ packages/
 ## Application Structure (per app)
 
 Each app follows UmiJS Max conventions:
+
 - `config/config.js` — Umi config with `hash` history, `antd`, `access`, `model`, `initialState` plugins
 - `config/routes.js` — Route definitions with layout
 - `src/app.jsx` — Runtime config: `getInitialState`, `rootContainer` (Antd ConfigProvider wrapping)
