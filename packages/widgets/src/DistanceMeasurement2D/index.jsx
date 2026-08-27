@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-distance-measurement-2d';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-direct-line-measurement-2d reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-distance-measurement-2d ref={ref} />;
 };
 
 export default Widget;

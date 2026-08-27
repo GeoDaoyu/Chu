@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-building-explorer';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-building-explorer reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-building-explorer ref={ref} />;
 };
 
 export default Widget;

@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-sketch';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-sketch reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-sketch ref={ref} />;
 };
 
 export default Widget;

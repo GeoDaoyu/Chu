@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-fullscreen';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-fullscreen reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-fullscreen ref={ref} />;
 };
 
 export default Widget;
