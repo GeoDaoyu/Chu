@@ -17,6 +17,7 @@ export default defineConfig({
   mfsu: false,
   npmClient: 'pnpm',
   jsMinifier: 'terser',
+  favicons: ['./logo.svg'],
   publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
   headScripts: [
     './config/fixHTMLElement.js',
