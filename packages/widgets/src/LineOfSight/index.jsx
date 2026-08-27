@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-line-of-sight';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-line-of-sight reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-line-of-sight ref={ref} />;
 };
 
 export default Widget;

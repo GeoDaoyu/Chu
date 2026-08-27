@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-slice';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-slice reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-slice ref={ref} />;
 };
 
 export default Widget;

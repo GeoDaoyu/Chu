@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-compass';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-compass reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-compass ref={ref} />;
 };
 
 export default Widget;

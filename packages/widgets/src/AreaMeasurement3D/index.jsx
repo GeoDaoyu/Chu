@@ -1,7 +1,9 @@
 import '@arcgis/map-components/components/arcgis-area-measurement-3d';
+import useReferenceElement from '../useReferenceElement';
 
 const Widget = () => {
-  return <arcgis-area-measurement-3d reference-element="view" />;
+  const ref = useReferenceElement();
+  return <arcgis-area-measurement-3d ref={ref} />;
 };
 
 export default Widget;
